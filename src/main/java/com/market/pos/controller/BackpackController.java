@@ -5,16 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class BackpackController {
 
     @Autowired
     private IBackpackService iBackpackService;
 
-    @RequestMapping("/money")
+   @RequestMapping("/money")
     public String searchMoney(){
-        int userid = 1218;
-        String money = iBackpackService.selectMoney(userid);
-        return money;
-    }
+       String money = iBackpackService.selectMoney(1218);
+       return money;
+   }
 }
