@@ -19,7 +19,9 @@ public class PosApplication {
         lemocWebSocketClient.connect();
     }
     public static void main(String[] args) throws Exception {
+        // 启动spring-boot的主程序
         SpringApplication.run(PosApplication.class, args);
+        //启动QQ转发中间件Lemoc
         start();
     }
 }

@@ -27,6 +27,7 @@
 
 
     <dependencies>
+        <!--导入web项目所需的依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -90,6 +91,7 @@
 
     </dependencies>
 
+    <!--打jar包插件-->
     <build>
         <plugins>
             <plugin>

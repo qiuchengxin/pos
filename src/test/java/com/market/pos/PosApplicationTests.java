@@ -11,6 +11,7 @@ public class PosApplicationTests {
 
     @Test
     public void contextLoads() {
+
     }
 
 }
