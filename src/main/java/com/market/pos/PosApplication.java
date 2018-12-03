@@ -1,6 +1,6 @@
 package com.market.pos;
 
-import com.market.pos.service.LemocWebSocketClientFactory;
+import com.market.pos.tool.lemoc.LemocWebSocketClientFactory;
 import org.java_websocket.client.WebSocketClient;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
