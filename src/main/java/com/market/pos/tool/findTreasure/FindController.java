@@ -1,0 +1,1 @@
+package com.market.pos.tool.findTreasure;public class FindController {    public static void findController(String qqid,String groupid,String msg){        //实现挖宝的主流程        /**         *         */    }}
