@@ -812,42 +812,99 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="204" parent="4" name="users">
+    <table id="204" parent="4" name="backpack">
+      <Collation>gb2312_chinese_ci</Collation>
+    </table>
+    <table id="205" parent="4" name="users">
       <Engine>MyISAM</Engine>
       <Collation>gb2312_chinese_ci</Collation>
     </table>
-    <column id="205" parent="204" name="userid">
+    <routine id="206" parent="4" name="update_daily_pkdaily_onl">
+      <SourceTextLength>123</SourceTextLength>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <scheduled-event id="207" parent="4" name="update_daily_pkdaily">
+      <SourceTextLength>29</SourceTextLength>
+      <Definer>root@%</Definer>
+      <Interval>&apos;1&apos; DAY</Interval>
+      <Starts>&apos;2018-11-01 00:00:00&apos;</Starts>
+      <Preserve>0</Preserve>
+      <Status>enabled</Status>
+    </scheduled-event>
+    <column id="208" parent="204" name="userid">
+      <Position>1</Position>
+      <Comment>qqid</Comment>
+      <DataType>int(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="209" parent="204" name="equipment">
+      <Position>2</Position>
+      <Comment>武器</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="210" parent="204" name="money">
+      <Position>3</Position>
+      <Comment>金钱</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="211" parent="204" name="book">
+      <Position>4</Position>
+      <Comment>秘籍</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="212" parent="204" name="special">
+      <Position>5</Position>
+      <Comment>特殊物品</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="213" parent="204" name="finddaily">
+      <Position>6</Position>
+      <Comment>每天重置为5，每次更新减少一点</Comment>
+      <DataType>int(2)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="214" parent="204" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>userid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="215" parent="205" name="userid">
       <Position>1</Position>
       <DataType>int(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="206" parent="204" name="username">
+    <column id="216" parent="205" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="207" parent="204" name="grade">
+    <column id="217" parent="205" name="grade">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="208" parent="204" name="update_time">
+    <column id="218" parent="205" name="update_time">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="209" parent="204" name="daily">
+    <column id="219" parent="205" name="daily">
       <Position>5</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="210" parent="204" name="pkdaily">
+    <column id="220" parent="205" name="pkdaily">
       <Position>6</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="211" parent="204" name="PRIMARY">
+    <key id="221" parent="205" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userid</ColNames>
       <Primary>1</Primary>
