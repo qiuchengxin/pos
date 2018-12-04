@@ -48,12 +48,13 @@ public class Hurt {
                     ask = new Gson().toJson(askQQMessage);
                 } else {
                     if (data.equals("六脉神剑") == true) {
-                        int shaoshang = (int) Math.random() * 6 + 1;
-                        int shangyang = (int) Math.random() * 6 + 1;
-                        int zhongchong = (int) Math.random() * 6 + 1;
-                        int shaochong = (int) Math.random() * 6 + 1;
+                        int shaoshang = (int) (Math.random() * 6 + 1);
+                        int shangyang = (int) (Math.random() * 6 + 1);
+                        int zhongchong = (int) (Math.random() * 6 + 1);
+                        int shaochong = (int) (Math.random() * 6 + 1);
+                        System.out.println(shaoshang);
 
-                        double hurtInt = shaoshang * shangyang * zhongchong * shaochong;
+                        int hurtInt = shaoshang * shangyang * zhongchong * shaochong;
                             int last_hurt = (int) (hurtInt * (1-behurt));
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你成功施展了六脉神剑 ！" +
                                     "\n六脉神剑伤害：少商剑（" + shaoshang + "）" + "、"
@@ -77,7 +78,7 @@ public class Hurt {
                             GetGrade.update_wuxiapk_daily(qqid);
                     }
 
-                    else {
+                    if (data.equals("六脉神剑") == false && data.equals("化功大法") == false){
                         askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 该招式还在设计之中，侠士过两天再来把（目前江湖中只出现了六脉神剑和化功大法） ！");
                         ask = new Gson().toJson(askQQMessage);
                     }
