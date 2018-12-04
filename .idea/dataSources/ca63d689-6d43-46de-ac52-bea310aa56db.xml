@@ -830,6 +830,7 @@
       <Starts>&apos;2018-11-01 00:00:00&apos;</Starts>
       <Preserve>0</Preserve>
       <Status>enabled</Status>
+      <LastExecuted>2018-12-02.08:00:00</LastExecuted>
     </scheduled-event>
     <column id="208" parent="204" name="userid">
       <Position>1</Position>
