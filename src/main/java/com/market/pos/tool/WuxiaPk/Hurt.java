@@ -91,7 +91,7 @@ public class Hurt {
                             GetGrade.update_wuxiapk_daily(qqid);
                         }
                         if (panding > 50){
-                            int beuser_last_grade = (int)(usertwo_grade * 0.3);
+                            int beuser_last_grade = (int)(usertwo_grade * 0.7);
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了佛怒火莲，对方受到了重创 ！" +
                                     "\n对方修为减去三分之一 ！");
                             ask = new Gson().toJson(askQQMessage);
