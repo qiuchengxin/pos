@@ -5,8 +5,8 @@ import com.market.pos.tool.Equip.EquipService;
 public class BeHurt {
     public static double behurt;
 
-    public static void beHurt(String be_qqid){
-        EquipService.equipSelect(be_qqid);
+    public static void beHurt(String be_qqid,String groupid){
+        EquipService.equipSelect(be_qqid,groupid);
         String be_equipment = EquipService.equipment;
 
         if (be_equipment == null){

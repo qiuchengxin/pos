@@ -17,7 +17,7 @@ public class FindHideRoom {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
         String time = df.format(time_now);
 
-        hideRoomService.findHideRoom(time_now);
+        hideRoomService.findHideRoom(time_now,groupid);
         int nowInHide = hideRoomService.nowInHide;
         AskQQMessage askQQMessage = new AskQQMessage();
         askQQMessage.setAct("101");

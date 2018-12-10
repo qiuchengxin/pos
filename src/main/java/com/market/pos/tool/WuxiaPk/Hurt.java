@@ -18,7 +18,7 @@ public class Hurt {
         askQQMessage.setGroupid(groupid);
         askQQMessage.setQQID(qqid);
 
-        EquipService.equipSelect(qqid);
+        EquipService.equipSelect(qqid,groupid);
         String equip_book = EquipService.book;
 
         //获取被挑战者id
@@ -26,18 +26,18 @@ public class Hurt {
         String be_qqid = GetQid.ch_qqid;
 
         //判断当前对象usertwo是否可挑战
-        GetGrade.getGrade(be_qqid);
+        GetGrade.getGrade(be_qqid,groupid);
         int usertwo_grade = GetGrade.grade;
 
         //获取挑战者的修为
-        GetGrade.getGrade(qqid);
+        GetGrade.getGrade(qqid,groupid);
         int user_grade = GetGrade.grade;
 
         //获取对方防御信息
-        BeHurt.beHurt(be_qqid);
+        BeHurt.beHurt(be_qqid,groupid);
         double behurt = BeHurt.behurt;
 
-        EquipService.equipSelect(qqid);
+        EquipService.equipSelect(qqid,groupid);
         int pkdaily = EquipService.finddaily;
 
         if (pkdaily == 0) {
@@ -64,8 +64,8 @@ public class Hurt {
                                 + "\n共计伤害：" + last_hurt + "点！");
                         ask = new Gson().toJson(askQQMessage);
                         int last_grade = usertwo_grade - last_hurt;
-                        GetGrade.update_behurt_user(be_qqid, last_grade);
-                        GetGrade.update_wuxiapk_daily(qqid);
+                        GetGrade.update_behurt_user(be_qqid, last_grade,groupid);
+                        GetGrade.update_wuxiapk_daily(qqid,groupid);
                     }
 
                     if (msg.matches(".*化功大法.*")) {
@@ -74,8 +74,8 @@ public class Hurt {
                                 "\n成功散去对方" + last_hurt + "点修为！");
                         ask = new Gson().toJson(askQQMessage);
                         int last_grade = usertwo_grade - last_hurt;
-                        GetGrade.update_behurt_user(be_qqid, last_grade);
-                        GetGrade.update_wuxiapk_daily(qqid);
+                        GetGrade.update_behurt_user(be_qqid, last_grade,groupid);
+                        GetGrade.update_wuxiapk_daily(qqid,groupid);
                     }
 
                     if (msg.matches(".*佛怒火莲.*")){
@@ -86,17 +86,17 @@ public class Hurt {
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 阁下倾尽全力，成功释放了佛怒火莲，但是因为根基尚浅受到反噬，双方修为都受到了重创 ！" +
                                     "\n双方修为减半 ！");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(qqid,user_last_grade);
-                            GetGrade.update_behurt_user(be_qqid,beuser_last_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(qqid,user_last_grade,groupid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                         if (panding > 50){
                             int beuser_last_grade = (int)(usertwo_grade * 0.7);
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了佛怒火莲，对方受到了重创 ！" +
                                     "\n对方修为减去三分之一 ！");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_last_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                     }
 
@@ -108,9 +108,9 @@ public class Hurt {
                         askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了吸功大法 ！" +
                                 "\n吸收了对方 "+hurt+"点修为 ！");
                         ask = new Gson().toJson(askQQMessage);
-                        GetGrade.update_behurt_user(qqid,user_last_grade);
-                        GetGrade.update_behurt_user(be_qqid,beuser_last_grade);
-                        GetGrade.update_wuxiapk_daily(qqid);
+                        GetGrade.update_behurt_user(qqid,user_last_grade,groupid);
+                        GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
+                        GetGrade.update_wuxiapk_daily(qqid,groupid);
                     }
 
                     if (msg.matches(".*移花接木.*")){
@@ -122,15 +122,15 @@ public class Hurt {
                            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你获得了弟弟修为，反被揍了一顿,掉了 "+(int)(500*(1-behurt))+" 点修为 ！");
                            ask = new Gson().toJson(askQQMessage);
                            int user_last_grade = user_grade - (int)(500*(1-behurt));
-                           GetGrade.update_behurt_user(qqid,user_last_grade);
-                           GetGrade.update_wuxiapk_daily(qqid);
+                           GetGrade.update_behurt_user(qqid,user_last_grade,groupid);
+                           GetGrade.update_wuxiapk_daily(qqid,groupid);
                        }else {
                            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 成功获得对方修为并把对方打哭了 ！" +
                                    "\n对方掉了 "+(int)(500*(1-behurt))+" 点修为！");
                            ask = new Gson().toJson(askQQMessage);
                            int beuser_last_grade = usertwo_grade - (int)(500*(1-behurt));
-                           GetGrade.update_behurt_user(be_qqid,beuser_last_grade);
-                           GetGrade.update_wuxiapk_daily(qqid);
+                           GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
+                           GetGrade.update_wuxiapk_daily(qqid,groupid);
                        }
                     }
 
@@ -143,8 +143,8 @@ public class Hurt {
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你大喊一声焰分噬浪尺 ！" +
                                     "\n对方roll点结果为奇数，被你成功命中，修为减半,减去了 "+(int)(hurt*(1-behurt))+" 点修为！");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }else {
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你大喊一声焰分噬浪尺 ！" +
                                     "\n对方roll点结果为偶数，身法飘逸的逃开了 ！");
@@ -159,32 +159,32 @@ public class Hurt {
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 八极崩 ！！！" +
                                     "\n你嚷嚷的倒是挺凶，结果八极崩只打出了一段伤害，对方被打掉了 "+(int)(8*(1-behurt))+" 点修为。");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                         if (panding > 25 && panding <= 50){
                             int beuser_grade = usertwo_grade - (int)(64*(1-behurt));
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 八极崩 ！！！" +
                                     "\n你倾尽船力释放出八极崩，结果只打出了二段伤害，对方被打掉了 "+(int)(64*(1-behurt))+" 点修为。");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                         if (panding > 50 && panding <=90){
                             int beuser_grade = usertwo_grade - (int)(512*(1-behurt));
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 八极崩 ！！！" +
                                     "\n你轻描淡写释放了八极崩，打出了三段伤害，对方被打掉了 "+(int)(512*(1-behurt))+" 点修为。");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                         if (panding > 90){
                             int beuser_grade = usertwo_grade - (int)(4096*(1-behurt));
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 八极崩 ！！！" +
                                     "\n阁下武学造诣简直让人惊叹，竟然将八极崩练到了第四重境界！，对方被打掉了 "+(int)(4096*(1-behurt))+" 点修为 ！");
                             ask = new Gson().toJson(askQQMessage);
-                            GetGrade.update_behurt_user(be_qqid,beuser_grade);
-                            GetGrade.update_wuxiapk_daily(qqid);
+                            GetGrade.update_behurt_user(be_qqid,beuser_grade,groupid);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                     }
 
