@@ -2,36 +2,30 @@ package com.market.pos.tool.connect;
 
 import java.sql.*;
 
-public class JdbcSky {
+public class JdbcCw {
+
     static Connection connection;
     static String driver = "com.mysql.cj.jdbc.Driver";
     static String user = "root";
     static String password = "123456";
 
     public static String result_userid;
-    public static String one;
-    public static String two;
-    public static String three;
-    public static int need;
-    public static int done;
-    public static String who;
-    public static int fail;
+    public static int is_doudi;
+    public static String hurt;
+    public static int daily;
+    public static String cw_name;
 
     /**
-     * 查询sky表
+     * 查询cw表
      * @param sql
      * @param groupid
      */
-    public static void searchSky(String sql,String groupid){
+    public static void searchCw(String sql,String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         result_userid = null;
-        one = null;
-        two = null;
-        three = null;
-        need = 0;
-        done = 0;
-        who = null;
-        fail = 0;
+        is_doudi = 0;
+        hurt = null;
+        daily = 0;
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
@@ -42,13 +36,10 @@ public class JdbcSky {
             ResultSet result = statement.executeQuery(sql);
             while (result.next()){
                 result_userid = result.getString("userid");
-                need = result.getInt("need");
-                done = result.getInt("done");
-                who = result.getString("who");
-                one = result.getString("one");
-                two = result.getString("two");
-                three = result.getString("three");
-                fail = result.getInt("fail");
+                is_doudi = result.getInt("is_doudi");
+                hurt = result.getString("hurt");
+                daily = result.getInt("daily");
+                cw_name = result.getString("cw_name");
             }
             connection.close();
         }catch (ClassNotFoundException e) {

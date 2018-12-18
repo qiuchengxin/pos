@@ -19,7 +19,7 @@ public class JdbcRank {
     public static int myRankNum;
 
     public static void searchRank(String sql,String groupid){
-        String url = "jdbc:mysql://localhost:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
@@ -54,7 +54,7 @@ public class JdbcRank {
     }
 
     public static void searchRankByUserid(String sql,String groupid){
-        String url = "jdbc:mysql://localhost:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         myRankNum = 0;
         try{
             Class.forName(driver);

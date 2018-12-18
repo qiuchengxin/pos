@@ -9,6 +9,8 @@ import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
 import com.market.pos.tool.WuxiaPk.Hurt;
+import com.market.pos.tool.cw.CwController;
+import com.market.pos.tool.cw.MakeCwController;
 import com.market.pos.tool.dujie.HelpDuJie;
 import com.market.pos.tool.dujie.SkyController;
 import com.market.pos.tool.dujie.Who;
@@ -17,6 +19,9 @@ import com.market.pos.tool.findTreasure.OpenBack;
 import com.market.pos.tool.hideroom.FindHideRoom;
 import com.market.pos.tool.hideroom.HideRoom;
 import com.market.pos.tool.hideroom.HurtHideRoom;
+import com.market.pos.tool.market.*;
+import com.market.pos.tool.market_equipment.GodMarketBuy_equipment;
+import com.market.pos.tool.market_equipment.GodMarketSell_equipment;
 import com.market.pos.tool.pk.GetQid;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
@@ -154,7 +159,7 @@ public class LemocWebSocketClient extends WebSocketClient {
             AskQQMessage askQQMessage = new AskQQMessage();
             askQQMessage.setAct("106");
             askQQMessage.setQQID(qqid);
-            askQQMessage.setMsg("温馨提示：闭关系统分群处理啦，目前开放的群有：皓水群（514869445）、帮会群（106102978）" +
+            askQQMessage.setMsg("温馨提示：闭关系统分群处理啦，目前开放的群有：皓水群（514869445）、帮会群（106102978）、大锤群（258512073）" +
                     "\n例如您要在皓水群闭关，请说：【我要在皓水群闭关】，句式：我要在xxx闭关 ’ ");
             String ask = new Gson().toJson(askQQMessage);
             send(ask);
@@ -203,6 +208,74 @@ public class LemocWebSocketClient extends WebSocketClient {
             Who.who(qqid,msg,groupid);
             String ask = Who.ask;
             send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*做橙武.*") || msg.matches(".*做cw.*") ||  msg.matches(".*做CW.*")){
+            CwController.makeCw(qqid,groupid);
+            String ask = CwController.ask;
+            send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches("我要锻造.*")){
+            MakeCwController.makeCwController(qqid,msg,groupid);
+            String ask = MakeCwController.ask;
+            send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*\\u005BCQ:at,qq=.*我要购买.*")) {
+            GetQid.getQid(msg);
+            String ch_qqid = GetQid.ch_qqid;
+            MarketService.selectMarketByUserid(ch_qqid, groupid);
+            String good = MarketService.good;
+            if (ch_qqid == null) {
+                AskQQMessage askQQMessage = new AskQQMessage();
+                askQQMessage.setAct("101");
+                askQQMessage.setQQID(ch_qqid);
+                askQQMessage.setGroupid(groupid);
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 压根儿没这玩意儿卖，你吓唬谁，跟谁俩呢，山炮儿 ！ \n温馨提示：检查下是不是艾特错人了 ！");
+                String ask = new Gson().toJson(askQQMessage);
+                this.send(ask);
+            } else {
+                if (good.matches(".*套.*")) {
+                    GodMarketBuy_equipment.godMarketBuy(qqid, msg, groupid);
+                    String ask = GodMarketBuy_equipment.ask;
+                    this.send(ask);
+                } else {
+                    GodMarketBuy.godMarketBuy(qqid, msg, groupid);
+                    String ask = GodMarketBuy.ask;
+                    this.send(ask);
+                }
+            }
+        }
+
+        if (msg.matches(".*我要.*出.*") && !msg.matches(".*套.*")) {
+            GodMarketSell.godMarketSell(qqid, msg, groupid);
+            String ask = GodMarketSell.ask;
+            this.send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*我要.*出.*套")) {
+            GodMarketSell_equipment.godMarketSell(qqid, msg, groupid);
+            String ask = GodMarketSell_equipment.ask;
+            this.send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*我的商店.*")) {
+            SearchSell.searchSell(qqid, groupid);
+            String ask = SearchSell.ask;
+            this.send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*我不摆摊了.*")) {
+            DelSell.delSell(qqid, groupid);
+            String ask = DelSell.ask;
+            this.send(ask);
             System.out.println(ask);
         }
     }

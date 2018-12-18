@@ -80,7 +80,7 @@ public class Hurt {
 
                     if (msg.matches(".*佛怒火莲.*")){
                         int panding = (int)(Math.random()*100);
-                        if (panding <= 50){
+                        if (panding <= 20){
                             int beuser_last_grade = (int)(usertwo_grade * 0.5);
                             int user_last_grade = (int)(user_grade * 0.5);
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 阁下倾尽全力，成功释放了佛怒火莲，但是因为根基尚浅受到反噬，双方修为都受到了重创 ！" +
@@ -90,13 +90,18 @@ public class Hurt {
                             GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
                             GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
-                        if (panding > 50){
+                        if (panding > 20 && panding <=30){
                             int beuser_last_grade = (int)(usertwo_grade * 0.7);
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了佛怒火莲，对方受到了重创 ！" +
                                     "\n对方修为减去三分之一 ！");
                             ask = new Gson().toJson(askQQMessage);
                             GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
                             GetGrade.update_wuxiapk_daily(qqid,groupid);
+                        }
+                        if (panding > 30){
+                            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 释放佛怒火莲失败，是不是钱充少了 ！" +
+                                    "\n明天再来试试把 ！");
+                            ask = new Gson().toJson(askQQMessage);
                         }
                     }
 
@@ -149,6 +154,7 @@ public class Hurt {
                             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你大喊一声焰分噬浪尺 ！" +
                                     "\n对方roll点结果为偶数，身法飘逸的逃开了 ！");
                             ask = new Gson().toJson(askQQMessage);
+                            GetGrade.update_wuxiapk_daily(qqid,groupid);
                         }
                     }
 
