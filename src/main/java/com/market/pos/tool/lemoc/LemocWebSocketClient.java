@@ -9,6 +9,9 @@ import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
 import com.market.pos.tool.WuxiaPk.Hurt;
+import com.market.pos.tool.dujie.HelpDuJie;
+import com.market.pos.tool.dujie.SkyController;
+import com.market.pos.tool.dujie.Who;
 import com.market.pos.tool.findTreasure.BackpackController;
 import com.market.pos.tool.findTreasure.OpenBack;
 import com.market.pos.tool.hideroom.FindHideRoom;
@@ -180,12 +183,28 @@ public class LemocWebSocketClient extends WebSocketClient {
             System.out.println(ask);
         }
 
-//         if (msg.matches(".*修为记录.*")){
-//             test.insertTest(qqid,nick,groupid);
-//             String ask = test.ask;
-//             send(ask);
-//             System.out.println(ask);
-//         }
+        if (msg.matches(".*我要渡劫.*")){
+            SkyController.skyController(qqid,groupid);
+            String ask = SkyController.ask;
+            send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*我要帮助.*\\u005BCQ:at,qq=.*")){
+            GetQid.getQid(msg);
+            String userid = GetQid.ch_qqid;
+            HelpDuJie.helpDuJie(qqid,userid,groupid);
+            String ask = HelpDuJie.ask;
+            send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*\\u005BCQ:at,qq=.*是破坏者.*")){
+            Who.who(qqid,msg,groupid);
+            String ask = Who.ask;
+            send(ask);
+            System.out.println(ask);
+        }
     }
 
     public void onOpen(ServerHandshake arg0){
