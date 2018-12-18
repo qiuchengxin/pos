@@ -5,14 +5,11 @@ import com.market.pos.tool.pk.GetGrade;
 public class GradeJudge {
 
     public static void gradeJudge(String userid,String groupid){
-        GetGrade.getGrade(userid,groupid);
-        int grade = GetGrade.grade;
-        if (grade >= 15000 && grade < 20000){
-            //小天劫
-
-        }
-        if (grade >= 20000){
-            //斗帝劫
+        //将grade大于20000的用户数据插入sky表并将need置为1
+        SkyService.searchSky(userid,groupid);
+        String reslut_userid = SkyService.result_userid;
+        if (reslut_userid == null){
+            SkyService.insertSky(userid,groupid);
         }
     }
 }
