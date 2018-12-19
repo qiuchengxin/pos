@@ -32,6 +32,7 @@ import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
 import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.serverOpenSearch.AdSearch;
+import com.market.pos.tool.wujiaHeZi.GetHeziList;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
@@ -312,6 +313,18 @@ public class LemocWebSocketClient extends WebSocketClient {
         if (msg.matches(".*更新公告.*")){
             String ask = AdSearch.adSearch(groupid);
             send(ask);
+        }
+        if (msg.matches("物价查询.*")){
+            String ask = GetHeziList.getHeziList(qqid,msg);
+            send(ask);
+
+            AskQQMessage askQQMessage = new AskQQMessage();
+            askQQMessage.setAct("101");
+            askQQMessage.setQQID(qqid);
+            askQQMessage.setGroupid(groupid);
+            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 已将5173首页价格一览私聊发送给您，请查收 ！");
+            String askGroup = new Gson().toJson(askQQMessage);
+            send(askGroup);
         }
     }
 
