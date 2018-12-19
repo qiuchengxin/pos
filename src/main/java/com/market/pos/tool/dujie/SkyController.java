@@ -17,7 +17,7 @@ public class SkyController {
 
         GetGrade.getGrade(userid,groupid);
         int grade = GetGrade.grade;
-        if (grade == 20000){
+        if (grade == 15000){
             //在sky表中生成记录并将need置为1
             GradeJudge.gradeJudge(userid,groupid);
             SkyService.updateSkyNeed(userid,groupid);
@@ -62,10 +62,10 @@ public class SkyController {
                     }
                 }
             }
-        }if (grade < 20000){
+        }if (grade < 15000){
             askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 您不满足渡劫条件" );
             ask = new Gson().toJson(askQQMessage);
-        }if (grade > 20000){
+        }if (grade > 15000){
             askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 您已经是斗帝了，可以接受他们的膜拜！" );
             ask = new Gson().toJson(askQQMessage);
         }

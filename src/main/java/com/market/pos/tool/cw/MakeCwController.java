@@ -32,6 +32,7 @@ public class MakeCwController {
             askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 您的包里并没有玄晶哦 ！");
             ask = new Gson().toJson(askQQMessage);
         }else {
+            CwService.insertCw(userid, groupid);
             if (is_doudi == 0) {
                 CwService.updateCwName(userid, groupid, cwName);
                 CwService.delBackPackSpecial(userid, groupid);

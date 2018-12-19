@@ -29,7 +29,7 @@ public class Who {
 
         GetGrade.getGrade(userid, groupid);
         int grade = GetGrade.grade;
-        if (grade == 20000) {
+        if (grade == 15000) {
             if (fail == 1) {
                 askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 今天渡劫次数用完了，明天再来吧 ！");
                 ask = new Gson().toJson(askQQMessage);
@@ -41,7 +41,7 @@ public class Who {
                         ask = new Gson().toJson(askQQMessage);
                         SkyService.updateSkyDone(userid, groupid);
                         SkyService.updateFail(userid, groupid);
-                        GetGrade.updateUsers(userid, 20001, update_time, groupid);
+                        GetGrade.updateUsers(userid, 15001, update_time, groupid);
                     } else if (!who.matches("nobody")) {
                         //猜错了
                         askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 渡劫失败！");
@@ -54,7 +54,7 @@ public class Who {
                     ask = new Gson().toJson(askQQMessage);
                     SkyService.updateSkyDone(userid, groupid);
                     SkyService.updateFail(userid, groupid);
-                    GetGrade.updateUsers(userid, 20001, update_time, groupid);
+                    GetGrade.updateUsers(userid, 15001, update_time, groupid);
                 } else if (!heler_userid_string.matches(who)) {
                     //猜错了
                     askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 渡劫失败！");

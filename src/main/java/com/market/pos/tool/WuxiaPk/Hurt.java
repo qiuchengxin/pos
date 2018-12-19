@@ -45,6 +45,7 @@ public class Hurt {
 
         if (pkdaily < 1) {
             System.out.println("进来了");
+            //cw判定
             ResetDaily.resetDaily(qqid,groupid);
             int cwTeXiao = ResetDaily.cwTeXiao;
             if (cwTeXiao == 1){
@@ -52,10 +53,14 @@ public class Hurt {
             }else if (cwTeXiao == 0){
                 cwAsk = "nocd";
             }
+
             if (usertwo_grade < 150) {
                 askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 他还是个弟弟，不能对其施展招式 ！ ");
                 ask = new Gson().toJson(askQQMessage);
-            } else {
+            }else if (usertwo_grade > 15000){
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 普通技能无法对斗帝产生伤害 ！ ");
+                ask = new Gson().toJson(askQQMessage);
+            }else {
                 if (msg.matches(".*"+equip_book+".*")) {
                     if (msg.matches(".*六脉神剑.*")) {
                         int shaoshang = (int) (Math.random() * 6 + 1);

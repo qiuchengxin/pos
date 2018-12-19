@@ -17,6 +17,8 @@ import com.market.pos.tool.dujie.SkyController;
 import com.market.pos.tool.dujie.Who;
 import com.market.pos.tool.findTreasure.BackpackController;
 import com.market.pos.tool.findTreasure.OpenBack;
+import com.market.pos.tool.goldPriceSearch.GoldPriceSearch;
+import com.market.pos.tool.goldPriceSearch.ServerSearch;
 import com.market.pos.tool.hideroom.FindHideRoom;
 import com.market.pos.tool.hideroom.HideRoom;
 import com.market.pos.tool.hideroom.HurtHideRoom;
@@ -29,6 +31,7 @@ import com.market.pos.tool.pk.GetQid;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
 import com.market.pos.tool.pk.TiaoZhan;
+import com.market.pos.tool.serverOpenSearch.AdSearch;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
@@ -299,6 +302,16 @@ public class LemocWebSocketClient extends WebSocketClient {
             String ask = DelSell.ask;
             this.send(ask);
             System.out.println(ask);
+        }
+
+        if (msg.matches(".*金价查询.*")){
+            String ask = ServerSearch.sercerSearch(msg,groupid);
+            send(ask);
+            System.out.println(ask);
+        }
+        if (msg.matches(".*更新公告.*")){
+            String ask = AdSearch.adSearch(groupid);
+            send(ask);
         }
     }
 
