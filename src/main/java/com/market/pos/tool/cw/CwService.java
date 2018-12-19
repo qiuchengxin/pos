@@ -9,6 +9,7 @@ public class CwService {
     public static String hurt;
     public static int daily;
     public static String cw_name;
+    public static int cd;
 
     /**
      * 查询cw表
@@ -23,6 +24,7 @@ public class CwService {
         hurt = JdbcCw.hurt;
         daily = JdbcCw.daily;
         cw_name = JdbcCw.cw_name;
+        cd = JdbcCw.cd;
     }
 
     /**
@@ -89,6 +91,16 @@ public class CwService {
      */
     public static void updateEquipSpecial(String userid,String groupid,String cw_name){
         String sql = "update equip set special = " + "'" + cw_name + "'" + " where userid = " + userid;
+        JdbcUsers.update(sql,groupid);
+    }
+
+    /**
+     * 更新cd为1
+     * @param userid
+     * @param groupid
+     */
+    public static void updateCd(String userid,String groupid){
+        String sql = "update cw set cd = 1 where userid = " + userid;
         JdbcUsers.update(sql,groupid);
     }
 }

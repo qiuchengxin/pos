@@ -35,7 +35,11 @@ public class GodMarketSell_equipment {
             BackpackService.searchBackPack(qqid,groupid);
             String sell_user_equipment = BackpackService.equipment;
             System.out.println("--------------------------------------------------------------------------------");
-            if (sell_user_equipment.matches(".*" + good + ".*")) {
+            if (sell_user_equipment == null){
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 您包里没有这件商品哦，您是想空手套白狼吗 ~" +
+                        "\n温馨提示：请检查您的背包再进行出售把 ！ ");
+                ask = new Gson().toJson(askQQMessage);
+            }else if (sell_user_equipment.matches(".*" + good + ".*") && sell_user_equipment != null) {
                 askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 摆摊成功，请耐心等待傻大个儿来购买吧 ！" +
                         "\n如果没有顾客您可以尝试对我说“我不摆摊了 ！”然后重新上架商品，温馨提示：亲民的价格和受人喜爱的商品更容易达成交易哦 ！ ");
                 ask = new Gson().toJson(askQQMessage);

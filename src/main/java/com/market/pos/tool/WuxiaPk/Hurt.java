@@ -3,6 +3,7 @@ package com.market.pos.tool.WuxiaPk;
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
 import com.market.pos.tool.Equip.EquipService;
+import com.market.pos.tool.cw.ResetDaily;
 import com.market.pos.tool.pk.GetGrade;
 import com.market.pos.tool.pk.GetQid;
 
@@ -10,6 +11,8 @@ public class Hurt {
 
     public static int last_hurt;
     public static String ask;
+    public static String cwAsk;
+    public static int cd;
     //data:招式名称
     public static void hurt(String qqid,String groupid,String msg){
 
@@ -40,8 +43,15 @@ public class Hurt {
         EquipService.equipSelect(qqid,groupid);
         int pkdaily = EquipService.finddaily;
 
-        if (pkdaily == 0) {
+        if (pkdaily < 1) {
             System.out.println("进来了");
+            ResetDaily.resetDaily(qqid,groupid);
+            int cwTeXiao = ResetDaily.cwTeXiao;
+            if (cwTeXiao == 1){
+                cwAsk = ResetDaily.ask;
+            }else if (cwTeXiao == 0){
+                cwAsk = "nocd";
+            }
             if (usertwo_grade < 150) {
                 askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 他还是个弟弟，不能对其施展招式 ！ ");
                 ask = new Gson().toJson(askQQMessage);
@@ -52,15 +62,20 @@ public class Hurt {
                         int shangyang = (int) (Math.random() * 6 + 1);
                         int zhongchong = (int) (Math.random() * 6 + 1);
                         int shaochong = (int) (Math.random() * 6 + 1);
+                        int guanchong = (int) (Math.random() * 6 + 1);
+                        int shaoze = (int) (Math.random() * 6 + 1);
+
                         System.out.println(shaoshang);
 
-                        int hurtInt = shaoshang * shangyang * zhongchong * shaochong;
+                        int hurtInt = shaoshang * shangyang * zhongchong * shaochong * guanchong * shaoze;
                         int last_hurt = (int) (hurtInt * (1-behurt));
                         askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 你成功施展了六脉神剑 ！" +
                                 "\n六脉神剑伤害：少商剑（" + shaoshang + "）" + "、"
                                 + "商阳剑（" + shangyang + "）" + "、"
                                 + "中冲剑（" + zhongchong + "）" + "、"
                                 + "少冲剑（" + zhongchong + "）" + "、"
+                                + "关冲剑（" + guanchong + "）" + "、"
+                                + "少泽剑（" + shaoze + "）" + "、"
                                 + "\n共计伤害：" + last_hurt + "点！");
                         ask = new Gson().toJson(askQQMessage);
                         int last_grade = usertwo_grade - last_hurt;
@@ -205,7 +220,7 @@ public class Hurt {
                 }
             }
         }
-        if (pkdaily == 1){
+        if (pkdaily >= 1){
             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 招式尚在调息之中，少侠明日再来 ！");
             ask = new Gson().toJson(askQQMessage);
         }

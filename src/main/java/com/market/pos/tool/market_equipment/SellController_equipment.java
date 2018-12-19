@@ -62,7 +62,7 @@ public class SellController_equipment {
                   BackpackService.updateBackPack(buy_userid,"money",end_buy_user_money.toString(),groupid);
 
                   //交易完成，检查销售者装备栏，如果有装备此商品，则删除
-                  DeLEquip.delEquip(sell_userid,"book",good,groupid);
+                  DeLEquip.delEquip(sell_userid,"equipment",good,groupid);
 
                   //查询购买者的背包
                   BackpackService.searchBackPack(buy_userid,groupid);

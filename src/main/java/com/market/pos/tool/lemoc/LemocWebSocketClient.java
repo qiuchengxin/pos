@@ -10,6 +10,7 @@ import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
 import com.market.pos.tool.WuxiaPk.Hurt;
 import com.market.pos.tool.cw.CwController;
+import com.market.pos.tool.cw.CwService;
 import com.market.pos.tool.cw.MakeCwController;
 import com.market.pos.tool.dujie.HelpDuJie;
 import com.market.pos.tool.dujie.SkyController;
@@ -22,6 +23,8 @@ import com.market.pos.tool.hideroom.HurtHideRoom;
 import com.market.pos.tool.market.*;
 import com.market.pos.tool.market_equipment.GodMarketBuy_equipment;
 import com.market.pos.tool.market_equipment.GodMarketSell_equipment;
+import com.market.pos.tool.market_special.GodMarketBuy_special;
+import com.market.pos.tool.market_special.GodMarketSell_special;
 import com.market.pos.tool.pk.GetQid;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
@@ -130,8 +133,16 @@ public class LemocWebSocketClient extends WebSocketClient {
             GetQid.getQid(msg);
             Hurt.hurt(qqid,groupid,msg);
             String ask = Hurt.ask;
+            String cwAsk = Hurt.cwAsk;
+            CwService.searchCw(qqid,groupid);
+            int cd = CwService.cd;
             send(ask);
             System.out.println(ask);
+            if (!cwAsk.matches("nocd") && cd == 0){
+                send(cwAsk);
+                System.out.println(cwAsk);
+                CwService.updateCd(qqid,groupid);
+            }
         }
 
 
@@ -243,7 +254,11 @@ public class LemocWebSocketClient extends WebSocketClient {
                     GodMarketBuy_equipment.godMarketBuy(qqid, msg, groupid);
                     String ask = GodMarketBuy_equipment.ask;
                     this.send(ask);
-                } else {
+                }else if (good.matches(".*玄晶.*")){
+                    GodMarketBuy_special.godMarketBuy(qqid, msg, groupid);
+                    String ask = GodMarketBuy_special.ask;
+                    this.send(ask);
+                } else if (!good.matches(".*套.*") && !good.matches(".*玄晶.*")){
                     GodMarketBuy.godMarketBuy(qqid, msg, groupid);
                     String ask = GodMarketBuy.ask;
                     this.send(ask);
@@ -251,17 +266,24 @@ public class LemocWebSocketClient extends WebSocketClient {
             }
         }
 
-        if (msg.matches(".*我要.*出.*") && !msg.matches(".*套.*")) {
+        if (msg.matches(".*我要.*出.*") && !msg.matches(".*套.*") && !msg.matches(".*玄晶.*")) {
             GodMarketSell.godMarketSell(qqid, msg, groupid);
             String ask = GodMarketSell.ask;
-            this.send(ask);
+            send(ask);
             System.out.println(ask);
         }
 
         if (msg.matches(".*我要.*出.*套")) {
             GodMarketSell_equipment.godMarketSell(qqid, msg, groupid);
             String ask = GodMarketSell_equipment.ask;
-            this.send(ask);
+            send(ask);
+            System.out.println(ask);
+        }
+
+        if (msg.matches(".*我要.*出醉月玄晶")){
+            GodMarketSell_special.godMarketSell(qqid, msg, groupid);
+            String ask = GodMarketSell_special.ask;
+            send(ask);
             System.out.println(ask);
         }
 

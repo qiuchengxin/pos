@@ -14,6 +14,7 @@ public class JdbcCw {
     public static String hurt;
     public static int daily;
     public static String cw_name;
+    public static int cd;
 
     /**
      * 查询cw表
@@ -26,6 +27,7 @@ public class JdbcCw {
         is_doudi = 0;
         hurt = null;
         daily = 0;
+        cd = 0;
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
@@ -40,6 +42,7 @@ public class JdbcCw {
                 hurt = result.getString("hurt");
                 daily = result.getInt("daily");
                 cw_name = result.getString("cw_name");
+                cd = result.getInt("cd");
             }
             connection.close();
         }catch (ClassNotFoundException e) {
