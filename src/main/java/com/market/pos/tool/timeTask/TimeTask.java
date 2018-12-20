@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 定时任务
+ */
 public class TimeTask {
     public static void timeTask() {
         Timer tim = new Timer();
@@ -17,7 +20,6 @@ public class TimeTask {
                 //获取更新时间 update_time
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String update_time = df.format(new Date());
-                TimePriceService.insertTimePrice(money,update_time);
             }
         };
         tim.schedule(tTask,0,30*60*1000);

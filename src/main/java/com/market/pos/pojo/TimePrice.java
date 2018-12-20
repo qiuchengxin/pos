@@ -24,4 +24,8 @@ public class TimePrice {
     this.time = time;
   }
 
+  public TimePrice(String money, String time) {
+    this.money = money;
+    this.time = time;
+  }
 }
