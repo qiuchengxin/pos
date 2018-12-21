@@ -326,6 +326,16 @@ public class LemocWebSocketClient extends WebSocketClient {
             String askGroup = new Gson().toJson(askQQMessage);
             send(askGroup);
         }
+
+        if (msg.matches(".*金价表.*")){
+            AskQQMessage askQQMessage = new AskQQMessage();
+            askQQMessage.setAct("101");
+            askQQMessage.setQQID(qqid);
+            askQQMessage.setGroupid(groupid);
+            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 请点击：www.qiuchengxin.xyz:8080/list");
+            String ask = new Gson().toJson(askQQMessage);
+            send(ask);
+        }
     }
 
     public void onOpen(ServerHandshake arg0){

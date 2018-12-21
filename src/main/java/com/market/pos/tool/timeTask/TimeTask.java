@@ -1,5 +1,6 @@
 package com.market.pos.tool.timeTask;
 
+import com.market.pos.tool.connect.JdbcUsers;
 import com.market.pos.tool.goldPriceSearch.GoldPriceSearch;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +21,9 @@ public class TimeTask {
                 //获取更新时间 update_time
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String update_time = df.format(new Date());
+                String sql = "INSERT INTO time_price (money,time) VALUES (" +
+                        "'" + money + "'" + "," + "'" + update_time + "'" + ")";
+                JdbcUsers.insert(sql,"pay_data");
             }
         };
         tim.schedule(tTask,0,30*60*1000);

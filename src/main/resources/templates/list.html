@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>四合一</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-anim layui-anim-scale">
+<table align="center" class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="150">
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <td>时间</td>
+        <td>金价</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each ="i:${list}">
+        <td th:text = "${i.time}"></td>
+        <td th:text = "${i.money}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<script src="../static/layui/layui.js"></script>
+</body>
+</html>
