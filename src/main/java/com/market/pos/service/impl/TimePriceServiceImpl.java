@@ -23,4 +23,10 @@ public class TimePriceServiceImpl extends ServiceImpl<TimePriceMapper, TimePrice
         List<TimePrice> list = timePriceMapper.findAll();
         return list;
     }
+
+    @Override
+    public List<TimePrice> findAsc() {
+        List<TimePrice> list = timePriceMapper.findAsc();
+        return list;
+    }
 }

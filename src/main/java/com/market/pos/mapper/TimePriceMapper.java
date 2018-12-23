@@ -14,4 +14,7 @@ public interface TimePriceMapper extends BaseMapper<TimePrice> {
      * @return
      */
     public List<TimePrice> findAll();
+
+    public List<TimePrice> findAsc();
+
 }

@@ -7,8 +7,14 @@
         <result property="money" column="money"/>
         <result property="time" column="time"/>
     </resultMap>
+    
     <!--查询所有的数据-->
     <select id="findAll" resultMap="TimePriceResultMap">
         select * from time_price order by time desc
     </select>
+
+    <select id="findAsc" resultMap="TimePriceResultMap">
+        select * from time_price order by time ASC
+    </select>
+
 </mapper>

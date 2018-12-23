@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="../static/echartsJs/echarts.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>图表</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-anim layui-anim-scale" align="center">
+<div id="main" style="height:400px;">
+    <script type="text/javascript" th:inline="javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'),'light');
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '电信五区幽月轮金价'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                data: ['金价比']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: [[${time}]]
+            }],
+            yAxis: [{
+                type: 'value',
+                min:600
+            }],
+            series: [{
+                name: '金价比',
+                type: 'line',
+                stack: '总量',
+                areaStyle: {
+                    normal: {}
+                },
+                data: [[${money}]]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        </script>
+
+    <h3 align="center">半小时更新一次</h3>
+    <table align="center" class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="150">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <td>时间</td>
+            <td>金价</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="i:${list}">
+            <td th:text = "${i.time}"></td>
+            <td th:text = "${i.money}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<script src="../static/layui/layui.js"></script>
+<script th:inline="javascript">
+    var money = [[${money}]];
+    var time = [[${time}]]
+    console.log(money);
+    console.log(time);
+</script>
+</body>
+</html>

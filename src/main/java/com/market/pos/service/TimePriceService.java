@@ -9,4 +9,7 @@ import java.util.List;
 public interface TimePriceService extends IService<TimePrice> {
 
     public List<TimePrice> findAll();
+
+    public List<TimePrice> findAsc();
+
 }
