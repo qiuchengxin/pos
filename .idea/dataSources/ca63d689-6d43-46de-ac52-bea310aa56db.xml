@@ -834,24 +834,25 @@
     <table id="211" parent="9" name="equip"/>
     <table id="212" parent="9" name="hideroom"/>
     <table id="213" parent="9" name="market"/>
-    <table id="214" parent="9" name="servers"/>
-    <table id="215" parent="9" name="sky">
+    <table id="214" parent="9" name="members"/>
+    <table id="215" parent="9" name="servers"/>
+    <table id="216" parent="9" name="sky">
       <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="216" parent="9" name="teamtable"/>
-    <table id="217" parent="9" name="test">
+    <table id="217" parent="9" name="teamtable"/>
+    <table id="218" parent="9" name="test">
       <Collation>gb2312_chinese_ci</Collation>
     </table>
-    <table id="218" parent="9" name="time_price"/>
-    <table id="219" parent="9" name="users">
+    <table id="219" parent="9" name="time_price"/>
+    <table id="220" parent="9" name="users">
       <Engine>MyISAM</Engine>
       <Collation>gb2312_chinese_ci</Collation>
     </table>
-    <routine id="220" parent="9" name="update_daily_pkdaily_onl">
+    <routine id="221" parent="9" name="update_daily_pkdaily_onl">
       <SourceTextLength>123</SourceTextLength>
       <RoutineKind>procedure</RoutineKind>
     </routine>
-    <scheduled-event id="221" parent="9" name="update_daily_pkdaily">
+    <scheduled-event id="222" parent="9" name="update_daily_pkdaily">
       <SourceTextLength>29</SourceTextLength>
       <Definer>root@%</Definer>
       <Interval>&apos;1&apos; DAY</Interval>
@@ -860,292 +861,308 @@
       <Status>enabled</Status>
       <LastExecuted>2018-12-02.08:00:00</LastExecuted>
     </scheduled-event>
-    <column id="222" parent="209" name="userid">
+    <column id="223" parent="209" name="userid">
       <Position>1</Position>
       <Comment>qqid</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="223" parent="209" name="equipment">
+    <column id="224" parent="209" name="equipment">
       <Position>2</Position>
       <Comment>武器</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="224" parent="209" name="money">
+    <column id="225" parent="209" name="money">
       <Position>3</Position>
       <Comment>金钱</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="225" parent="209" name="book">
+    <column id="226" parent="209" name="book">
       <Position>4</Position>
       <Comment>秘籍</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="226" parent="209" name="special">
+    <column id="227" parent="209" name="special">
       <Position>5</Position>
       <Comment>特殊物品</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="227" parent="209" name="finddaily">
+    <column id="228" parent="209" name="finddaily">
       <Position>6</Position>
       <Comment>每天重置为5，每次更新减少一点</Comment>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="228" parent="209" name="PRIMARY">
+    <key id="229" parent="209" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="229" parent="210" name="userid">
+    <column id="230" parent="210" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="230" parent="210" name="name">
+    <column id="231" parent="210" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="231" parent="210" name="msg">
+    <column id="232" parent="210" name="msg">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="232" parent="210" name="start_time">
+    <column id="233" parent="210" name="start_time">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="233" parent="211" name="userid">
+    <column id="234" parent="211" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="234" parent="211" name="equipment">
+    <column id="235" parent="211" name="equipment">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="235" parent="211" name="book">
+    <column id="236" parent="211" name="book">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="236" parent="211" name="money">
+    <column id="237" parent="211" name="money">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="237" parent="211" name="special">
+    <column id="238" parent="211" name="special">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="238" parent="211" name="finddaily">
+    <column id="239" parent="211" name="finddaily">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="212" name="userid">
+    <column id="240" parent="212" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="212" name="start_time">
+    <column id="241" parent="212" name="start_time">
       <Position>2</Position>
       <Comment>闭关时间</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="212" name="is_ok">
+    <column id="242" parent="212" name="is_ok">
       <Position>3</Position>
       <Comment>1：闭关成功/0：闭关失败</Comment>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="212" name="is_hurt">
+    <column id="243" parent="212" name="is_hurt">
       <Position>4</Position>
       <Comment>1：受伤了/0：未受伤</Comment>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="243" parent="212" name="do_hurt">
+    <column id="244" parent="212" name="do_hurt">
       <Position>5</Position>
       <Comment>1：挑战过了别人/0：未挑战过别人</Comment>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="213" name="userid">
+    <column id="245" parent="213" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="213" name="buy_userid">
+    <column id="246" parent="213" name="buy_userid">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="213" name="money">
+    <column id="247" parent="213" name="money">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="213" name="good">
+    <column id="248" parent="213" name="good">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="214" name="id">
+    <column id="249" parent="214" name="userid">
+      <Position>1</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="250" parent="214" name="password">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="251" parent="214" name="job">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="252" parent="215" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned zerofill|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="214" name="server_name">
+    <column id="253" parent="215" name="server_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>gb2312_chinese_ci</Collation>
     </column>
-    <column id="250" parent="214" name="server_url">
+    <column id="254" parent="215" name="server_url">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>gb2312_chinese_ci</Collation>
     </column>
-    <column id="251" parent="215" name="userid">
+    <column id="255" parent="216" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="252" parent="215" name="need">
+    <column id="256" parent="216" name="need">
       <Position>2</Position>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="215" name="done">
+    <column id="257" parent="216" name="done">
       <Position>3</Position>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="254" parent="215" name="one">
+    <column id="258" parent="216" name="one">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="255" parent="215" name="two">
+    <column id="259" parent="216" name="two">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="215" name="three">
+    <column id="260" parent="216" name="three">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="215" name="who">
+    <column id="261" parent="216" name="who">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="215" name="fail">
+    <column id="262" parent="216" name="fail">
       <Position>8</Position>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="216" name="id">
+    <column id="263" parent="217" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="216" name="teamnname">
+    <column id="264" parent="217" name="teamnname">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="216" name="date">
+    <column id="265" parent="217" name="date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="216" name="dateImf">
+    <column id="266" parent="217" name="dateImf">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="217" name="userid">
+    <column id="267" parent="218" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="217" name="username">
+    <column id="268" parent="218" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="217" name="groupid">
+    <column id="269" parent="218" name="groupid">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="218" name="money">
+    <column id="270" parent="219" name="money">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>gb2312_chinese_ci</Collation>
     </column>
-    <column id="267" parent="218" name="time">
+    <column id="271" parent="219" name="time">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="219" name="userid">
+    <column id="272" parent="220" name="userid">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="219" name="username">
+    <column id="273" parent="220" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="219" name="grade">
+    <column id="274" parent="220" name="grade">
       <Position>3</Position>
       <DataType>int(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="219" name="update_time">
+    <column id="275" parent="220" name="update_time">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="219" name="daily">
+    <column id="276" parent="220" name="daily">
       <Position>5</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="219" name="pkdaily">
+    <column id="277" parent="220" name="pkdaily">
       <Position>6</Position>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="274" parent="219" name="PRIMARY">
+    <key id="278" parent="220" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userid</ColNames>
       <Primary>1</Primary>
