@@ -8,14 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
-<body>
 
-<div style="width: auto;margin: 1%;" align="center">
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 11%;" >
+    <!--<style>-->
+        <!--body{-->
+            <!--margin:0;//body外边距设为0；-->
+            <!--z-index: 1;-->
+        <!--}-->
+        <!--video{-->
+            <!--position: fixed;//视频定位方式设为固定-->
+        <!--right: 0;-->
+            <!--bottom: 0;//视频位置-->
+        <!--min-width: 100%;-->
+            <!--min-height: 100%; //不会因视频尺寸造成页面需要滚动-->
+        <!--width: auto;-->
+            <!--height: auto; //尺寸保持原视频大小-->
+        <!--z-index: -100; //z轴定位，小于0即可-->
+        <!-- -webkit-filter: grayscale(20%);//添加灰度蒙版，如果设定为100%则视频显示为黑白-->
+        <!--z-index: -1;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+
+<body>
+<!--<video src="../static/jx3.mp4" loop="loop" autoplay="autoplay" muted="muted" id="video"></video>-->
+<div style="width: auto;margin: 1%;" align="center" >
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 13%;" >
     <legend align="center">欢迎加入！</legend>
 </fieldset>
-<form class="layui-form layui-form-pane" action="/Members/Add" style="width: 30%;" method="post">
+<form class="layui-form layui-form-pane" action="/Members/Add" style="width: 22%;" method="post">
 
     <div class="layui-form-item">
         <label class="layui-form-label">QQ账号</label>
@@ -35,6 +55,19 @@
         <label class="layui-form-label">确认密码</label>
         <div class="layui-input-block">
             <input type="password" name="password2" id="password2" placeholder="请输入密码" autocomplete="off" class="layui-input" maxlength="20">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择QQ群</label>
+        <div class="layui-input-block">
+            <select name="QQgroup" lay-filter="QQ群">
+                <option value=""></option>
+                <option value="514869445">皓水PVE团群</option>
+                <option value="106102978">皓水帮会群</option>
+                <option value="2">大唐修真群</option>
+                <option value="3">大锤群</option>
+            </select>
         </div>
     </div>
 
@@ -75,5 +108,9 @@
         });
     }
 </script>
+<!--<script>-->
+    <!--var video = document.getElementById("video");-->
+    <!--video.playbackRate = 0.8;-->
+<!--</script>-->
 </body>
 </html>

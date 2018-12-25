@@ -2,6 +2,7 @@ package com.market.pos.controller;
 
 import com.market.pos.pojo.Members;
 import com.market.pos.service.MembersService;
+import com.market.pos.tool.common.GetUserId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,10 @@ public class MembersController {
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
+        String QQgroup = request.getParameter("QQgroup");
+
+        GetUserId.getUserId(userid,QQgroup);
+        String group_userid = GetUserId.result_userid;
 
         String result_userid = membersService.findUser(userid);
         //长度校验
@@ -46,10 +51,14 @@ public class MembersController {
             model.addAttribute("return","两次输入密码不正确！");
         }else if (password.equals(password2)){
             if (result_userid == null) {
-                members.setUserid(userid);
-                members.setPassword(password);
-                membersService.addMember(members);
-                model.addAttribute("return", "注册成功，即将跳转至登录页面！");
+                if (group_userid == null){
+                    model.addAttribute("return","你的QQ账号并未在群（"+ QQgroup +"）中，不可以注册哦！");
+                }else {
+                    members.setUserid(userid);
+                    members.setPassword(password);
+                    membersService.addMember(members);
+                    model.addAttribute("return", "注册成功，即将跳转至登录页面！");
+                }
             }else if (result_userid != null){
                 model.addAttribute("return","该账号已经被注册了！");
             }

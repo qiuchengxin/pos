@@ -8,6 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+    body{
+    margin:0;//body外边距设为0；
+    z-index: 1;
+    }
+    video{
+    position: fixed;//视频定位方式设为固定
+    right: 0;
+    bottom: 0;//视频位置
+    min-width: 100%;
+    min-height: 100%; //不会因视频尺寸造成页面需要滚动
+    width: auto;
+    height: auto; //尺寸保持原视频大小
+    z-index: -100; //z轴定位，小于0即可
+     -webkit-filter: grayscale(20%);//添加灰度蒙版，如果设定为100%则视频显示为黑白
+    z-index: -1;
+    }
+    </style>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
@@ -15,22 +33,22 @@
         <div class="layui-logo">剑三PVE</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item"><a href="">主页</a></li>
+            <li class="layui-nav-item"><a href="">副本攻略</a></li>
+            <li class="layui-nav-item"><a href="">论坛</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
+                    <dd><a href="">配装器</a></dd>
+                    <dd><a href="">奇遇查询</a></dd>
+                    <dd><a href="">金价查询</a></dd>
                 </dl>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;" th:text="${userid}">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
@@ -46,31 +64,22 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
+                    <a class="" href="javascript:;">我的菜单</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;">我的笔记</a></dd>
+                        <dd><a href="javascript:;">我的贴子</a></dd>
+                        <dd><a href="javascript:;">发帖</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
-                <li class="layui-nav-item"><a href="">发布商品</a></li>
+
+                <li class="layui-nav-item"><a href="">副本团查询</a></li>
+                <li class="layui-nav-item"><a href="">副本团报名</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <video src="../static/jx3.mp4" loop="loop" autoplay="autoplay" muted="muted" id="video"></video>
     </div>
 
     <div class="layui-footer">

@@ -129,13 +129,20 @@ public class Hurt {
                         int hurt = (int) (Math.random() * 100 + 300);
                         int beuser_last_grade = usertwo_grade - hurt;
                         int user_last_grade = user_grade + hurt;
-
-                        askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了吸功大法 ！" +
-                                "\n吸收了对方 "+hurt+"点修为 ！");
-                        ask = new Gson().toJson(askQQMessage);
-                        GetGrade.update_behurt_user(qqid,user_last_grade,groupid);
-                        GetGrade.update_behurt_user(be_qqid,beuser_last_grade,groupid);
-                        GetGrade.update_wuxiapk_daily(qqid,groupid);
+                        if (user_grade <= 15000 && user_last_grade > 15000){
+                            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 您的天劫已经到来，请对我说：我要渡劫 ！");
+                            ask = new Gson().toJson(askQQMessage);
+                            GetGrade.update_behurt_user(qqid, 15000, groupid);
+                            GetGrade.update_behurt_user(be_qqid, beuser_last_grade, groupid);
+                            GetGrade.update_wuxiapk_daily(qqid, groupid);
+                        }else {
+                            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 恭喜你成功释放了吸功大法 ！" +
+                                    "\n吸收了对方 " + hurt + "点修为 ！");
+                            ask = new Gson().toJson(askQQMessage);
+                            GetGrade.update_behurt_user(qqid, user_last_grade, groupid);
+                            GetGrade.update_behurt_user(be_qqid, beuser_last_grade, groupid);
+                            GetGrade.update_wuxiapk_daily(qqid, groupid);
+                        }
                     }
 
                     if (msg.matches(".*移花接木.*")){
