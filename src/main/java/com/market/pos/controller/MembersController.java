@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @RequestMapping("/Members")
 @Controller
 public class MembersController {
+    static HttpSession session = null;
 
     /**
      * 新增member
@@ -38,15 +41,18 @@ public class MembersController {
         String password2 = request.getParameter("password2");
 
         String result_userid = membersService.findUser(userid);
-
-        if (result_userid == null) {
-            members.setUserid(userid);
-            members.setPassword(password);
-            members.setJob(password2);
-            membersService.addMember(members);
-            model.addAttribute("return", "注册成功，即将跳转至登录页面！");
-        }else if (result_userid != null){
-            model.addAttribute("return","该账号已经被注册了！");
+        //长度校验
+        if (!password.equals(password2)){
+            model.addAttribute("return","两次输入密码不正确！");
+        }else if (password.equals(password2)){
+            if (result_userid == null) {
+                members.setUserid(userid);
+                members.setPassword(password);
+                membersService.addMember(members);
+                model.addAttribute("return", "注册成功，即将跳转至登录页面！");
+            }else if (result_userid != null){
+                model.addAttribute("return","该账号已经被注册了！");
+            }
         }
         return "test";
     }
@@ -54,5 +60,48 @@ public class MembersController {
     @RequestMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @RequestMapping(value = "/logincheck" , method = RequestMethod.POST)
+    public String logincheck(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException {
+        String userid = request.getParameter("userid");
+        String password = request.getParameter("password");
+        String result_userid = membersService.findUser(userid);
+        String result_password = membersService.findPassword(userid);
+
+        if (result_userid == null){
+            model.addAttribute("return","该账号并未注册！");
+        }else {
+            if (result_password.equals(password)){
+                model.addAttribute("return","登录成功！");
+                HttpSession session = request.getSession();
+                session.setAttribute("userid",userid);
+                response.sendRedirect("/Members/IndexServlet");
+            }else {
+                model.addAttribute("return","密码错误！");
+            }
+        }
+        return "login";
+    }
+
+    @RequestMapping("/IndexServlet")
+    public void index(HttpServletRequest request, HttpServletResponse response,Model model)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=utf-8");
+        session = request.getSession();
+        if (session == null){
+            response.sendRedirect("/Members/login");
+        }
+        response.sendRedirect("/main/index");
+    }
+
+    @RequestMapping("/LoginOut")
+    public void LoginOut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        session = request.getSession();
+        //销毁session
+        session.invalidate();
+        response.sendRedirect(request.getContextPath() + "/Members/login");
+        session = null ;
     }
 }

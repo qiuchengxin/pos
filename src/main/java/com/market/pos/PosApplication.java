@@ -32,6 +32,6 @@ public class PosApplication {
         //启动QQ转发中间件Lemoc
         start();
         //启动定时任务
-        TimeTask.timeTask();
+//        TimeTask.timeTask();
     }
 }

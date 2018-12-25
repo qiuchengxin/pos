@@ -20,26 +20,30 @@
     <div class="layui-form-item">
         <label class="layui-form-label">QQ账号</label>
         <div class="layui-input-block">
-            <input type="text" name="userid" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="text" name="userid" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" maxlength="20">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
-            <input type="password" name="password" id="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password" id="password" placeholder="请输入密码" autocomplete="off" class="layui-input" maxlength="20">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">确认密码</label>
         <div class="layui-input-block">
-            <input type="password" name="password2" id="password2" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password2" id="password2" placeholder="请输入密码" autocomplete="off" class="layui-input" maxlength="20">
         </div>
     </div>
 
     <div style="width: auto;margin-top: 1%;">
-        <button class="layui-btn layui-btn-fluid" lay-submit onclick="qiu">立即提交</button>
+        <button class="layui-btn layui-btn-fluid" lay-submit>立即提交</button>
+    </div>
+
+    <div style="margin-top: 1%" align="right">
+        <a href="/Members/login">已有账号直接登录</a>
     </div>
 </form>
 </div>
@@ -65,8 +69,8 @@
             layer.msg(message);
             if (message == "注册成功，即将跳转至登录页面！") {
                 setTimeout(function () {
-                    window.location.href="/login"
-                },3000)
+                    window.location.href="/Members/login"
+                },1000)
             }
         });
     }
