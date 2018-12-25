@@ -13,4 +13,5 @@ public interface MembersService extends IService<Members> {
 
     public String findUser(String userid);
 
+    public String findPassword(String userid);
 }

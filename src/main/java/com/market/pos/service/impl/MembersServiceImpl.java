@@ -9,6 +9,8 @@ import com.market.pos.service.MembersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MembersServiceImpl extends ServiceImpl<MembersMapper, Members> implements MembersService {
 
@@ -24,5 +26,11 @@ public class MembersServiceImpl extends ServiceImpl<MembersMapper, Members> impl
     public String findUser(String userid) {
         String result_userid = membersMapper.findUser(userid);
         return result_userid;
+    }
+
+    @Override
+    public String findPassword(String userid) {
+        String result_password = membersMapper.findPassword(userid);
+        return result_password;
     }
 }
