@@ -1,12 +1,15 @@
 function myajax(data) {
     $.ajax({
+        type:"POST",
         url:"/team/members",
-        type:"post",
-        dataType:"json",
         traditional: true,
-        data:{"data":data},
+        data:data,
+        dataType: 'json',
         success:function (data) {
-            console.log(data);
-        }
-    })
+            console.log(data)
+        },
+        error:function (res) {
+            console.log("error")
+        },
+    });
 }
