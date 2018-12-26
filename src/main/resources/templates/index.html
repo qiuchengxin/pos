@@ -53,14 +53,14 @@
                         <dd><a href="javascript:;">发帖</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">副本团报名<span class="layui-badge" th:text="${userid}"></span></a></li>
-                <li class="layui-nav-item"><a href="">副本团招募</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">副本团报名<span class="layui-badge" th:text="${userid}"></span></a></li>
+                <li class="layui-nav-item"><a href="javascript:zhaomu()">副本团招募</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
-        <iframe src="teammake.html" style="width: 100%;height: 100%;bgcolor: black"></iframe>
+        <iframe src="/Members/login" style="width: 100%;height: 100%;bgcolor: black" id="myiframe"></iframe>
     </div>
 
     <div class="layui-footer">
@@ -70,6 +70,11 @@
 </div>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    function zhaomu() {
+        document.getElementById("myiframe").src="/view/make";
+    }
+</script>
 <script th:inline="javascript">
     var message = [[${userid}]];
     if (message != null){

@@ -117,7 +117,7 @@
                 </div>
 
                 <div style="width: auto;margin-top: 1%;margin-left: 5%">
-                    <button class="layui-btn layui-btn-fluid" lay-submit>立即提交</button>
+                    <button class="layui-btn layui-btn-fluid" lay-submit onclick="showdata()">立即提交</button>
                 </div>
 
             </form>
@@ -230,24 +230,50 @@
                     </div>
                 </div>
             </div>
-            <button class="layui-btn" onclick="showdata()">show!</button>
         </div>
     </div>
 
 </div>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-
+<script src="../static/js/myJs.js"></script>
 <script>
     function showdata() {
-        for (var i=0;i<5;i++){
-            for (var j=0;j<5;j++){
-                var data = document.getElementById("target"+i+j).innerText;
-                console.log(data)
-            }
-        }
-        console.log(data);
-        alert("data");
+        var data11 = document.getElementById("target11").innerText;
+        var data12 = document.getElementById("target12").innerText;
+        var data13 = document.getElementById("target13").innerText;
+        var data14 = document.getElementById("target14").innerText;
+        var data15 = document.getElementById("target15").innerText;
+
+        var data21 = document.getElementById("target21").innerText;
+        var data22 = document.getElementById("target22").innerText;
+        var data23 = document.getElementById("target23").innerText;
+        var data24 = document.getElementById("target24").innerText;
+        var data25 = document.getElementById("target25").innerText;
+
+        var data31 = document.getElementById("target31").innerText;
+        var data32 = document.getElementById("target32").innerText;
+        var data33 = document.getElementById("target33").innerText;
+        var data34 = document.getElementById("target34").innerText;
+        var data35 = document.getElementById("target35").innerText;
+
+        var data41 = document.getElementById("target41").innerText;
+        var data42 = document.getElementById("target42").innerText;
+        var data43 = document.getElementById("target43").innerText;
+        var data44 = document.getElementById("target44").innerText;
+        var data45 = document.getElementById("target45").innerText;
+
+        var data51 = document.getElementById("target51").innerText;
+        var data52 = document.getElementById("target52").innerText;
+        var data53 = document.getElementById("target53").innerText;
+        var data54 = document.getElementById("target54").innerText;
+        var data55 = document.getElementById("target55").innerText;
+
+        var data = [data11.valueOf(),data12,data13,data14,data15,data21,data22,data23,data24,data25
+                    ,data31,data32,data33,data34,data35,data41,data42,data43,data44,data45
+                    ,data51,data52,data53,data54,data55];
+
+        myajax(data);
     }
 
 </script>
