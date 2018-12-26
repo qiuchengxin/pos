@@ -46,6 +46,6 @@ public class Team {
         String data54 = request.getParameter("data54").replaceAll("坦","").replaceAll("疗","").replaceAll("外","").replaceAll("内","");
         String data55 = request.getParameter("data55").replaceAll("坦","").replaceAll("疗","").replaceAll("外","").replaceAll("内","");
 
-        System.out.println(data11);
+
     }
 }
