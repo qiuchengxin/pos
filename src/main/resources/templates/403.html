@@ -14,12 +14,12 @@
         layui.use('layer', function(){
             var layer = layui.layer;
             layer.open({
-                title: 'error'
-                ,content: '您还没有这个发布招募的权限！'
+                title: '问题'
+                ,content: '您还没有发布招募的权限！若想认证请联系管理员吧~'
+                ,yes:function () {
+                    window.location.href="/Members/login";
+                }
             });
-            setTimeout(function () {
-                window.location.href="/Members/login"
-            },3000)
         })
     }
 </script>

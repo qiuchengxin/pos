@@ -8,6 +8,8 @@ import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamListServiceImpl extends ServiceImpl<ITeamListMapper, TeamList> implements TeamListService {
 
@@ -17,5 +19,11 @@ public class TeamListServiceImpl extends ServiceImpl<ITeamListMapper, TeamList> 
     @Override
     public void insertTeamList(TeamList teamList) {
         iTeamListMapper.insertTeamList(teamList);
+    }
+
+    @Override
+    public List<TeamList> selectAllTeamList() {
+        List<TeamList> list = iTeamListMapper.selectAllTeamList();
+        return list;
     }
 }
