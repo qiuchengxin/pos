@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.pos.mapper.ITeamTreeMapper">
+
+    <insert id="insertTeamTree" parameterType="TeamTree" keyProperty="t_id" useGeneratedKeys="true">
+        insert into team_tree (t_id, t_11, t_12, t_13, t_14, t_15, t_21, t_22, t_23, t_24, t_25, t_31, t_32, t_33, t_34, t_35, t_41, t_42, t_43, t_44, t_45, t_51, t_52, t_53, t_54, t_55)
+          values (#{tId},#{t11},#{t12},#{t13},#{t14},#{t15},
+                          #{t21},#{t22},#{t23},#{t24},#{t25},
+                          #{t31},#{t32},#{t33},#{t34},#{t35},
+                          #{t41},#{t42},#{t43},#{t44},#{t45},
+                          #{t51},#{t52},#{t53},#{t54},#{t55});
+    </insert>
+
+</mapper>

@@ -1,7 +1,7 @@
-function myajax(data) {
+function myajax(data,ajaxUrl) {
     $.ajax({
         type:"POST",
-        url:"/team/members",
+        url:ajaxUrl,
         traditional: true,
         data:data,
         dataType: 'json',
@@ -12,4 +12,14 @@ function myajax(data) {
             console.log("error")
         },
     });
+}
+
+function getGUID() {
+    function S4() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    var UID = S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4();
+    var timestamp=new Date().getTime();
+    var GUID = UID + timestamp;
+    return GUID;
 }

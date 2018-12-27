@@ -10,31 +10,30 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-
 <div class="layui-row layui-col-space5">
     <div class="layui-col-md8">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 5%;" >
             <legend align="center">填写招募信息</legend>
         </fieldset>
         <div style="margin:0.5% 0.5% 0.5% 0.5%;">
-            <form class="layui-form" action="#">
+            <form class="layui-form" action="/view/made">
                 <div class="layui-form-item">
                     <label class="layui-form-label">副本选择</label>
                     <div class="layui-input-block">
-                        <select name="teamName" lay-verify="required" lay-search="">
+                        <select name="teamName" lay-verify="required" lay-search="" id="team_name">
                             <option value="">直接选择或搜索</option>
                             <optgroup label="100级">
-                                <option value="1">荒血路</option>
-                                <option value="2">冰莲狱</option>
-                                <option value="3">挑战·荒血路</option>
-                                <option value="4">挑战·冰莲狱</option>
+                                <option value="荒血路">荒血路</option>
+                                <option value="青莲狱">青莲狱</option>
+                                <option value="挑战·荒血路">挑战·荒血路</option>
+                                <option value="挑战·青莲狱">挑战·青莲狱</option>
                             </optgroup>
                             <optgroup label="武林通鉴">
-                                <option value="5">周常10人秘境</option>
-                                <option value="6">周常5人秘境</option>
+                                <option value="周常10人秘境">周常10人秘境</option>
+                                <option value="周常5人秘境">周常5人秘境</option>
                             </optgroup>
                             <optgroup label="10人副本刷侠义">
-                                <option value="7">10人副本</option>
+                                <option value="10人副本刷侠义">10人副本</option>
                             </optgroup>
                         </select>
                     </div>
@@ -42,26 +41,26 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">副本难度</label>
-                    <div class="layui-input-block">
-                        <select name="teamType" lay-verify="required">
-                            <option value="10">10人难度</option>
-                            <option value="25">25人难度</option>
-                            <option value="26">试炼秘境</option>
+                    <div class="layui-input-block" >
+                        <select name="teamType" lay-verify="required" id="team_type">
+                            <option value="10人难度">10人难度</option>
+                            <option value="25人难度" selected>25人难度</option>
+                            <option value="试炼秘境">试炼秘境</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="layui-inline">
+                <div class="layui-inline" id="team_date">
                     <label class="layui-form-label">选择日期</label>
                     <div class="layui-input-inline">
-                        <input name="date" type="text" class="layui-input" id="test11" placeholder="请选择日期">
+                        <input name="date"  type="text" class="layui-input" id="test11" placeholder="请选择日期" lay-verify="required">
                     </div>
                 </div>
 
-                <div class="layui-inline">
+                <div class="layui-inline" id="team_time">
                     <label class="layui-form-label">选择时间</label>
                     <div class="layui-input-inline">
-                        <input name="time" type="text" class="layui-input" id="test14" placeholder="请选择时间">
+                        <input name="time"  type="text" class="layui-input" id="test14" placeholder="请选择时间" lay-verify="required">
                     </div>
                 </div>
 
@@ -239,6 +238,8 @@
 <script src="../static/js/myJs.js"></script>
 <script>
     function showdata() {
+        var t_id = getGUID();
+
         var data11 = document.getElementById("target11").innerText;
         var data12 = document.getElementById("target12").innerText;
         var data13 = document.getElementById("target13").innerText;
@@ -271,75 +272,86 @@
 
         var con = {};
 
-        con["data11"] =  data11;
-        con["data12"] =  data12;
-        con["data13"] =  data13;
-        con["data14"] =  data14;
-        con["data15"] =  data15;
+        con["t_id"] = t_id;
 
-        con["data21"] =  data21;
-        con["data22"] =  data22;
-        con["data23"] =  data23;
-        con["data24"] =  data24;
-        con["data25"] =  data25;
+        con["data11"] = data11;
+        con["data12"] = data12;
+        con["data13"] = data13;
+        con["data14"] = data14;
+        con["data15"] = data15;
 
-        con["data31"] =  data31;
-        con["data32"] =  data32;
-        con["data33"] =  data33;
-        con["data34"] =  data34;
-        con["data35"] =  data35;
+        con["data21"] = data21;
+        con["data22"] = data22;
+        con["data23"] = data23;
+        con["data24"] = data24;
+        con["data25"] = data25;
 
-        con["data41"] =  data41;
-        con["data42"] =  data42;
-        con["data43"] =  data43;
-        con["data44"] =  data44;
-        con["data45"] =  data45;
+        con["data31"] = data31;
+        con["data32"] = data32;
+        con["data33"] = data33;
+        con["data34"] = data34;
+        con["data35"] = data35;
 
-        con["data51"] =  data51;
-        con["data52"] =  data52;
-        con["data53"] =  data53;
-        con["data54"] =  data54;
-        con["data55"] =  data55;
+        con["data41"] = data41;
+        con["data42"] = data42;
+        con["data43"] = data43;
+        con["data44"] = data44;
+        con["data45"] = data45;
+
+        con["data51"] = data51;
+        con["data52"] = data52;
+        con["data53"] = data53;
+        con["data54"] = data54;
+        con["data55"] = data55;
 
         console.log(con);
-        myajax(con);
+        myajax(con, "/team/tree");
 
-        // layui.use('layer', function(){
-        //     var layer = layui.layer;
-        //     layer.msg("开团成功！")
-        // });
+        // language=JQuery-CSS
+        var t_name = $("#team_name option:selected").val();
+        var t_type = $("#team_type option:selected").val();
+        var date = test11.value;
+        var time = test14.value;
+
+        var form = {};
+        form["t_id"] = t_id;
+        form["t_name"] = t_name;
+        form["t_type"] = t_type;
+        form["date"] = date;
+        form["time"] = time;
+        console.log(form)
+        myajax(form,"/team/members");
     }
 
-</script>
 
-<script>
     //Demo
-    layui.use('form', function(){
+    layui.use('form', function () {
         var form = layui.form;
 
         //监听提交
-        form.on('submit(formDemo)', function(data){
+        form.on('submit(formDemo)', function (data) {
             layer.msg(JSON.stringify(data.field));
             return false;
         });
     });
-    layui.use('laydate', function() {
+    layui.use('laydate', function () {
         var laydate = layui.laydate;
         //自定义格式
         laydate.render({
             elem: '#test11'
-            ,format: 'yyyy年MM月dd日'
+            , format: 'yyyy年MM月dd日'
         });
         laydate.render({
             elem: '#test14'
-            ,type: 'time'
-            ,format: 'H点m分'
+            , type: 'time'
+            , format: 'H点m分'
         });
     });
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
     });
 </script>
+
 <script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
 <!--导入jqueryUI插件-->
 <script type="text/javascript" src="../static/js/jquery-ui.js"></script>

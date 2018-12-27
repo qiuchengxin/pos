@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/main")
-public class Main {
+public class MainIndexController {
 
     @RequestMapping("/index")
     public String index(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {

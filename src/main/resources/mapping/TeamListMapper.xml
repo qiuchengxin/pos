@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.pos.mapper.ITeamListMapper">
+
+    <insert id="insertTeamList" parameterType="TeamList" keyProperty="id" useGeneratedKeys="true">
+        insert into team_list (t_id, t_name, t_type, t_time) values (#{tId},#{tName},#{tType},#{tTime});
+    </insert>
+
+</mapper>
