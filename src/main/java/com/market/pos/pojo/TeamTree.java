@@ -1,33 +1,64 @@
 package com.market.pos.pojo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "team_tree")
 public class TeamTree {
 
+    @Id
   private String tId;
+    @Column(name = "t_11")
   private String t11;
+    @Column(name = "t_12")
   private String t12;
+    @Column(name = "t_13")
   private String t13;
+    @Column(name = "t_14")
   private String t14;
+    @Column(name = "t_15")
   private String t15;
+    @Column(name = "t_21")
   private String t21;
+    @Column(name = "t_22")
   private String t22;
+    @Column(name = "t_23")
   private String t23;
+    @Column(name = "t_24")
   private String t24;
+    @Column(name = "t_25")
   private String t25;
+    @Column(name = "t_31")
   private String t31;
+    @Column(name = "t_32")
   private String t32;
+    @Column(name = "t_33")
   private String t33;
+    @Column(name = "t_34")
   private String t34;
+    @Column(name = "t_35")
   private String t35;
+    @Column(name = "t_41")
   private String t41;
+    @Column(name = "t_42")
   private String t42;
+    @Column(name = "t_43")
   private String t43;
+    @Column(name = "t_44")
   private String t44;
+    @Column(name = "t_45")
   private String t45;
+    @Column(name = "t_51")
   private String t51;
+    @Column(name = "t_52")
   private String t52;
+    @Column(name = "t_53")
   private String t53;
+    @Column(name = "t_54")
   private String t54;
+    @Column(name = "t_55")
   private String t55;
 
 

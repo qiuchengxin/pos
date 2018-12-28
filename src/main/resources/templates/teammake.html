@@ -53,14 +53,14 @@
                 <div class="layui-inline" id="team_date">
                     <label class="layui-form-label">选择日期</label>
                     <div class="layui-input-inline">
-                        <input name="date"  type="text" class="layui-input" id="test11" placeholder="请选择日期" lay-verify="required">
+                        <input name="date"  type="text" class="layui-input" id="test11" placeholder="请选择日期" lay-verify="required" readonly >
                     </div>
                 </div>
 
                 <div class="layui-inline" id="team_time">
                     <label class="layui-form-label">选择时间</label>
                     <div class="layui-input-inline">
-                        <input name="time"  type="text" class="layui-input" id="test14" placeholder="请选择时间" lay-verify="required">
+                        <input name="time"  type="text" class="layui-input" id="test14" placeholder="请选择时间" lay-verify="required" readonly>
                     </div>
                 </div>
 
@@ -230,6 +230,11 @@
                 </div>
             </div>
         </div>
+        <!--留言框-->
+        <div class="layui-input-block " style="margin-left: 10px;margin-top: 30px;margin-right: 10px;margin-top: 0px">
+            <button class="layui-btn layui-btn-fluid" style="background: #9fd07a">给大家留条言吧！</button>
+            <textarea name="desc" placeholder="请输入内容(150字以内)" class="layui-textarea" id="liuyan" maxlength="150"></textarea>
+        </div>
     </div>
 
 </div>
@@ -238,89 +243,91 @@
 <script src="../static/js/myJs.js"></script>
 <script>
     function showdata() {
-        var t_id = getGUID();
+        var liuyan = $("#liuyan").val();
+            var t_id = getGUID();
 
-        var data11 = document.getElementById("target11").innerText;
-        var data12 = document.getElementById("target12").innerText;
-        var data13 = document.getElementById("target13").innerText;
-        var data14 = document.getElementById("target14").innerText;
-        var data15 = document.getElementById("target15").innerText;
+            var data11 = document.getElementById("target11").innerText;
+            var data12 = document.getElementById("target12").innerText;
+            var data13 = document.getElementById("target13").innerText;
+            var data14 = document.getElementById("target14").innerText;
+            var data15 = document.getElementById("target15").innerText;
 
-        var data21 = document.getElementById("target21").innerText;
-        var data22 = document.getElementById("target22").innerText;
-        var data23 = document.getElementById("target23").innerText;
-        var data24 = document.getElementById("target24").innerText;
-        var data25 = document.getElementById("target25").innerText;
+            var data21 = document.getElementById("target21").innerText;
+            var data22 = document.getElementById("target22").innerText;
+            var data23 = document.getElementById("target23").innerText;
+            var data24 = document.getElementById("target24").innerText;
+            var data25 = document.getElementById("target25").innerText;
 
-        var data31 = document.getElementById("target31").innerText;
-        var data32 = document.getElementById("target32").innerText;
-        var data33 = document.getElementById("target33").innerText;
-        var data34 = document.getElementById("target34").innerText;
-        var data35 = document.getElementById("target35").innerText;
+            var data31 = document.getElementById("target31").innerText;
+            var data32 = document.getElementById("target32").innerText;
+            var data33 = document.getElementById("target33").innerText;
+            var data34 = document.getElementById("target34").innerText;
+            var data35 = document.getElementById("target35").innerText;
 
-        var data41 = document.getElementById("target41").innerText;
-        var data42 = document.getElementById("target42").innerText;
-        var data43 = document.getElementById("target43").innerText;
-        var data44 = document.getElementById("target44").innerText;
-        var data45 = document.getElementById("target45").innerText;
+            var data41 = document.getElementById("target41").innerText;
+            var data42 = document.getElementById("target42").innerText;
+            var data43 = document.getElementById("target43").innerText;
+            var data44 = document.getElementById("target44").innerText;
+            var data45 = document.getElementById("target45").innerText;
 
-        var data51 = document.getElementById("target51").innerText;
-        var data52 = document.getElementById("target52").innerText;
-        var data53 = document.getElementById("target53").innerText;
-        var data54 = document.getElementById("target54").innerText;
-        var data55 = document.getElementById("target55").innerText;
+            var data51 = document.getElementById("target51").innerText;
+            var data52 = document.getElementById("target52").innerText;
+            var data53 = document.getElementById("target53").innerText;
+            var data54 = document.getElementById("target54").innerText;
+            var data55 = document.getElementById("target55").innerText;
 
-        var con = {};
+            var con = {};
 
-        con["t_id"] = t_id;
+            con["t_id"] = t_id;
 
-        con["data11"] = data11;
-        con["data12"] = data12;
-        con["data13"] = data13;
-        con["data14"] = data14;
-        con["data15"] = data15;
+            con["data11"] = data11;
+            con["data12"] = data12;
+            con["data13"] = data13;
+            con["data14"] = data14;
+            con["data15"] = data15;
 
-        con["data21"] = data21;
-        con["data22"] = data22;
-        con["data23"] = data23;
-        con["data24"] = data24;
-        con["data25"] = data25;
+            con["data21"] = data21;
+            con["data22"] = data22;
+            con["data23"] = data23;
+            con["data24"] = data24;
+            con["data25"] = data25;
 
-        con["data31"] = data31;
-        con["data32"] = data32;
-        con["data33"] = data33;
-        con["data34"] = data34;
-        con["data35"] = data35;
+            con["data31"] = data31;
+            con["data32"] = data32;
+            con["data33"] = data33;
+            con["data34"] = data34;
+            con["data35"] = data35;
 
-        con["data41"] = data41;
-        con["data42"] = data42;
-        con["data43"] = data43;
-        con["data44"] = data44;
-        con["data45"] = data45;
+            con["data41"] = data41;
+            con["data42"] = data42;
+            con["data43"] = data43;
+            con["data44"] = data44;
+            con["data45"] = data45;
 
-        con["data51"] = data51;
-        con["data52"] = data52;
-        con["data53"] = data53;
-        con["data54"] = data54;
-        con["data55"] = data55;
+            con["data51"] = data51;
+            con["data52"] = data52;
+            con["data53"] = data53;
+            con["data54"] = data54;
+            con["data55"] = data55;
 
-        console.log(con);
-        myajax(con, "/team/tree");
+            console.log(con);
+            myajax(con, "/team/tree");
 
-        // language=JQuery-CSS
-        var t_name = $("#team_name option:selected").val();
-        var t_type = $("#team_type option:selected").val();
-        var date = test11.value;
-        var time = test14.value;
+            // language=JQuery-CSS
+            var t_name = $("#team_name option:selected").val();
+            var t_type = $("#team_type option:selected").val();
+            var date = test11.value;
+            var time = test14.value;
 
-        var form = {};
-        form["t_id"] = t_id;
-        form["t_name"] = t_name;
-        form["t_type"] = t_type;
-        form["date"] = date;
-        form["time"] = time;
-        console.log(form)
-        myajax(form,"/team/members");
+            var form = {};
+            form["t_id"] = t_id;
+            form["t_name"] = t_name;
+            form["t_type"] = t_type;
+            form["date"] = date;
+            form["time"] = time;
+            form["liuyan"] = liuyan;
+            console.log(form)
+            myajax(form, "/team/members");
     }
 
 

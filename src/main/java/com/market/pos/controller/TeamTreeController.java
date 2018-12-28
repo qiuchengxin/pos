@@ -34,6 +34,12 @@ public class TeamTreeController {
         String t_type = request.getParameter("t_type");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
+        String liuyan = request.getParameter("liuyan");
+        if (liuyan.equals("")){
+            teamList.setLiuyan("他并未发布留言哦！");
+        }else {
+            teamList.setLiuyan(liuyan);
+        }
         String t_time = date + " - " +time;
         teamList.setTId(t_id);
         teamList.setTName(t_name);
@@ -101,36 +107,6 @@ public class TeamTreeController {
             teamTree.setT54(data54);
             teamTree.setT55(data55);
             iTeamTreeService.insertTeamTree(teamTree);
-
-            model.addAttribute("t_11", data11);
-            model.addAttribute("t_12", data12);
-            model.addAttribute("t_13", data13);
-            model.addAttribute("t_14", data14);
-            model.addAttribute("t_15", data15);
-
-            model.addAttribute("t_21", data21);
-            model.addAttribute("t_22", data22);
-            model.addAttribute("t_23", data23);
-            model.addAttribute("t_24", data24);
-            model.addAttribute("t_25", data25);
-
-            model.addAttribute("t_31", data31);
-            model.addAttribute("t_32", data32);
-            model.addAttribute("t_33", data33);
-            model.addAttribute("t_34", data34);
-            model.addAttribute("t_35", data35);
-
-            model.addAttribute("t_41", data41);
-            model.addAttribute("t_42", data42);
-            model.addAttribute("t_43", data43);
-            model.addAttribute("t_44", data44);
-            model.addAttribute("t_45", data45);
-
-            model.addAttribute("t_51", data51);
-            model.addAttribute("t_52", data52);
-            model.addAttribute("t_53", data53);
-            model.addAttribute("t_54", data54);
-            model.addAttribute("t_55", data55);
             model.addAttribute("return", "开团成功！");
         }catch (NullPointerException e){
             System.out.println("空指针异常！");

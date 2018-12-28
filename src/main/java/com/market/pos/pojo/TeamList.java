@@ -1,13 +1,19 @@
 package com.market.pos.pojo;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "team_list")
 public class TeamList {
 
+  @Id
   private long id;
   private String tId;
   private String tName;
   private String tType;
   private String tTime;
+  private String liuyan;
 
 
   public long getId() {
@@ -50,4 +56,11 @@ public class TeamList {
     this.tTime = tTime;
   }
 
+    public String getLiuyan() {
+        return liuyan;
+    }
+
+    public void setLiuyan(String liuyan) {
+        this.liuyan = liuyan;
+    }
 }

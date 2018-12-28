@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成功</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+
+</body>
+<script>
+    window.onload = function () {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.confirm('发布成功！', {
+                btn: ['继续发布招募', '查看招募列表'] //可以无限个按钮
+            }, function(){
+                window.location.href="/view/make";
+            }, function(index){
+                //按钮【按钮二】的回调
+                window.location.href="/view/teamList";
+            });
+        })
+    }
+</script>
+</html>

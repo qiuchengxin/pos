@@ -11,32 +11,45 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 3%;margin-left: 3%">
-    <legend>招募详情</legend>
+    <legend align="center">招募详情</legend>
 </fieldset>
-<ul class="layui-timeline" style="margin-left: 5%">
-    <li class="layui-timeline-item">
-        <i class="layui-icon layui-timeline-axis"></i>
-        <div class="layui-timeline-content layui-text">
-            <h3 class="layui-timeline-title">副本名称：</h3>
-            <ul>
-                <li th:text="${t_name}"></li>
-                <li th:text="${t_type}"></li>
+<div class="layui-collapse" style="margin: 3% 3% 0% 3%">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">基本信息</h2>
+        <div class="layui-colla-content layui-show">
+            <ul class="layui-timeline" style="margin-left: 5%">
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">副本名称：</h3>
+                        <ul>
+                            <li th:text="${t_name}"></li>
+                            <li th:text="${t_type}"></li>
+                        </ul>
+                    </div>
+
+                </li>
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">开团时间：</h3>
+                        <p th:text="${t_time}"></p>
+                    </div>
+                </li>
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">团长留言：</h3>
+                        <p th:text="${liuyan}"></p>
+                    </div>
+                </li>
             </ul>
         </div>
-    </li>
-    <li class="layui-timeline-item">
-        <i class="layui-icon layui-timeline-axis"></i>
+    </div>
+</div>
+
         <div class="layui-timeline-content layui-text">
-            <h3 class="layui-timeline-title">开团时间：</h3>
-            <p th:text="${t_time}"></p>
-        </div>
-    </li>
-    <li class="layui-timeline-item">
-        <i class="layui-icon layui-timeline-axis"></i>
-        <div class="layui-timeline-content layui-text">
-            <h3 class="layui-timeline-title">排表页</h3>
-            <p>
-            <div class="layui-form-item" style="margin-top: 2%;margin-right: 5%">
+            <div class="layui-form-item" style="margin: 0% 3% 3% 1%">
                 <table border="1" class="layui-table" id="team_table">
                     <thead>
                     <tr height="40px">
@@ -88,22 +101,8 @@
             </div>
             </p>
         </div>
-    </li>
-    <li class="layui-timeline-item">
-
-    </li>
-</ul>
-
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-    window.onload=function open() {
-        layui.use('layer', function(){
-            var layer = layui.layer;
-            layer.msg("发布成功！");
-        });
-    }
-</script>
 <script th:inline="javascript">
     var message = [[${return}]];
     if (message != null){
@@ -112,6 +111,13 @@
             layer.msg(message);
         });
     }
+</script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
 </script>
 </body>
 </html>
