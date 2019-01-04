@@ -19,4 +19,8 @@
     <select id="selectAllTeamList" resultMap="TeamListResultMap">
         select * from team_list order by id desc ;
     </select>
+
+    <select id="findById" resultMap="TeamListResultMap">
+        select * from team_list where id = #{id}
+    </select>
 </mapper>

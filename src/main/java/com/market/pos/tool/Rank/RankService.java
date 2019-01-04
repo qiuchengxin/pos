@@ -36,4 +36,19 @@ public class RankService {
         JdbcRank.searchRankByUserid(sql,groupid);
         myRowNo = JdbcRank.myRankNum;
     }
+
+    /**
+     * 查询倒数前三信息
+     * @param groupid
+     */
+    public static void selectMin(String groupid){
+        String sql = "select username, grade from users order by grade LIMIT 3";
+        JdbcRank.searchRank(sql,groupid);
+        first_username = JdbcRank.first_username;
+        first_grade = JdbcRank.first_grade;
+        second_username = JdbcRank.second_username;
+        second_grade = JdbcRank.second_grade;
+        third_username = JdbcRank.third_username;
+        third_grade = JdbcRank.third_grade;
+    }
 }

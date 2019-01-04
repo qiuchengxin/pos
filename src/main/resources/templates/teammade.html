@@ -119,5 +119,21 @@
         //…
     });
 </script>
+<script>
+    function insertUser(data) {
+        console.log(data);
+    }
+</script>
+<script th:inline="javascript">
+    var message = [[${return}]];
+    if (message != null) {
+        window.onload = function open() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.msg(message);
+            });
+        }
+    }
+</script>
 </body>
 </html>

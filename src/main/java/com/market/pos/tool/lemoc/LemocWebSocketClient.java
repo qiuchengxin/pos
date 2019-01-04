@@ -8,6 +8,7 @@ import com.market.pos.pojo.QQMessage;
 import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
+import com.market.pos.tool.Rank.RankMin;
 import com.market.pos.tool.WuxiaPk.Hurt;
 import com.market.pos.tool.cw.CwController;
 import com.market.pos.tool.cw.CwService;
@@ -174,7 +175,7 @@ public class LemocWebSocketClient extends WebSocketClient {
             AskQQMessage askQQMessage = new AskQQMessage();
             askQQMessage.setAct("106");
             askQQMessage.setQQID(qqid);
-            askQQMessage.setMsg("温馨提示：闭关系统分群处理啦，目前开放的群有：皓水群（514869445）、帮会群（106102978）、大锤群（258512073）" +
+            askQQMessage.setMsg("温馨提示：闭关系统分群处理啦，目前开放的群有：皓水群（514869445）、帮会群（106102978）、大锤群（258512073）、修真群（571175444）、狗带群（546665366）" +
                     "\n例如您要在皓水群闭关，请说：【我要在皓水群闭关】，句式：我要在xxx闭关 ’ ");
             String ask = new Gson().toJson(askQQMessage);
             send(ask);
@@ -201,6 +202,12 @@ public class LemocWebSocketClient extends WebSocketClient {
             String ask = RankController.ask;
             send(ask);
             System.out.println(ask);
+        }
+
+        if (msg.matches(".*看弟弟.*") || msg.matches(".*弟弟排行.*")){
+            RankMin.rankMin(qqid,groupid);
+            String ask = RankMin.ask;
+            send(ask);
         }
 
         if (msg.matches(".*我要渡劫.*")){

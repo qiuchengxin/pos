@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+        <div style="margin-top: 50px;margin-right: 40px">
+            <form class="layui-form" th:action="@{'/join/'+${id}}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">游戏ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" required  lay-verify="required" placeholder="请输入ID" autocomplete="off" class="layui-input" id="username">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择职业</label>
+                    <div class="layui-input-block">
+
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">T心法</li>
+                                <li>奶妈</li>
+                                <li>外功</li>
+                                <li>内功</li>
+                            </ul>
+                            <div class="layui-tab-content" id="usertype">
+                                <div class="layui-tab-item layui-show">
+                                    <span><img src="../static/png/明教.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="明教T" title="明尊" name="usertype">
+                                    <span><img src="../static/png/天策.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="天策T" title="铁牢" name="usertype">
+                                    <span><img src="../static/png/少林.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="大师T" title="洗髓" name="usertype">
+                                    <span><img src="../static/png/苍云.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="苍云T" title="铁骨" name="usertype">
+                                </div>
+                                <div class="layui-tab-item">
+                                    <span><img src="../static/png/万花.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="奶花" title="奶花" name="usertype">
+                                    <span><img src="../static/png/五毒.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="奶毒" title="奶毒" name="usertype">
+                                    <span><img src="../static/png/七秀.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="奶秀" title="奶秀" name="usertype">
+                                    <span><img src="../static/png/长歌.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="奶歌" title="奶歌" name="usertype">
+                                </div>
+                                <div class="layui-tab-item">
+                                    <span><img src="../static/png/藏剑.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="蓬莱" title="蓬莱" name="usertype">
+                                    <span><img src="../static/png/霸刀.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="霸刀" title="霸刀" name="usertype">
+                                    <span><img src="../static/png/丐帮.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="丐帮" title="丐帮" name="usertype">
+                                    <span><img src="../static/png/纯阳.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="剑纯" title="剑纯" name="usertype">
+                                    <p>
+                                    <span><img src="../static/png/藏剑.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="藏剑" title="藏剑" name="usertype">
+                                    <span><img src="../static/png/天策.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="傲血" title="傲血" name="usertype">
+                                    <span><img src="../static/png/苍云.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="分山" title="分山" name="usertype">
+                                    <span><img src="../static/png/唐门.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="鲸鱼" title="鲸鱼" name="usertype">
+                                </div>
+                                <div class="layui-tab-item">
+                                    <span><img src="../static/png/万花.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="花间" title="花间" name="usertype">
+                                    <span><img src="../static/png/少林.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="易经" title="易经" name="usertype">
+                                    <span><img src="../static/png/长歌.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="莫问" title="莫问" name="usertype">
+                                    <span><img src="../static/png/纯阳.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="气纯" title="气纯" name="usertype">
+                                    <p>
+                                    <span><img src="../static/png/唐门.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="田螺" title="田螺" name="usertype">
+                                    <span><img src="../static/png/七秀.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="冰心" title="冰心" name="usertype">
+                                    <span><img src="../static/png/五毒.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="毒经" title="毒经" name="usertype">
+                                    <span><img src="../static/png/明教.png" style="width: 40px;height: 40px"></span><input type="checkbox" value="焚影" title="焚影" name="usertype">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否可替补</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="is_tibu" lay-skin="switch" lay-text="ON|OFF" lay-filter="switchTest" id="is_tibu">
+                    </div>
+                </div>
+
+                <div style="width: auto;margin-top: 1%;margin-left: 2%;margin-right: 2%">
+                    <button class="layui-btn layui-btn-fluid" lay-submit th:onclick="'javascript:baoming('+${id}+')'">立即提交</button>
+                </div>
+            </form>
+        </div>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            return false;
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('您选择了：'+ (this.checked ? '可替补' : '不可替补'))
+        });
+    });
+</script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>

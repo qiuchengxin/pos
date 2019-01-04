@@ -39,7 +39,7 @@
         <div class="layui-col-space10 layui-col-space10" style="height: 25px;">
             <div class="layui-btn-group">
             <button class="layui-btn layui-btn-normal layui-btn-sm" style="width: 70px" th:onclick="'javascript:teamImfor('+${team.id}+')'">看排表</button>
-            <button class="layui-btn layui-btn-warm layui-btn-sm" style="width: 70px" onclick="join">报名</button>
+            <button class="layui-btn layui-btn-warm layui-btn-sm" style="width: 70px" th:onclick="'javascript:join('+${team.id}+')'">报名</button>
             </div>
         </div>
         <div style="height: 10px"><hr class="layui-bg-gray"></div>
@@ -53,18 +53,6 @@
         layui.use('layer', function(){
             var layer = layui.layer;
             layer.msg("加载成功！");
-        });
-        layui.use('laypage', function() {
-            var laypage = layui.laypage;
-            //完整功能
-            laypage.render({
-                elem: 'demo'
-                ,count: 100
-                ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                ,jump: function(obj){
-                    console.log(obj)
-                }
-            });
         });
     }
 </script>
@@ -81,8 +69,15 @@
     function teamImfor(id) {
         window.location.href = "/jpa/" + id;
     }
-    function join() {
-
+    function join(id) {
+        layui.use('layer', function(){
+            layer.open({
+                type: 2,
+                title: '请认真填写哦',
+                area: ['70%','90%'],
+                content: '/teamJoin/' + id
+            });
+        })
     }
 </script>
 </body>

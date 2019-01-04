@@ -10,4 +10,6 @@ public interface TeamListService extends IService<TeamList> {
     public void insertTeamList(TeamList teamList);
 
     public List<TeamList> selectAllTeamList();
+
+    public List<TeamList> findById(String id);
 }

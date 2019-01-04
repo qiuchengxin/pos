@@ -1,7 +1,9 @@
 package com.market.pos.controller;
 
 import com.market.pos.pojo.TeamList;
+import com.market.pos.pojo.TeamMembers;
 import com.market.pos.pojo.TeamTree;
+import com.market.pos.service.ITeamMembersService;
 import com.market.pos.service.JPAService.TeamListRepository;
 import com.market.pos.service.JPAService.TeamTreeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -19,6 +22,9 @@ public class TeamInfoByJPA {
 
     @Autowired
     private TeamTreeRepository teamTreeRepository;
+
+    @Autowired
+    private ITeamMembersService iTeamMembersService;
 
     @GetMapping(value = "/jpa/{id}")
     public String findAllById(@PathVariable("id") long id , Model model){
@@ -35,6 +41,9 @@ public class TeamInfoByJPA {
         String tId = teamlist.getTId();
         Optional<TeamTree> optional = teamTreeRepository.findById(tId);
         TeamTree teamTree = optional.get();
+
+        List<TeamMembers> membersList = iTeamMembersService.findById(tId);
+        System.out.println(membersList);
 
         String t_11 = teamTree.getT11();
         String t_12 = teamTree.getT12();
@@ -98,4 +107,9 @@ public class TeamInfoByJPA {
         return "teammade";
     }
 
+    @GetMapping(value = "/teamJoin/{id}")
+    public String teamJoin(@PathVariable("id") long id,Model model){
+        model.addAttribute("id",id);
+        return "baoming";
+    }
 }

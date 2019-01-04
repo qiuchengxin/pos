@@ -139,3 +139,6 @@ div .left:after {
     width: 100%;
     height: auto;
 }
+.mytag{
+    border: none;
+}

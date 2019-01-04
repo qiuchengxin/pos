@@ -4,9 +4,7 @@ import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamTree;
 import com.market.pos.service.ITeamTreeService;
 import com.market.pos.service.TeamListService;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +22,7 @@ public class TeamTreeController {
     private TeamListService teamListService;
 
     @RequestMapping("/members")
-//    @ResponseBody
-    public void addTeam(HttpServletRequest request, HttpResponse response,Model model){
+    public void addTeam(HttpServletRequest request,Model model){
 
         TeamList teamList = new TeamList();
         //form传来的
