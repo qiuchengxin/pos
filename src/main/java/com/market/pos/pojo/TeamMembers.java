@@ -8,6 +8,7 @@ public class TeamMembers {
   private String username;
   private String usertype;
   private String isTibu;
+  private int putin;
 
 
   public String getTId() {
@@ -54,4 +55,11 @@ public class TeamMembers {
     this.isTibu = isTibu;
   }
 
+  public int getPutin() {
+    return putin;
+  }
+
+  public void setPutin(int putin) {
+    this.putin = putin;
+  }
 }

@@ -54,4 +54,9 @@ public class ViewController {
         System.out.println(id);
         return "teammade";
     }
+
+    @RequestMapping("/zhuye")
+    public String zhuye(Model model){
+        return "zhuye";
+    }
 }

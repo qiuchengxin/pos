@@ -12,4 +12,12 @@
                           #{t51},#{t52},#{t53},#{t54},#{t55});
     </insert>
 
+    <update id="updateTeamMembers" parameterType="TeamTree" keyProperty="t_id" useGeneratedKeys="true">
+        update team_tree set t_11 = #{t11},t_12 = #{t12},t_13 = #{t13},t_14 = #{t14},t_15 = #{t15}
+                            ,t_21 = #{t21},t_22 = #{t22},t_23 = #{t23},t_24 = #{t24},t_25 = #{t25}
+                            ,t_31 = #{t31},t_32 = #{t32},t_33 = #{t33},t_34 = #{t34},t_35 = #{t35}
+                            ,t_41 = #{t41},t_42 = #{t42},t_43 = #{t43},t_44 = #{t44},t_45 = #{t45}
+                            ,t_51 = #{t51},t_52 = #{t52},t_53 = #{t53},t_54 = #{t54},t_55 = #{t55} where t_id = #{tId}
+    </update>
+
 </mapper>

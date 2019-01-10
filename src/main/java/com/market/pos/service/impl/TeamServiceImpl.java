@@ -17,4 +17,9 @@ public class TeamServiceImpl extends ServiceImpl<ITeamTreeMapper, TeamTree> impl
     public void insertTeamTree(TeamTree teamTree) {
         iTeamTreeMapper.insertTeamTree(teamTree);
     }
+
+    @Override
+    public void updateTeamMembers(TeamTree teamTree) {
+        iTeamTreeMapper.updateTeamMembers(teamTree);
+    }
 }

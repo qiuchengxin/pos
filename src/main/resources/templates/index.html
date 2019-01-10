@@ -15,15 +15,14 @@
         <div class="layui-logo">剑三PVE</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">主页</a></li>
+            <li class="layui-nav-item"><a href="javascript:zhuye();">主页</a></li>
             <li class="layui-nav-item"><a href="">副本攻略</a></li>
             <li class="layui-nav-item"><a href="">论坛</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">配装器</a></dd>
-                    <dd><a href="">奇遇查询</a></dd>
-                    <dd><a href="">金价查询</a></dd>
+                    <dd><a href="https://www.j3pz.com/" target="_blank">配装器</a></dd>
+                    <dd><a href="https://jx3.derzh.com/serendipity/" target="_blank">奇遇查询</a></dd>
                 </dl>
             </li>
         </ul>
@@ -60,7 +59,7 @@
     </div>
 
     <div class="layui-body">
-        <iframe src="/Members/login" style="width: 100%;height: 100%;bgcolor: black" id="myiframe"></iframe>
+        <iframe src="/view/zhuye" style="width: 100%;height: 100%;bgcolor: black" id="myiframe"></iframe>
     </div>
 
     <div class="layui-footer">
@@ -76,6 +75,9 @@
     }
     function baoming() {
         document.getElementById("myiframe").src="/view/teamList";
+    }
+    function zhuye() {
+        document.getElementById("myiframe").src="/view/zhuye";
     }
 </script>
 <script th:inline="javascript">

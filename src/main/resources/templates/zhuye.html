@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>403</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        video{
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%);*/
+            z-index:-11
+        }
+        source{
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<video loop="loop" autoplay="autoplay">
+    <source src="../static/jx3.mp4" type="video/mp4">
+</video>
+</body>
+</html>

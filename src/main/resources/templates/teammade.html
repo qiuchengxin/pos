@@ -15,35 +15,13 @@
 </fieldset>
 <div class="layui-collapse" style="margin: 3% 3% 0% 3%">
     <div class="layui-colla-item">
-        <h2 class="layui-colla-title">基本信息</h2>
+        <h2 class="layui-colla-title">基本信息      【您报名的职业是】 ：  <span class="layui-badge layui-bg-blue" th:text="${usertype}"></span></h2>
         <div class="layui-colla-content layui-show">
-            <ul class="layui-timeline" style="margin-left: 5%">
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <h3 class="layui-timeline-title">副本名称：</h3>
-                        <ul>
-                            <li th:text="${t_name}"></li>
-                            <li th:text="${t_type}"></li>
-                        </ul>
-                    </div>
-
-                </li>
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <h3 class="layui-timeline-title">开团时间：</h3>
-                        <p th:text="${t_time}"></p>
-                    </div>
-                </li>
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <h3 class="layui-timeline-title">团长留言：</h3>
-                        <p th:text="${liuyan}"></p>
-                    </div>
-                </li>
-            </ul>
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-friends" style="font-size: 15px; color: #1E9FFF;"> 副本名称：</i><a th:text="${t_type}"></a><a th:text="${t_name}"></a> </h3>
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-notice" style="font-size: 15px; color: #1E9FFF;"> 开团时间：</i><a th:text="${t_time}"></a></h3>
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-reply-fill" style="font-size: 15px; color: #1E9FFF;"> 团长留言：</i><a th:text="${liuyan}"></a></h3>
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-tabs" style="font-size: 15px; color: #1E9FFF;"> 报名清单：</i></h3>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
         </div>
     </div>
 </div>
@@ -62,56 +40,53 @@
                     </thead>
                     <tbody>
                     <tr height="50px" align="center">
-                        <td id="target11" th:text="${t_11}"></td>
-                        <td id="target12" th:text="${t_12}"></td>
-                        <td id="target13" th:text="${t_13}"></td>
-                        <td id="target14" th:text="${t_14}"></td>
-                        <td id="target15" th:text="${t_15}"></td>
+                        <td id="target11" th:text="${t_11}" contenteditable="true"></td>
+                        <td id="target12" th:text="${t_12}" contenteditable="true"></td>
+                        <td id="target13" th:text="${t_13}" contenteditable="true"></td>
+                        <td id="target14" th:text="${t_14}" contenteditable="true"></td>
+                        <td id="target15" th:text="${t_15}" contenteditable="true"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target21" th:text="${t_21}"></td>
-                        <td id="target22" th:text="${t_22}"></td>
-                        <td id="target23" th:text="${t_23}"></td>
-                        <td id="target24" th:text="${t_24}"></td>
-                        <td id="target25" th:text="${t_25}"></td>
+                        <td id="target21" th:text="${t_21}" contenteditable="true"></td>
+                        <td id="target22" th:text="${t_22}" contenteditable="true"></td>
+                        <td id="target23" th:text="${t_23}" contenteditable="true"></td>
+                        <td id="target24" th:text="${t_24}" contenteditable="true"></td>
+                        <td id="target25" th:text="${t_25}" contenteditable="true"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target31" th:text="${t_31}"></td>
-                        <td id="target32" th:text="${t_32}"></td>
-                        <td id="target33" th:text="${t_33}"></td>
-                        <td id="target34" th:text="${t_34}"></td>
-                        <td id="target35" th:text="${t_35}"></td>
+                        <td id="target31" th:text="${t_31}" contenteditable="true" ></td>
+                        <td id="target32" th:text="${t_32}" contenteditable="true" ></td>
+                        <td id="target33" th:text="${t_33}" contenteditable="true" ></td>
+                        <td id="target34" th:text="${t_34}" contenteditable="true" ></td>
+                        <td id="target35" th:text="${t_35}" contenteditable="true" ></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target41" th:text="${t_41}"></td>
-                        <td id="target42" th:text="${t_42}"></td>
-                        <td id="target43" th:text="${t_43}"></td>
-                        <td id="target44" th:text="${t_44}"></td>
-                        <td id="target45" th:text="${t_45}"></td>
+                        <td id="target41" th:text="${t_41}" contenteditable="true"></td>
+                        <td id="target42" th:text="${t_42}" contenteditable="true"></td>
+                        <td id="target43" th:text="${t_43}" contenteditable="true"></td>
+                        <td id="target44" th:text="${t_44}" contenteditable="true"></td>
+                        <td id="target45" th:text="${t_45}" contenteditable="true"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target51" th:text="${t_51}"></td>
-                        <td id="target52" th:text="${t_52}"></td>
-                        <td id="target53" th:text="${t_53}"></td>
-                        <td id="target54" th:text="${t_54}"></td>
-                        <td id="target55" th:text="${t_55}"></td>
+                        <td id="target51" th:text="${t_51}" contenteditable="true"></td>
+                        <td id="target52" th:text="${t_52}" contenteditable="true"></td>
+                        <td id="target53" th:text="${t_53}" contenteditable="true"></td>
+                        <td id="target54" th:text="${t_54}" contenteditable="true"></td>
+                        <td id="target55" th:text="${t_55}" contenteditable="true"></td>
                     </tr>
                     </tbody>
                 </table>
+                <div style="width: auto;margin-top: 1%">
+                    <button class="layui-btn layui-btn-fluid" lay-submit onclick="showdata()">保存排表</button>
+                </div>
             </div>
-            </p>
         </div>
+
 <script src="../static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
+<script src="../static/js/myJs.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script th:inline="javascript">
-    var message = [[${return}]];
-    if (message != null){
-        layui.use('layer', function(){
-            var layer = layui.layer;
-            layer.msg(message);
-        });
-    }
-</script>
+
 <script>
     layui.use('element', function(){
         var element = layui.element;
@@ -124,14 +99,186 @@
         console.log(data);
     }
 </script>
+
 <script th:inline="javascript">
-    var message = [[${return}]];
-    if (message != null) {
-        window.onload = function open() {
-            layui.use('layer', function () {
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //展示已知数据
+        table.render({
+            elem: '#test'
+            ,title: '已报名玩家'
+            ,cols: [[ //标题栏
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'userid', title: 'QQID'}
+                ,{field: 'username', title: '游戏ID'}
+                ,{field: 'usertype', title: '游戏职业',sort: true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',fixed: 'right'}
+            ]]
+            ,data: [[${json}]]
+            // ,data: [{"putin":0,"usertype":"田螺","isTibu":"on","userid":"1404461123","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"星月"},{"putin":0,"usertype":"霸刀","isTibu":"on","userid":"404597818","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"彭于晏"},{"putin":0,"usertype":"气纯","userid":"411135973","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"谷玄牝"},{"putin":0,"usertype":"七秀","userid":"549104527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"似萌\n"},{"putin":0,"usertype":"铁牢\n","userid":"582038510","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"姜陵"},{"putin":0,"usertype":"奶歌","userid":"1072452624","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"瓜宝"},{"putin":0,"usertype":"冰心","userid":"169084597","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"咸鱼烧"},{"putin":0,"usertype":"藏剑","userid":"1358783401","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"藏剑－夕墨"},{"putin":0,"usertype":"分山劲","userid":"975505608","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"别君"},{"putin":0,"usertype":"花间","userid":"565698639","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"请问我是谁"},{"putin":0,"usertype":"气纯","userid":"962452622","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"繁星若尘"},{"putin":0,"usertype":"天牢","userid":"474444246","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"君轻狂"},{"putin":0,"usertype":"铁牢","userid":"394542130","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":""},{"putin":0,"usertype":"铁骨","userid":"280242527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"保镖"},{"putin":0,"usertype":"霸刀","userid":"1390554661","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"妥思"},{"putin":0,"usertype":"打毛线","userid":"870044692","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"螺玄玄"},{"putin":0,"usertype":"蓬莱","userid":"469878581","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"扒个田螺"}]
+            ,page: true //是否显示分页
+            ,limits: [5, 7, 10]
+            ,limit: 5 //每页默认显示的数量
+            ,id: 'testReload'
+            // ,initSort: {
+            //     field: 'id' //排序字段，对应 cols 设定的各字段名
+            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            // }
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('确定要删除这条记录吗？', function(index){
+                    obj.del();
+                    var userid = data.userid;
+                    var tId = [[${tId}]];
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    editdata["tId"] = tId;
+                    myajax(editdata,"/team/delTeamMemer");
+                    layer.close(index);
+                    var isAdmin = [[${isAdmin}]];
+                    if (isAdmin == 0){
+                        layer.msg("您没有删除权限，本次操作无效！");
+                    } else if (isAdmin == 1){
+                        layer.msg("删除成功!");
+                    }
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.usertype
+                    ,title: '编辑职业'
+                }, function(value, index){
+                    obj.update({
+                        usertype: value
+                    });
+                    var userid = data.userid;
+                    var tId = [[${tId}]];
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    editdata["usertype"] = value;
+                    editdata["tId"] = tId;
+                    console.log(editdata);
+                    myajax(editdata,"/team/edit")
+                    layer.close(index);
+                    layer.msg("修改成功");
+                });
+            }else if (obj.event ==='editId') {
+                layer.prompt({
+                    formType: 2
+                    ,value: data.username
+                    ,title: '修改ID'
+                }, function(value, index){
+                    obj.update({
+                        username: value
+                    });
+                    var userid = data.userid;
+                    var tId = [[${tId}]];
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    editdata["username"] = value;
+                    editdata["tId"] = tId;
+                    console.log(editdata);
+                    myajax(editdata,"/team/editId")
+                    layer.close(index);
+                    layer.msg("修改成功");
+                });
+            }
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="editId">修改ID</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改职业</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script th:inline="javascript">
+    function showdata() {
+        var t_id = [[${tId}]];
+        var isAdmin = [[${isAdmin}]];
+        if (isAdmin == 0){
+            layui.use('layer', function(){
                 var layer = layui.layer;
-                layer.msg(message);
+
+                layer.msg('您的权限不足，无法提交！');
             });
+        }else if (isAdmin == 1) {
+
+            layui.use('layer', function(){
+                var layer = layui.layer;
+
+                layer.msg('修改排表成功，辛苦啦 ~');
+            });
+
+            var data11 = document.getElementById("target11").innerText;
+            var data12 = document.getElementById("target12").innerText;
+            var data13 = document.getElementById("target13").innerText;
+            var data14 = document.getElementById("target14").innerText;
+            var data15 = document.getElementById("target15").innerText;
+
+            var data21 = document.getElementById("target21").innerText;
+            var data22 = document.getElementById("target22").innerText;
+            var data23 = document.getElementById("target23").innerText;
+            var data24 = document.getElementById("target24").innerText;
+            var data25 = document.getElementById("target25").innerText;
+
+            var data31 = document.getElementById("target31").innerText;
+            var data32 = document.getElementById("target32").innerText;
+            var data33 = document.getElementById("target33").innerText;
+            var data34 = document.getElementById("target34").innerText;
+            var data35 = document.getElementById("target35").innerText;
+
+            var data41 = document.getElementById("target41").innerText;
+            var data42 = document.getElementById("target42").innerText;
+            var data43 = document.getElementById("target43").innerText;
+            var data44 = document.getElementById("target44").innerText;
+            var data45 = document.getElementById("target45").innerText;
+
+            var data51 = document.getElementById("target51").innerText;
+            var data52 = document.getElementById("target52").innerText;
+            var data53 = document.getElementById("target53").innerText;
+            var data54 = document.getElementById("target54").innerText;
+            var data55 = document.getElementById("target55").innerText;
+
+            var con = {};
+
+            con["t_id"] = t_id;
+
+            con["data11"] = data11;
+            con["data12"] = data12;
+            con["data13"] = data13;
+            con["data14"] = data14;
+            con["data15"] = data15;
+
+            con["data21"] = data21;
+            con["data22"] = data22;
+            con["data23"] = data23;
+            con["data24"] = data24;
+            con["data25"] = data25;
+
+            con["data31"] = data31;
+            con["data32"] = data32;
+            con["data33"] = data33;
+            con["data34"] = data34;
+            con["data35"] = data35;
+
+            con["data41"] = data41;
+            con["data42"] = data42;
+            con["data43"] = data43;
+            con["data44"] = data44;
+            con["data45"] = data45;
+
+            con["data51"] = data51;
+            con["data52"] = data52;
+            con["data53"] = data53;
+            con["data54"] = data54;
+            con["data55"] = data55;
+            console.log(con);
+            myajax(con, "/team/updateTeamMembers");
         }
     }
 </script>

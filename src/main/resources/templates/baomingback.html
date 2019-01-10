@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>副本报名</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+
+</body>
+<script th:inline="javascript">
+    window.onload = function () {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg(
+                [[${back}]],
+                {time:3000},
+                function () {
+                    parent.layer.closeAll();
+                }
+            )
+        })
+    }
+</script>
+</html>

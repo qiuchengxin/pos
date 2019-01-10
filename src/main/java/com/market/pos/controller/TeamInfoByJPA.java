@@ -1,5 +1,7 @@
 package com.market.pos.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamMembers;
 import com.market.pos.pojo.TeamTree;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +31,7 @@ public class TeamInfoByJPA {
     private ITeamMembersService iTeamMembersService;
 
     @GetMapping(value = "/jpa/{id}")
-    public String findAllById(@PathVariable("id") long id , Model model){
+    public String findAllById(@PathVariable("id") long id , Model model, HttpServletRequest request){
         TeamList teamlist =  teamListRepository.findById(id);
         String tName = teamlist.getTName();
         String tType = teamlist.getTType();
@@ -42,9 +46,32 @@ public class TeamInfoByJPA {
         Optional<TeamTree> optional = teamTreeRepository.findById(tId);
         TeamTree teamTree = optional.get();
 
+        //获取报名数据
         List<TeamMembers> membersList = iTeamMembersService.findById(tId);
-        System.out.println(membersList);
+        String jsonString = JSON.toJSONString(membersList);
+        JSONArray jsonArray = JSONArray.parseArray(jsonString);
+//        System.out.println(jsonArray);
+        model.addAttribute("json",jsonArray);
+        model.addAttribute("tId",tId);
 
+        //通过session获得userid,并向前端传递其时候为管理员的信息
+        HttpSession session = request.getSession();
+        String userid = (String) session.getAttribute("userid");
+
+        if (userid.matches("admin")){
+            model.addAttribute("isAdmin",1);
+        }else if (!userid.matches("admin")){
+            model.addAttribute("isAdmin",0);
+        }
+
+        String usertype = iTeamMembersService.findUserType(userid,tId);
+        if (usertype == null){
+            model.addAttribute("usertype","未报名");
+        }else {
+            model.addAttribute("usertype",usertype);
+        }
+
+        //获取table
         String t_11 = teamTree.getT11();
         String t_12 = teamTree.getT12();
         String t_13 = teamTree.getT13();

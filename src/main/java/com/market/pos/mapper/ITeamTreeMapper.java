@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ITeamTreeMapper extends BaseMapper<TeamTree> {
 
     public void insertTeamTree(TeamTree teamTree);
+
+    public void updateTeamMembers(TeamTree teamTree);
 }

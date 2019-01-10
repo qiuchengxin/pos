@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,13 +36,21 @@ public class TeamMembersController {
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("userid");
 
-        teamMembers.setTId(tID);
-        teamMembers.setUserid(userid);
-        teamMembers.setUsername(username);
-        teamMembers.setUsertype(usertype);
-        teamMembers.setIsTibu(is_tibu);
-        iTeamMembersService.addTeamMember(teamMembers);
-        model.addAttribute("return","报名成功！");
-        return "teammade";
+        String data_usertype = iTeamMembersService.findUserType(userid,tID);
+        if (data_usertype == null) {
+            teamMembers.setTId(tID);
+            teamMembers.setUserid(userid);
+            teamMembers.setUsername(username);
+            teamMembers.setUsertype(usertype);
+            teamMembers.setIsTibu(is_tibu);
+            iTeamMembersService.addTeamMember(teamMembers);
+
+            String back = "报名成功！您报名的职业是： " + usertype;
+            model.addAttribute("back", back);
+        }else if (data_usertype != null){
+            String back = "您已经报名过了，不可以重复报名！";
+            model.addAttribute("back",back);
+        }
+        return "baomingback";
     }
 }
