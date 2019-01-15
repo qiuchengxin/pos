@@ -67,7 +67,7 @@ public class LemocWebSocketClient extends WebSocketClient {
         String msg = receiveMessage.getMsg();
         String groupid = receiveMessage.getFromGroup();
         String subType = receiveMessage.getSubType();
-        System.out.println(subType);
+        String username = receiveMessage.getUsername();
         //传递信息到NLU
         if (groupid.matches("721623673")){
             if (msg.matches(".*有团吗.*") && groupid.matches("721623673")){
@@ -77,14 +77,30 @@ public class LemocWebSocketClient extends WebSocketClient {
             }
 
             if (msg.matches("我要报名.*") && groupid.matches("721623673")){
-                String ask = TeamAdminController.insertTeamMembers(groupid,qqid,nick,msg);
+                String ask = TeamAdminController.insertTeamMembers(groupid,qqid,username,msg);
                 send(ask);
                 System.out.println(ask);
+            }
+
+            if (msg.matches(".*取消报名.*")){
+                String ask = TeamAdminController.delTeamMembers(qqid,groupid);
+                send(ask);
+                System.out.println(ask);
+            }
+
+            if (msg.matches(".*看排表.*")) {
+                AskQQMessage askQQMessage = new AskQQMessage();
+                askQQMessage.setAct("101");
+                askQQMessage.setQQID(qqid);
+                askQQMessage.setGroupid(groupid);
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：148.70.49.2:8080/teamTable");
+                String ask = new Gson().toJson(askQQMessage);
+                send(ask);
             }
         }else if (!groupid.matches("721623673")) {
             String qiandao = "签到";
             if ((msg.equals(qiandao) == true) || msg.equals("qd") == true || msg.equals("QD") == true) {
-                QianDao.nluMod(qqid, nick, msg, groupid);
+                QianDao.nluMod(qqid, username, msg, groupid);
                 String ask = QianDao.ask;
                 send(ask);
             }

@@ -59,4 +59,28 @@ public class TeamAdminController {
         }
         return ask;
     }
+
+    //取消报名
+    public static String delTeamMembers(String userid,String groupid){
+        String ask = null;
+        TeamAdminService.searchTeamList("pay_data");
+        String t_id = TeamAdminService.t_id;
+        AskQQMessage askQQMessage = new AskQQMessage();
+        askQQMessage.setAct("101");
+        askQQMessage.setGroupid(groupid);
+        askQQMessage.setQQID(userid);
+
+        TeamAdminService.searchTeamMembers("pay_data",userid);
+        String result_userid = TeamAdminService.result_userid;
+        if (result_userid == null){
+            askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 你并没有报名哦！");
+            ask = new Gson().toJson(askQQMessage);
+        }else if (result_userid != null) {
+            askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 取消报名成功！");
+            ask = new Gson().toJson(askQQMessage);
+            //删除报名信息
+            TeamAdminService.delTeamMembers("pay_data", userid, t_id);
+        }
+        return ask;
+    }
 }

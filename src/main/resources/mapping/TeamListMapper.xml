@@ -23,4 +23,16 @@
     <select id="findById" resultMap="TeamListResultMap">
         select * from team_list where id = #{id}
     </select>
+
+    <select id="findTidById" resultType="String">
+        select t_id from team_list order by id desc limit 1;
+    </select>
+
+    <select id="findByTid" resultMap="TeamListResultMap">
+        select * from team_list where t_id = #{tId}
+    </select>
+
+    <delete id="delTeamList">
+        delete from team_list where id = #{id}
+    </delete>
 </mapper>

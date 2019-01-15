@@ -16,7 +16,7 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="javascript:zhuye();">主页</a></li>
-            <li class="layui-nav-item"><a href="">副本攻略</a></li>
+            <li class="layui-nav-item"><a href="http://www.jx3pve.com/fam" target="_blank">副本攻略</a></li>
             <li class="layui-nav-item"><a href="">论坛</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
@@ -78,15 +78,6 @@
     }
     function zhuye() {
         document.getElementById("myiframe").src="/view/zhuye";
-    }
-</script>
-<script th:inline="javascript">
-    var message = [[${userid}]];
-    if (message != null){
-        layui.use('layer', function(){
-           var layer = layui.layer;
-           layer.msg(message)
-        });
     }
 </script>
 <script>

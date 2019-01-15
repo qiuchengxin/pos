@@ -18,9 +18,6 @@ public class JdbcServerUrl {
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            if(!connection.isClosed()){
-                System.out.println("----------------sky表查询---------------");
-            }
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while (result.next()){

@@ -8,4 +8,6 @@ public interface TeamListRepository extends JpaRepository<TeamList,Integer> {
     //通过id查询
     public TeamList findById(long id);
 
+    public TeamList findByTId(String tId);
+
 }

@@ -1,5 +1,6 @@
 package com.market.pos.controller;
 
+import com.market.pos.mapper.ITeamListMapper;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamTree;
 import com.market.pos.service.ITeamMembersService;
@@ -213,5 +214,12 @@ public class TeamTreeController {
         }catch (NullPointerException e){
             System.out.println("空指针异常！");
         }
+    }
+
+    @RequestMapping("/delTeamList")
+    public void delTeamList(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println(id);
+        teamListService.delTeamList(id);
     }
 }

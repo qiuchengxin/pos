@@ -37,9 +37,10 @@
             </div>
         </div>
         <div class="layui-col-space10 layui-col-space10" style="height: 25px;">
-            <div class="layui-btn-group">
+            <div class="layui-btn-group" style="float: right">
             <button class="layui-btn layui-btn-normal layui-btn-sm" style="width: 70px" th:onclick="'javascript:teamImfor('+${team.id}+')'">看排表</button>
             <button class="layui-btn layui-btn-warm layui-btn-sm" style="width: 70px" th:onclick="'javascript:join('+${team.id}+')'">报名</button>
+            <button class="layui-btn layui-btn-danger layui-btn-sm" style="width: 70px" th:onclick="'javascript:del('+${team.id}+')'">删除</button>
             </div>
         </div>
         <div style="height: 10px"><hr class="layui-bg-gray"></div>
@@ -47,6 +48,8 @@
 
 </div>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
+<script src="../static/js/myJs.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     window.onload=function open() {
@@ -65,7 +68,7 @@
         });
     }
 </script>
-<script>
+<script  th:inline="javascript">
     function teamImfor(id) {
         window.location.href = "/jpa/" + id;
     }
@@ -77,6 +80,22 @@
                 area: ['70%','90%'],
                 content: '/teamJoin/' + id
             });
+        })
+    }
+    function del(id) {
+        layer.confirm('确定要删除这条记录吗？', {icon: 3, title:'提示'} , function(index){
+            var isAdmin = [[${isAdmin}]];
+            console.log(isAdmin);
+            if (isAdmin == 0){
+                layer.msg("您没有删除权限！");
+            } else if (isAdmin == 1){
+                layer.msg("删除成功!");
+                var editdata = {};
+                editdata["id"] = id;
+                myajax(editdata,"/team/delTeamList");
+                location.reload();
+            }
+            layer.close(index);
         })
     }
 </script>

@@ -28,9 +28,6 @@ public class JdbcTeamAdmin {
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            if(!connection.isClosed()){
-                System.out.println("----------------sky表查询---------------");
-            }
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while (result.next()){
@@ -59,9 +56,6 @@ public class JdbcTeamAdmin {
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            if(!connection.isClosed()){
-                System.out.println("----------------连接成功---------------");
-            }
             Statement statement = connection.createStatement();
             result = statement.executeUpdate(sql);
             if(result != 0 ){
@@ -87,9 +81,6 @@ public class JdbcTeamAdmin {
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            if(!connection.isClosed()){
-                System.out.println("----------------连接成功---------------");
-            }
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
             connection.close();

@@ -12,4 +12,10 @@ public interface TeamListService extends IService<TeamList> {
     public List<TeamList> selectAllTeamList();
 
     public List<TeamList> findById(String id);
+
+    public String findTidById();
+
+    public List<TeamList> findByTid(String tId);
+
+    public void delTeamList(String id);
 }

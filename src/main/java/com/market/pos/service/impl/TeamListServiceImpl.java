@@ -32,4 +32,21 @@ public class TeamListServiceImpl extends ServiceImpl<ITeamListMapper, TeamList> 
         List<TeamList> list = iTeamListMapper.findById(id);
         return list;
     }
+
+    @Override
+    public String findTidById() {
+        String tId = iTeamListMapper.findTidById();
+        return tId;
+    }
+
+    @Override
+    public List<TeamList> findByTid(String tId) {
+        List<TeamList> list = iTeamListMapper.findByTid(tId);
+        return list;
+    }
+
+    @Override
+    public void delTeamList(String id) {
+        iTeamListMapper.delTeamList(id);
+    }
 }

@@ -64,4 +64,17 @@ public class TeamAdminService {
         JdbcTeamAdmin.updateTeamList(sql,groupid);
         System.out.println(sql);
     }
+
+    /**
+     * 删除报名信息
+     * @param groupid
+     * @param userid
+     * @param t_id
+     */
+    public static void delTeamMembers(String groupid,String userid,String t_id){
+        String sql = "delete from team_members where userid = " + "'" + userid + "'" +
+                " and t_id = " + "'" + t_id + "'" ;
+        JdbcTeamAdmin.updateTeamList(sql,groupid);
+        System.out.println(sql);
+    }
 }

@@ -4,6 +4,7 @@ import com.market.pos.pojo.TeamList;
 import com.market.pos.service.ITeamTreeService;
 import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,17 @@ public class ViewController {
     }
 
     @RequestMapping("/teamList")
-    public String teamList(Model model){
+    public String teamList(Model model, HttpServletRequest request){
         List<TeamList> list = teamListService.selectAllTeamList();
+        HttpSession session = request.getSession();
+        String userid = (String) session.getAttribute("userid");
+        int isAdmin = 0;
+        if (userid.matches("admin")){
+            isAdmin = 1;
+        }else if (! userid.matches("admin")){
+            isAdmin = 0;
+        }
+        model.addAttribute("isAdmin",isAdmin);
         model.addAttribute("list",list);
         return "teamlist";
     }
