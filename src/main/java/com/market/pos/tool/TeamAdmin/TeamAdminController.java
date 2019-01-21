@@ -21,10 +21,11 @@ public class TeamAdminController {
         if (t_name != null){
             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 最新的团队招募如下：" +
                     "\n日期：" + t_time +
-                    "\n副本：" + t_type + " " + t_name);
+                    "\n副本：" + t_type + " " + t_name +
+                    "\n若要报名请对我说：【我要报名xxx】,xxx为心法名称");
             ask = new Gson().toJson(askQQMessage);
         }else if (t_name == null){
-            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 并没有招募信息！");
+            askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 当前并没有招募信息！");
             ask = new Gson().toJson(askQQMessage);
         }
         return ask;
@@ -45,7 +46,9 @@ public class TeamAdminController {
             TeamAdminService.searchTeamMembers("pay_data",userid);
             String result_userid = TeamAdminService.result_userid;
             if (result_userid == null){
-                askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 报名成功！你报名的职业是： " + usertype + ", 若是进入排表，本机器人会私聊通知到您。");
+                askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 报名成功！你报名的职业是： " + usertype
+                                                            + "\n查看排表请对我说【看排表】"
+                                                            + "\n若要取消，请对我说【取消报名】");
                 ask = new Gson().toJson(askQQMessage);
                 TeamAdminService.insertTeamMembers("pay_data",userid,username,usertype);
             }else if (result_userid != null){
@@ -76,7 +79,7 @@ public class TeamAdminController {
             askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 你并没有报名哦！");
             ask = new Gson().toJson(askQQMessage);
         }else if (result_userid != null) {
-            askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 取消报名成功！");
+            askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 取消报名成功！下次记得积极报名吧！");
             ask = new Gson().toJson(askQQMessage);
             //删除报名信息
             TeamAdminService.delTeamMembers("pay_data", userid, t_id);

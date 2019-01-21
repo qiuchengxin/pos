@@ -69,4 +69,7 @@ public class ViewController {
     public String zhuye(Model model){
         return "zhuye";
     }
+
+    @RequestMapping("/hong")
+    public String hong(){ return "hong"; }
 }

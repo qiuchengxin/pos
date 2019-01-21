@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 
 import com.market.pos.pojo.AskQQMessage;
 import com.market.pos.pojo.QQMessage;
+import com.market.pos.tool.DailySearch.DailySearchController;
 import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
@@ -97,12 +98,24 @@ public class LemocWebSocketClient extends WebSocketClient {
                 String ask = new Gson().toJson(askQQMessage);
                 send(ask);
             }
+
+            if (msg.matches(".*日常.*")){
+                String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
+                send(ask);
+                System.out.println(ask);
+            }
         }else if (!groupid.matches("721623673")) {
             String qiandao = "签到";
             if ((msg.equals(qiandao) == true) || msg.equals("qd") == true || msg.equals("QD") == true) {
                 QianDao.nluMod(qqid, username, msg, groupid);
                 String ask = QianDao.ask;
                 send(ask);
+            }
+
+            if (msg.matches(".*日常.*")){
+                String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
+                send(ask);
+                System.out.println(ask);
             }
 
             String dianzhan = "赞我";
@@ -179,7 +192,6 @@ public class LemocWebSocketClient extends WebSocketClient {
                 }
             }
 
-
             if (subType.equals("1") && msg.matches(".*要.*闭关.*")) {
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("101");
@@ -201,6 +213,7 @@ public class LemocWebSocketClient extends WebSocketClient {
             }
 
             if (!subType.equals("1") && msg.matches("闭关")) {
+                System.out.println("发起闭关请求");
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("106");
                 askQQMessage.setQQID(qqid);
