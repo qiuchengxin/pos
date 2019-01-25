@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信息管理</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 3%;margin-left: 3%">
+    <legend align="center">核心成员信息<p>
+        <span class="layui-badge layui-bg-blue" th:text="${tFrom}"></span>
+    </p></legend>
+
+</fieldset>
+<div class="layui-collapse" style="margin: 3% 3% 0% 3%">
+<div class="layui-tab layui-tab-card" style="margin:2% 2% 2% 2%">
+    <ul class="layui-tab-title">
+        <li class="layui-this">
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-friends" style="font-size: 15px; color: #1E9FFF;"> 核心成员录入及修改</i></h3>
+        </li>
+        <li>
+            <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-release" style="font-size: 15px; color: #1E9FFF;"> 从签到记录选择核心成员</i></h3>
+        </li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form action="/view/insertImpotMember" method="post">
+            <div class="layui-inline">
+            <input type="text" maxlength="20" name="userid" id="userid" lay-verify="required" placeholder="QQ账号" autocomplete="off" class="layui-input layui-inline">
+            </div>
+            <div class="layui-inline">
+            <input type="text" maxlength="20" name="username" id="username" lay-verify="required" placeholder="TA的常用称呼" autocomplete="off" class="layui-input layui-inline">
+            </div>
+            <div class="layui-inline">
+            <button class="layui-btn layui-btn-normal" onclick="insertImpotMember()" type="submit">信息录入</button>
+            </div>
+            </form>
+            <div>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            该页面开发中。
+            <table class="layui-hide" id="test2" lay-filter="test2"></table>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+<script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
+<script src="../static/js/myJs.js"></script>
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+<script th:inline="javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //展示已知数据
+        table.render({
+            elem: '#test'
+            ,title: '已报名玩家'
+            ,cols: [[ //标题栏
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'userid', title: 'QQID'}
+                ,{field: 'username', title: '游戏ID'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',fixed: 'right'}
+            ]]
+            ,data: [[${json}]]
+            // ,data: [{"putin":0,"usertype":"田螺","isTibu":"on","userid":"1404461123","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"星月"},{"putin":0,"usertype":"霸刀","isTibu":"on","userid":"404597818","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"彭于晏"},{"putin":0,"usertype":"气纯","userid":"411135973","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"谷玄牝"},{"putin":0,"usertype":"七秀","userid":"549104527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"似萌\n"},{"putin":0,"usertype":"铁牢\n","userid":"582038510","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"姜陵"},{"putin":0,"usertype":"奶歌","userid":"1072452624","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"瓜宝"},{"putin":0,"usertype":"冰心","userid":"169084597","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"咸鱼烧"},{"putin":0,"usertype":"藏剑","userid":"1358783401","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"藏剑－夕墨"},{"putin":0,"usertype":"分山劲","userid":"975505608","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"别君"},{"putin":0,"usertype":"花间","userid":"565698639","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"请问我是谁"},{"putin":0,"usertype":"气纯","userid":"962452622","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"繁星若尘"},{"putin":0,"usertype":"天牢","userid":"474444246","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"君轻狂"},{"putin":0,"usertype":"铁牢","userid":"394542130","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":""},{"putin":0,"usertype":"铁骨","userid":"280242527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"保镖"},{"putin":0,"usertype":"霸刀","userid":"1390554661","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"妥思"},{"putin":0,"usertype":"打毛线","userid":"870044692","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"螺玄玄"},{"putin":0,"usertype":"蓬莱","userid":"469878581","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"扒个田螺"}]
+            ,page: true //是否显示分页
+            ,limits: [5, 7, 10]
+            ,limit: 10 //每页默认显示的数量
+            ,id: 'testReload'
+            // ,initSort: {
+            //     field: 'id' //排序字段，对应 cols 设定的各字段名
+            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            // }
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('确定要删除这条记录吗？', function(index){
+                    obj.del();
+                    var userid = data.userid;
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    myajax(editdata,"/team/delTeamMemerImport");
+                    layer.close(index);
+                    layer.msg("删除成功！");
+
+                });
+            }else if (obj.event ==='editId') {
+                layer.prompt({
+                    formType: 2
+                    ,value: data.username
+                    ,title: '修改ID'
+                }, function(value, index){
+                    obj.update({
+                        username: value
+                    });
+                    var userid = data.userid;
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    editdata["username"] = value;
+                    myajax(editdata,"/team/editTeamMemberImport")
+                    layer.close(index);
+                    layer.msg("修改成功");
+                });
+            }
+        });
+
+        //展示已知数据
+        table.render({
+            elem: '#test2'
+            ,title: '已报名玩家'
+            ,cols: [[ //标题栏
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'userid', title: 'QQID'}
+                ,{field: 'username', title: '游戏ID'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo2',fixed: 'right'}
+            ]]
+            // ,data: [[${json}]]
+            ,data: [{"putin":0,"usertype":"田螺","isTibu":"on","userid":"1404461123","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"星月"},{"putin":0,"usertype":"霸刀","isTibu":"on","userid":"404597818","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"彭于晏"},{"putin":0,"usertype":"气纯","userid":"411135973","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"谷玄牝"},{"putin":0,"usertype":"七秀","userid":"549104527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"似萌\n"},{"putin":0,"usertype":"铁牢\n","userid":"582038510","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"姜陵"},{"putin":0,"usertype":"奶歌","userid":"1072452624","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"瓜宝"},{"putin":0,"usertype":"冰心","userid":"169084597","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"咸鱼烧"},{"putin":0,"usertype":"藏剑","userid":"1358783401","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"藏剑－夕墨"},{"putin":0,"usertype":"分山劲","userid":"975505608","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"别君"},{"putin":0,"usertype":"花间","userid":"565698639","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"请问我是谁"},{"putin":0,"usertype":"气纯","userid":"962452622","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"繁星若尘"},{"putin":0,"usertype":"天牢","userid":"474444246","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"君轻狂"},{"putin":0,"usertype":"铁牢","userid":"394542130","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":""},{"putin":0,"usertype":"铁骨","userid":"280242527","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"保镖"},{"putin":0,"usertype":"霸刀","userid":"1390554661","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"妥思"},{"putin":0,"usertype":"打毛线","userid":"870044692","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"螺玄玄"},{"putin":0,"usertype":"蓬莱","userid":"469878581","tId":"d8ef9995-60b2-297e-f3a4-98e1ade6b52e1546855360348","username":"扒个田螺"}]
+            ,page: true //是否显示分页
+            ,limits: [5, 7, 10]
+            ,limit: 10 //每页默认显示的数量
+            ,id: 'testReload'
+            // ,initSort: {
+            //     field: 'id' //排序字段，对应 cols 设定的各字段名
+            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            // }
+        });
+
+        //监听行工具事件
+        table.on('tool(test2)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'addToImpot'){
+                layer.confirm('确定将他纳入核心成员吗？', function(index){
+                    obj.del();
+                    var userid = data.userid;
+                    var username = data.username;
+                    var editdata = {};
+                    editdata["userid"] = userid;
+                    editdata["username"] = username;
+                    myajax(editdata,"/team/addToImpot");
+                    layer.close(index);
+                    layer.msg("纳入成功！");
+                });
+            }
+        });
+    });
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="editId">修改ID</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="barDemo2">
+    <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="addToImpot">纳入核心成员</a>
+</script>
+
+<!--<script th:inline="javascript">-->
+    <!--function insertImpotMember() {-->
+        <!--var userid = $("#userid").val();-->
+        <!--var username = $("#username").val();-->
+
+        <!--var form = {};-->
+        <!--form["userid"] = userid;-->
+        <!--form["username"] = username;-->
+        <!--myajax(form,"/view/insertImpotMember");-->
+    <!--}-->
+<!--</script>-->
+
+<script th:inline="javascript">
+    var message = [[${return}]];
+    if (message != null){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg(message);
+        });
+    }
+</script>
+</html>

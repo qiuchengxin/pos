@@ -15,7 +15,8 @@
 </fieldset>
 <div class="layui-collapse" style="margin: 3% 3% 0% 3%">
     <div class="layui-colla-item">
-        <h2 class="layui-colla-title">基本信息      【您报名的职业是】 ：  <span class="layui-badge layui-bg-blue" th:text="${usertype}"></span></h2>
+        <h2 class="layui-colla-title">基本信息      【您报名的职业是】 ：  <span class="layui-badge layui-bg-blue" th:text="${usertype}"></span>
+            【副本团】 ：<span class="layui-badge layui-bg-blue" th:text="${tFrom}"></span></h2>
         <div class="layui-colla-content layui-show">
             <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-friends" style="font-size: 15px; color: #1E9FFF;"> 副本名称：</i><a th:text="${t_type}"></a><a th:text="${t_name}"></a> </h3>
             <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-notice" style="font-size: 15px; color: #1E9FFF;"> 开团时间：</i><a th:text="${t_time}"></a></h3>

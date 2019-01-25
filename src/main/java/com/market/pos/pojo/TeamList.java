@@ -14,6 +14,7 @@ public class TeamList {
   private String tType;
   private String tTime;
   private String liuyan;
+  private String tFrom;
 
 
   public long getId() {
@@ -63,4 +64,12 @@ public class TeamList {
     public void setLiuyan(String liuyan) {
         this.liuyan = liuyan;
     }
+
+  public String gettFrom() {
+    return tFrom;
+  }
+
+  public void settFrom(String tFrom) {
+    this.tFrom = tFrom;
+  }
 }

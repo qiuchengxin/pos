@@ -34,10 +34,11 @@ public class TeamListServiceImpl extends ServiceImpl<ITeamListMapper, TeamList> 
     }
 
     @Override
-    public String findTidById() {
-        String tId = iTeamListMapper.findTidById();
+    public String findTidById(String tFrom) {
+        String tId = iTeamListMapper.findTidById(tFrom);
         return tId;
     }
+
 
     @Override
     public List<TeamList> findByTid(String tId) {

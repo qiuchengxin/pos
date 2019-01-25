@@ -15,7 +15,7 @@ public interface ITeamListMapper extends BaseMapper<TeamList> {
 
     public List<TeamList> findById(String id);
 
-    public String findTidById();
+    public String findTidById(String tFrom);
 
     public List<TeamList> findByTid(String tId);
 

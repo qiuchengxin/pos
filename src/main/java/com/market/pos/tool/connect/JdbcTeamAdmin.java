@@ -9,11 +9,14 @@ public class JdbcTeamAdmin {
     static String password = "123456";
 
     public static int id;
+    public static int putin;
     public static String t_id;
     public static String t_name;
     public static String t_type;
     public static String t_time;
     public static String liuyan;
+    public static String username;
+    public static String usertype;
 
     public static String result_userid;
 
@@ -38,6 +41,7 @@ public class JdbcTeamAdmin {
                 t_time = result.getString("t_time");
                 liuyan = result.getString("liuyan");
             }
+            connection.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -99,6 +103,7 @@ public class JdbcTeamAdmin {
     public static void searchTeamMembers(String sql,String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         result_userid = null;
+        putin = 0;
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
@@ -106,11 +111,62 @@ public class JdbcTeamAdmin {
             ResultSet result = statement.executeQuery(sql);
             while (result.next()){
                 result_userid = result.getString("userid");
+                putin = result.getInt("putin");
+                username = result.getString("username");
+                usertype = result.getString("usertype");
             }
+            connection.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String searchTeamTree(String sql,String groupid,String tposition){
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String tpositionFromSql = null;
+        try{
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url,user,password);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()){
+                tpositionFromSql = result.getString(tposition);
+                return tpositionFromSql;
+            }
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tpositionFromSql;
+    }
+
+    /**
+     * 查询team_impormember
+     */
+    public static String searchTeamImpotMember(String sql,String groupid){
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String username = null;
+        try{
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url,user,password);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()){
+                username = result.getString("username");
+                return username;
+            }
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return username;
     }
 }

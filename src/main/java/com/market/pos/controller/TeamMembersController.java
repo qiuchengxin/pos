@@ -1,7 +1,11 @@
 package com.market.pos.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.market.pos.pojo.TeamImpormember;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamMembers;
+import com.market.pos.service.ITeamMembersImportService;
 import com.market.pos.service.ITeamMembersService;
 import com.market.pos.service.JPAService.TeamListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class TeamMembersController {
@@ -23,6 +28,9 @@ public class TeamMembersController {
 
     @Autowired
     private TeamListRepository teamListRepository;
+
+    @Autowired
+    private ITeamMembersImportService iTeamMembersImportService;
 
     @GetMapping(value = "/join/{id}")
     public String addTeamMember(@PathVariable("id") long id, Model model, HttpServletRequest request){

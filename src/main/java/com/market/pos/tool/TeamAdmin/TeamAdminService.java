@@ -11,14 +11,13 @@ public class TeamAdminService {
     public static String liuyan;
 
     public static String result_userid;
-    public static String usertype;
 
     /**
      * 查询最新的团队信息team_list
      * @param groupid
      */
-    public static void searchTeamList(String groupid){
-        String sql = "SELECT * from team_list ORDER BY id desc limit 1";
+    public static void searchTeamList(String groupid,String t_from){
+        String sql = "SELECT * from team_list where t_from = " + "'" + t_from + "'" + " ORDER BY id desc limit 1";
         JdbcTeamAdmin.searchTeamList(sql,groupid);
         t_id = JdbcTeamAdmin.t_id;
         t_name = JdbcTeamAdmin.t_name;
@@ -35,7 +34,13 @@ public class TeamAdminService {
      * @param usertype
      */
     public static void insertTeamMembers(String groupid,String userid,String username,String usertype){
-        searchTeamList("pay_data");
+        String t_from = null;
+        if (groupid.equals("721623673")){
+            t_from = "皓水";
+        }else if (groupid.equals("")){
+            t_from = "风波渡";
+        }
+        searchTeamList("pay_data",t_from);
         String t_id = TeamAdminService.t_id;
         String sql = "INSERT INTO team_members (t_id,userid,username,usertype) VALUES (" +
                 "'" + t_id + "'" + "," +
@@ -51,9 +56,15 @@ public class TeamAdminService {
      * @param userid
      */
     public static void searchTeamMembers(String groupid,String userid){
-        searchTeamList("pay_data");
+        String t_from = null;
+        if (groupid.equals("721623673")){
+            t_from = "皓水";
+        }else if (groupid.equals("")){
+            t_from = "风波渡";
+        }
+        searchTeamList("pay_data",t_from);
         String t_id = TeamAdminService.t_id;
-        String sql = "select userid from team_members where t_id = " + "'" + t_id + "'" + " and userid = " + "'" +userid+ "'";
+        String sql = "select * from team_members where t_id = " + "'" + t_id + "'" + " and userid = " + "'" +userid+ "'";
         JdbcTeamAdmin.searchTeamMembers(sql,groupid);
         result_userid = JdbcTeamAdmin.result_userid;
         System.out.println(sql);

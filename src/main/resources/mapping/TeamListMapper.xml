@@ -10,10 +10,11 @@
         <result property="tType" column="t_type"/>
         <result property="tTime" column="t_time"/>
         <result property="liuyan" column="liuyan"/>
+        <result property="tFrom" column="t_from"/>
     </resultMap>
 
     <insert id="insertTeamList" parameterType="TeamList" keyProperty="id" useGeneratedKeys="true">
-        insert into team_list (t_id, t_name, t_type, t_time , liuyan) values (#{tId},#{tName},#{tType},#{tTime},#{liuyan});
+        insert into team_list (t_id, t_name, t_type, t_time , liuyan , t_from) values (#{tId},#{tName},#{tType},#{tTime},#{liuyan},#{tFrom});
     </insert>
 
     <select id="selectAllTeamList" resultMap="TeamListResultMap">
@@ -25,7 +26,7 @@
     </select>
 
     <select id="findTidById" resultType="String">
-        select t_id from team_list order by id desc limit 1;
+        select t_id from team_list where t_from = #{tFrom} order by id desc limit 1;
     </select>
 
     <select id="findByTid" resultMap="TeamListResultMap">

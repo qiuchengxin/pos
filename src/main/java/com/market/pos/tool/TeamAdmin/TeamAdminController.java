@@ -8,7 +8,13 @@ public class TeamAdminController {
 
     //查询团队信息
     public static String searchTeamList(String groupid,String qqid){
-        TeamAdminService.searchTeamList("pay_data");
+        String t_from = null;
+        if (groupid.equals("721623673")){
+            t_from = "皓水";
+        }else if (groupid.equals("921340922")){
+            t_from = "风波渡";
+        }
+        TeamAdminService.searchTeamList("pay_data",t_from);
         String t_name = TeamAdminService.t_name;
         String t_type = TeamAdminService.t_type;
         String t_time = TeamAdminService.t_time;
@@ -20,6 +26,7 @@ public class TeamAdminController {
         String ask = null;
         if (t_name != null){
             askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 最新的团队招募如下：" +
+                    "\n团队：" + t_from +
                     "\n日期：" + t_time +
                     "\n副本：" + t_type + " " + t_name +
                     "\n若要报名请对我说：【我要报名xxx】,xxx为心法名称");
@@ -31,22 +38,37 @@ public class TeamAdminController {
         return ask;
     }
 
-    //点招募
-    public static String insertTeamMembers(String groupid,String userid,String username,String msg){
+    /**
+     * 点招募
+     */
+
+    public static String insertTeamMembers(String groupid,String userid,String username,String msg,String nick){
         AskQQMessage askQQMessage = new AskQQMessage();
         askQQMessage.setAct("101");
         askQQMessage.setGroupid(groupid);
         askQQMessage.setQQID(userid);
-        TeamAdminService.searchTeamList("pay_data");
+        String t_from = null;
+        if (groupid.equals("721623673")){
+            t_from = "皓水";
+        }else if (groupid.equals("921340922")){
+            t_from = "风波渡";
+        }
+        TeamAdminService.searchTeamList("pay_data",t_from);
         String t_id = TeamAdminService.t_id;
         GetQid.getUserType(msg);
         String usertype = GetQid.ch_msg;
         String ask = null;
+        //如果群名片不为空，则username为群名片，若为空，则username为qq昵称
+        if (nick != null || !nick.equals("")){
+            username = nick;
+        }
+
         if (t_id != null){
             TeamAdminService.searchTeamMembers("pay_data",userid);
             String result_userid = TeamAdminService.result_userid;
             if (result_userid == null){
                 askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 报名成功！你报名的职业是： " + usertype
+                                                            + "\n副本团" + t_from
                                                             + "\n查看排表请对我说【看排表】"
                                                             + "\n若要取消，请对我说【取消报名】");
                 ask = new Gson().toJson(askQQMessage);
@@ -66,7 +88,13 @@ public class TeamAdminController {
     //取消报名
     public static String delTeamMembers(String userid,String groupid){
         String ask = null;
-        TeamAdminService.searchTeamList("pay_data");
+        String t_from = null;
+        if (groupid.equals("721623673")){
+            t_from = "皓水";
+        }else if (groupid.equals("921340922")){
+            t_from = "风波渡";
+        }
+        TeamAdminService.searchTeamList("pay_data",t_from);
         String t_id = TeamAdminService.t_id;
         AskQQMessage askQQMessage = new AskQQMessage();
         askQQMessage.setAct("101");

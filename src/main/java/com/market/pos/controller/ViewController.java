@@ -1,6 +1,10 @@
 package com.market.pos.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.market.pos.pojo.TeamImpormember;
 import com.market.pos.pojo.TeamList;
+import com.market.pos.service.ITeamMembersImportService;
 import com.market.pos.service.ITeamTreeService;
 import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +26,14 @@ public class ViewController {
     @Autowired
     private TeamListService teamListService;
 
+    @Autowired
+    private ITeamMembersImportService iTeamMembersImportService;
+
     @RequestMapping("/make")
     public String teamMake(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("userid");
-        if (!userid.equals("admin")){
+        if (!userid.equals("admin") && !userid.equals("382969350")){
             response.sendRedirect("/main/403");
         }
         return "teammake";
@@ -43,9 +50,9 @@ public class ViewController {
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("userid");
         int isAdmin = 0;
-        if (userid.matches("admin")){
+        if (userid.matches("admin") || userid.matches("382969350")){
             isAdmin = 1;
-        }else if (! userid.matches("admin")){
+        }else if (! userid.matches("admin") && !userid.matches("382969350")){
             isAdmin = 0;
         }
         model.addAttribute("isAdmin",isAdmin);
@@ -72,4 +79,65 @@ public class ViewController {
 
     @RequestMapping("/hong")
     public String hong(){ return "hong"; }
+
+    @RequestMapping("/cygl")
+    public String cygl(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+
+        String groupid = null;
+        String tFrom = null;
+        if (!userid.equals("admin") && !userid.equals("382969350")){
+            response.sendRedirect("/main/403");
+        }else if (userid.equals("admin")){
+            groupid = "721623673";
+            tFrom = "皓水";
+        }else if (userid.equals("382969350")){
+            groupid = "921340922";
+            tFrom = "风波渡";
+        }
+
+        List<TeamImpormember> list = iTeamMembersImportService.findAllByGroupid(groupid);
+        String jsonString = JSON.toJSONString(list);
+        JSONArray jsonArray = JSONArray.parseArray(jsonString);
+        model.addAttribute("json",jsonArray);
+        model.addAttribute("tFrom",tFrom);
+        return "cygl";
+    }
+
+    @RequestMapping(value = "/insertImpotMember" , method = RequestMethod.POST)
+    public String insertImpotMember(HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+
+        String groupid = null;
+        String tFrom = null;
+        if (userid.equals("admin")){
+            groupid = "721623673";
+            tFrom = "皓水";
+        }else if (userid.equals("382969350")){
+            groupid = "921340922";
+            tFrom = "风波渡";
+        }
+
+        String usernameGet = request.getParameter("username");
+        String useridGet = request.getParameter("userid");
+
+        String resultUserId = iTeamMembersImportService.findUserIdByUserIdAndGroupId(useridGet,groupid);
+        //只在无用户情况下新增用户
+        if (resultUserId == null) {
+            iTeamMembersImportService.insertImpotMember(useridGet, usernameGet, groupid);
+            model.addAttribute("return","新增成员成功！");
+        }else {
+            model.addAttribute("return","该成员已经添加过了！");
+        }
+
+        List<TeamImpormember> list = iTeamMembersImportService.findAllByGroupid(groupid);
+        String jsonString = JSON.toJSONString(list);
+        JSONArray jsonArray = JSONArray.parseArray(jsonString);
+        model.addAttribute("json",jsonArray);
+        model.addAttribute("tFrom",tFrom);
+
+        return "cygl";
+    }
 }

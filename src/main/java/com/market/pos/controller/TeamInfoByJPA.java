@@ -41,10 +41,12 @@ public class TeamInfoByJPA {
         String tType = teamlist.getTType();
         String tTime = teamlist.getTTime();
         String liuyan = teamlist.getLiuyan();
+        String tFrom = teamlist.gettFrom();
         model.addAttribute("t_name",tName);
         model.addAttribute("t_type",tType);
         model.addAttribute("t_time",tTime);
         model.addAttribute("liuyan",liuyan);
+        model.addAttribute("tFrom",tFrom);
 
         String tId = teamlist.getTId();
         Optional<TeamTree> optional = teamTreeRepository.findById(tId);
@@ -62,9 +64,9 @@ public class TeamInfoByJPA {
         HttpSession session = request.getSession();
         String userid = (String) session.getAttribute("userid");
 
-        if (userid.matches("admin")){
+        if (userid.matches("admin") || userid.matches("382969350")){
             model.addAttribute("isAdmin",1);
-        }else if (!userid.matches("admin")){
+        }else if (!userid.matches("admin") && !userid.matches("382969350")){
             model.addAttribute("isAdmin",0);
         }
 
@@ -144,9 +146,17 @@ public class TeamInfoByJPA {
         return "baoming";
     }
 
-    @RequestMapping("/teamTable")
-    public String teamTable(Model model){
-        String tId = teamListService.findTidById();
+    @GetMapping("/teamTable/{tFrom}")
+    public String teamTable(Model model,@PathVariable("tFrom") String tFrom){
+        String teamName = null;
+        if (tFrom.equals("hs")){
+            teamName = "皓水";
+        }else if (tFrom.equals("fbd")){
+            teamName = "风波渡";
+        }
+
+        String tId = teamListService.findTidById(teamName);
+        System.out.println(tId);
         Optional<TeamTree> optional = teamTreeRepository.findById(tId);
         TeamTree teamTree = optional.get();
 
@@ -155,6 +165,7 @@ public class TeamInfoByJPA {
         String tType = teamlist.getTType();
         String tTime = teamlist.getTTime();
         String liuyan = teamlist.getLiuyan();
+        model.addAttribute("t_from",teamName);
         model.addAttribute("t_name",tName);
         model.addAttribute("t_type",tType);
         model.addAttribute("t_time",tTime);

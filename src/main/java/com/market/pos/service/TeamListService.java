@@ -13,7 +13,7 @@ public interface TeamListService extends IService<TeamList> {
 
     public List<TeamList> findById(String id);
 
-    public String findTidById();
+    public String findTidById(String tFrom);
 
     public List<TeamList> findByTid(String tId);
 

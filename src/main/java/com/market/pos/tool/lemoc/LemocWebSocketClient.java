@@ -11,6 +11,8 @@ import com.market.pos.tool.Equip.OpenEquip;
 import com.market.pos.tool.Rank.RankController;
 import com.market.pos.tool.Rank.RankMin;
 import com.market.pos.tool.TeamAdmin.TeamAdminController;
+import com.market.pos.tool.TeamAdmin.TeamAdminService;
+import com.market.pos.tool.TeamAdmin.TeamJoin;
 import com.market.pos.tool.WuxiaPk.Hurt;
 import com.market.pos.tool.cw.CwController;
 import com.market.pos.tool.cw.CwService;
@@ -70,17 +72,31 @@ public class LemocWebSocketClient extends WebSocketClient {
         String subType = receiveMessage.getSubType();
         String username = receiveMessage.getUsername();
         //传递信息到NLU
-        if (groupid.matches("721623673")){
-            if (msg.matches(".*有团吗.*") && groupid.matches("721623673")){
+        if (groupid.matches("721623673") || groupid.matches("921340922")){
+            if (msg.matches(".*有团吗.*")){
                 String ask = TeamAdminController.searchTeamList(groupid,qqid);
                 send(ask);
                 System.out.println(ask);
             }
 
-            if (msg.matches("我要报名.*") && groupid.matches("721623673")){
-                String ask = TeamAdminController.insertTeamMembers(groupid,qqid,username,msg);
+            if (msg.matches("我要报名.*")){
+                String ask = TeamAdminController.insertTeamMembers(groupid,qqid,username,msg,nick);
                 send(ask);
                 System.out.println(ask);
+
+                String t_from = null;
+                if (groupid.equals("721623673")){
+                    t_from = "皓水";
+                }else if (groupid.equals("921340922")){
+                    t_from = "风波渡";
+                }
+                TeamAdminService.searchTeamList("pay_data",t_from);
+                String t_id = TeamAdminService.t_id;
+                GetQid.getUserType(msg);
+                String usertype = GetQid.ch_msg;
+                String askJoin = TeamJoin.teamJoin(t_id,qqid,usertype,groupid);
+                send(askJoin);
+                System.out.println(askJoin);
             }
 
             if (msg.matches(".*取消报名.*")){
@@ -90,11 +106,17 @@ public class LemocWebSocketClient extends WebSocketClient {
             }
 
             if (msg.matches(".*看排表.*")) {
+                String t_from = null;
+                if (groupid.equals("721623673")){
+                    t_from = "hs";
+                }else if (groupid.equals("921340922")){
+                    t_from = "fbd";
+                }
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("101");
                 askQQMessage.setQQID(qqid);
                 askQQMessage.setGroupid(groupid);
-                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：148.70.49.2:8080/teamTable");
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：148.70.49.2:8080/teamTable/" + t_from);
                 String ask = new Gson().toJson(askQQMessage);
                 send(ask);
             }
@@ -104,7 +126,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(ask);
                 System.out.println(ask);
             }
-        }else if (!groupid.matches("721623673")) {
+        }else if (!groupid.matches("721623673") && !groupid.matches("921340922")) {
             String qiandao = "签到";
             if ((msg.equals(qiandao) == true) || msg.equals("qd") == true || msg.equals("QD") == true) {
                 QianDao.nluMod(qqid, username, msg, groupid);

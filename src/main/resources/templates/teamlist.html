@@ -17,7 +17,9 @@
     <!--单模块-->
     <div class="layui-col-space10 layui-col-10" style="margin: 2% 3% 3% 3%;height: 150px;" >
         <div class="layui-col-space10 layui-col-space10" style="height: 25px"></div>
-        <span class="layui-badge layui-bg-red" th:text="${teamStat.count}"></span>
+        <span class="layui-badge layui-bg-blue" th:text="${teamStat.count}"></span>
+        <span class="layui-badge layui-bg-orange" th:text="${team.tFrom}"></span>
+
         <div style="height: 60px">
             <img src="../static/png/剑三logo.png" style="height: 60px">
             副本名称：<span th:text="${team.TName}"></span>

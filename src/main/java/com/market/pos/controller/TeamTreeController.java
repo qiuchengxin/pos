@@ -2,6 +2,7 @@ package com.market.pos.controller;
 
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamTree;
+import com.market.pos.service.ITeamMembersImportService;
 import com.market.pos.service.ITeamMembersService;
 import com.market.pos.service.ITeamTreeService;
 import com.market.pos.service.TeamListService;
@@ -26,6 +27,9 @@ public class TeamTreeController {
     @Autowired
     private ITeamMembersService iTeamMembersService;
 
+    @Autowired
+    private ITeamMembersImportService iTeamMembersImportService;
+
     @RequestMapping("/members")
     public void addTeam(HttpServletRequest request,Model model){
 
@@ -42,11 +46,21 @@ public class TeamTreeController {
         }else {
             teamList.setLiuyan(liuyan);
         }
+
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+        String tFrom = null;
+        if (userid.equals("admin")){
+            tFrom = "皓水";
+        }else if (userid.equals("382969350")){
+            tFrom = "风波渡";
+        }
         String t_time = date +time;
         teamList.setTId(t_id);
         teamList.setTName(t_name);
         teamList.setTTime(t_time);
         teamList.setTType(t_type);
+        teamList.settFrom(tFrom);
         teamListService.insertTeamList(teamList);
     }
 
@@ -139,9 +153,9 @@ public class TeamTreeController {
         String tId = request.getParameter("tId");
         HttpSession session = request.getSession();
         String session_userid = (String) session.getAttribute("userid");
-        if (!session_userid.matches("admin")){
+        if (!session_userid.matches("admin") && !session_userid.matches("382969350")){
             model.addAttribute("delReturn","您没有删除权限，本次操作无效！");
-        }else if (session_userid.matches("admin")){
+        }else if (session_userid.matches("admin") || session_userid.matches("382969350") ){
             iTeamMembersService.delTeamMemer(userid,tId);
             model.addAttribute("delReturn","删除成功！");
         }
@@ -207,7 +221,7 @@ public class TeamTreeController {
             teamTree.setT53(data53);
             teamTree.setT54(data54);
             teamTree.setT55(data55);
-            if (userid.matches("admin")) {
+            if (userid.matches("admin") || userid.matches("382969350")) {
                 iTeamTreeService.updateTeamMembers(teamTree);
             }
         }catch (NullPointerException e){
@@ -220,5 +234,56 @@ public class TeamTreeController {
         String id = request.getParameter("id");
         System.out.println(id);
         teamListService.delTeamList(id);
+    }
+
+    @RequestMapping("/delTeamMemerImport")
+    public void delTeamMemerImport(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+        String delUserId = request.getParameter("userid");
+
+        String groupid = null;
+        if (userid.equals("admin")){
+            groupid = "721623673";
+        }else if (userid.equals("382969350")){
+            groupid = "921340922";
+        }
+        iTeamMembersImportService.delByUserId(delUserId,groupid);
+    }
+
+    @RequestMapping("/editTeamMemberImport")
+    public void editId(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+
+        String groupid = null;
+        if (userid.equals("admin")){
+            groupid = "721623673";
+        }else if (userid.equals("382969350")){
+            groupid = "921340922";
+        }
+
+        String editUserName = request.getParameter("username");
+        String editUserId = request.getParameter("userid");
+        iTeamMembersImportService.updateUserNameByUserId(editUserId,editUserName,groupid);
+    }
+
+    @RequestMapping("/addToImpot")
+    public void addToImpot(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+
+        String groupid = null;
+        if (userid.equals("admin")){
+            groupid = "721623673";
+        }else if (userid.equals("382969350")){
+            groupid = "921340922";
+        }
+        String userIdGet = request.getParameter("userid");
+        String userNameGet = request.getParameter("username");
+        String resultUserId = iTeamMembersImportService.findUserIdByUserIdAndGroupId(userIdGet,groupid);
+        if (resultUserId == null) {
+            iTeamMembersImportService.insertImpotMember(userIdGet, userNameGet, groupid);
+        }
     }
 }
