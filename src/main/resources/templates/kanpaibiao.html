@@ -39,39 +39,39 @@
                     </thead>
                     <tbody>
                     <tr height="50px" align="center">
-                        <td id="target11" th:text="${t_11}"></td>
-                        <td id="target12" th:text="${t_12}"></td>
-                        <td id="target13" th:text="${t_13}"></td>
-                        <td id="target14" th:text="${t_14}"></td>
-                        <td id="target15" th:text="${t_15}"></td>
+                        <td id="t_11" th:text="${t_11}"></td>
+                        <td id="t_12" th:text="${t_12}"></td>
+                        <td id="t_13" th:text="${t_13}"></td>
+                        <td id="t_14" th:text="${t_14}"></td>
+                        <td id="t_15" th:text="${t_15}"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target21" th:text="${t_21}"></td>
-                        <td id="target22" th:text="${t_22}"></td>
-                        <td id="target23" th:text="${t_23}"></td>
-                        <td id="target24" th:text="${t_24}"></td>
-                        <td id="target25" th:text="${t_25}"></td>
+                        <td id="t_21" th:text="${t_21}"></td>
+                        <td id="t_22" th:text="${t_22}"></td>
+                        <td id="t_23" th:text="${t_23}"></td>
+                        <td id="t_24" th:text="${t_24}"></td>
+                        <td id="t_25" th:text="${t_25}"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target31" th:text="${t_31}" ></td>
-                        <td id="target32" th:text="${t_32}" ></td>
-                        <td id="target33" th:text="${t_33}" ></td>
-                        <td id="target34" th:text="${t_34}" ></td>
-                        <td id="target35" th:text="${t_35}" ></td>
+                        <td id="t_31" th:text="${t_31}" ></td>
+                        <td id="t_32" th:text="${t_32}" ></td>
+                        <td id="t_33" th:text="${t_33}" ></td>
+                        <td id="t_34" th:text="${t_34}" ></td>
+                        <td id="t_35" th:text="${t_35}" ></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target41" th:text="${t_41}"></td>
-                        <td id="target42" th:text="${t_42}"></td>
-                        <td id="target43" th:text="${t_43}"></td>
-                        <td id="target44" th:text="${t_44}"></td>
-                        <td id="target45" th:text="${t_45}"></td>
+                        <td id="t_41" th:text="${t_41}"></td>
+                        <td id="t_42" th:text="${t_42}"></td>
+                        <td id="t_43" th:text="${t_43}"></td>
+                        <td id="t_44" th:text="${t_44}"></td>
+                        <td id="t_45" th:text="${t_45}"></td>
                     </tr>
                     <tr height="50px" align="center">
-                        <td id="target51" th:text="${t_51}"></td>
-                        <td id="target52" th:text="${t_52}"></td>
-                        <td id="target53" th:text="${t_53}"></td>
-                        <td id="target54" th:text="${t_54}"></td>
-                        <td id="target55" th:text="${t_55}"></td>
+                        <td id="t_51" th:text="${t_51}"></td>
+                        <td id="t_52" th:text="${t_52}"></td>
+                        <td id="t_53" th:text="${t_53}"></td>
+                        <td id="t_54" th:text="${t_54}"></td>
+                        <td id="t_55" th:text="${t_55}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -79,7 +79,68 @@
 
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
-<script src="../static/js/myJs.js"></script>
+<script type="text/javascript" src="../static/js/myJs.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    function seticon(target) {
+        var HTML;
+        if (target.match("丐帮")){
+            HTML ="<img src=\"../static/png/丐帮.png\" height=\"30px\">" + target;
+        }else if (target.match("藏剑")){
+            HTML ="<img src=\"../static/png/藏剑.png\" height=\"30px\">" + target;
+        }else if (target.match("霸刀")){
+            HTML ="<img src=\"../static/png/霸刀.png\" height=\"30px\">" + target;
+        }else if (target.match("傲血") || target.match("天策T")){
+            HTML ="<img src=\"../static/png/天策.png\" height=\"30px\">" + target;
+        }else if (target.match("蓬莱")){
+            HTML ="<img src=\"../static/png/蓬莱.png\" height=\"30px\">" + target;
+        }else if (target.match("分山") || target.match("苍云T")){
+            HTML ="<img src=\"../static/png/苍云.png\" height=\"30px\">" + target;
+        }else if (target.match("剑纯") || target.match("气纯")){
+            HTML ="<img src=\"../static/png/纯阳.png\" height=\"30px\">" + target;
+        }else if (target.match("鲸鱼") || target.match("田螺")){
+            HTML ="<img src=\"../static/png/唐门.png\" height=\"30px\">" + target;
+        }else if (target.match("焚影") || target.match("明教T")){
+            HTML ="<img src=\"../static/png/明教.png\" height=\"30px\">" + target;
+        }else if (target.match("易经") || target.match("大师T")){
+            HTML ="<img src=\"../static/png/少林.png\" height=\"30px\">" + target;
+        }else if (target.match("奶花") || target.match("花间")){
+            HTML ="<img src=\"../static/png/万花.png\" height=\"30px\">" + target;
+        }else if (target.match("奶歌") || target.match("莫问")){
+            HTML ="<img src=\"../static/png/长歌.png\" height=\"30px\">" + target;
+        }else if (target.match("奶毒") || target.match("毒经")){
+            HTML ="<img src=\"../static/png/五毒.png\" height=\"30px\">" + target;
+        }else if (target.match("奶秀") || target.match("冰心")){
+            HTML ="<img src=\"../static/png/七秀.png\" height=\"30px\">" + target;
+        }else {
+            HTML = target;
+        }
+        return HTML;
+    }
+</script>
+<script th:inline="javascript">
+    //定义内容数组
+    var target = [
+        [[${t_11}]],[[${t_12}]],[[${t_13}]],[[${t_14}]],[[${t_15}]],
+        [[${t_21}]],[[${t_22}]],[[${t_23}]],[[${t_24}]],[[${t_25}]],
+        [[${t_31}]],[[${t_32}]],[[${t_33}]],[[${t_34}]],[[${t_35}]],
+        [[${t_41}]],[[${t_42}]],[[${t_43}]],[[${t_44}]],[[${t_45}]],
+        [[${t_51}]],[[${t_52}]],[[${t_53}]],[[${t_54}]],[[${t_55}]]
+    ];
+    //定义id数组
+    var tId = [
+        "t_11","t_12","t_13","t_14","t_15",
+        "t_21","t_22","t_23","t_24","t_25",
+        "t_31","t_32","t_33","t_34","t_35",
+        "t_41","t_42","t_43","t_44","t_45",
+        "t_51","t_52","t_53","t_54","t_55"
+    ];
+
+    for (i = 0;i<=24;i++) {
+        var HTML = seticon(target[i]);
+        document.getElementById(tId[i]).innerHTML = HTML;
+    }
+
+</script>
 </body>
 </html>
