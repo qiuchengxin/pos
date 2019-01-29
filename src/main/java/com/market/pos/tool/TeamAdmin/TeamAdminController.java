@@ -2,6 +2,7 @@ package com.market.pos.tool.TeamAdmin;
 
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
+import com.market.pos.tool.connect.JdbcTeamAdmin;
 import com.market.pos.tool.pk.GetQid;
 
 public class TeamAdminController {
@@ -109,8 +110,20 @@ public class TeamAdminController {
         }else if (result_userid != null) {
             askQQMessage.setMsg("[CQ:at,qq=" + userid + "] 取消报名成功！下次记得积极报名吧！");
             ask = new Gson().toJson(askQQMessage);
+
+            int putin = JdbcTeamAdmin.putin;
+
+            if (putin == 1) {
+                TeamOut.teamOut(userid, groupid, t_id);
+                String updatePutin = "update team_members set putin = '0' where userid = " + "'" + userid + "'" +
+                        " and t_id = " + "'" + t_id + "'";
+                JdbcTeamAdmin.updateTeamList(updatePutin,"pay_data");
+            }
             //删除报名信息
             TeamAdminService.delTeamMembers("pay_data", userid, t_id);
+            String sql = "select putin from team_members where userid = " + "'" + userid + "'"
+                    + " and t_id = " + "'" + t_id + "'";
+            JdbcTeamAdmin.searchTeamMembers(sql,"pay_data");
         }
         return ask;
     }
