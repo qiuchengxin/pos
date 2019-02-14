@@ -27,6 +27,8 @@ import com.market.pos.tool.goldPriceSearch.ServerSearch;
 import com.market.pos.tool.hideroom.FindHideRoom;
 import com.market.pos.tool.hideroom.HideRoom;
 import com.market.pos.tool.hideroom.HurtHideRoom;
+import com.market.pos.tool.hong.HongSearch;
+import com.market.pos.tool.hong.PublicHongSearch;
 import com.market.pos.tool.market.*;
 import com.market.pos.tool.market_equipment.GodMarketBuy_equipment;
 import com.market.pos.tool.market_equipment.GodMarketSell_equipment;
@@ -73,6 +75,19 @@ public class LemocWebSocketClient extends WebSocketClient {
         String username = receiveMessage.getUsername();
         //传递信息到NLU
         if (groupid.matches("721623673") || groupid.matches("921340922")){
+
+            if (msg.matches("我的.*宏")){
+                String ask = HongSearch.HongSearch(qqid,msg,groupid);
+                send(ask);
+                System.out.println(ask);
+            }
+
+            if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
+                String ask = PublicHongSearch.HongSearch(qqid,msg,groupid);
+                send(ask);
+                System.out.println(ask);
+            }
+
             if (msg.matches(".*有团吗.*")){
                 String ask = TeamAdminController.searchTeamList(groupid,qqid);
                 send(ask);
@@ -116,7 +131,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 askQQMessage.setAct("101");
                 askQQMessage.setQQID(qqid);
                 askQQMessage.setGroupid(groupid);
-                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：148.70.49.2:8080/teamTable/" + t_from);
+                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：http://148.70.49.2:8080/teamTable/" + t_from);
                 String ask = new Gson().toJson(askQQMessage);
                 send(ask);
             }
@@ -416,6 +431,18 @@ public class LemocWebSocketClient extends WebSocketClient {
                 askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 请点击：www.qiuchengxin.xyz:8080/echarts");
                 String ask = new Gson().toJson(askQQMessage);
                 send(ask);
+            }
+
+            if (msg.matches("我的.*宏")){
+                String ask = HongSearch.HongSearch(qqid,msg,groupid);
+                send(ask);
+                System.out.println(ask);
+            }
+
+            if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
+                String ask = PublicHongSearch.HongSearch(qqid,msg,groupid);
+                send(ask);
+                System.out.println(ask);
             }
         }
     }

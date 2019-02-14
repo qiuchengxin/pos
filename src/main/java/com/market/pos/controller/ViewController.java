@@ -66,6 +66,11 @@ public class ViewController {
         return "suc";
     }
 
+    @RequestMapping("/filedemo")
+    public String file(){
+        return "file";
+    }
+
     @RequestMapping(value = "/info",method = RequestMethod.POST)
     public String GetTeamInfo(@PathVariable("id") Integer id){
         System.out.println(id);

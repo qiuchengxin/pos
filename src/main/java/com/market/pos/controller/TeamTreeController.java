@@ -2,17 +2,16 @@ package com.market.pos.controller;
 
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamTree;
-import com.market.pos.service.ITeamMembersImportService;
-import com.market.pos.service.ITeamMembersService;
-import com.market.pos.service.ITeamTreeService;
-import com.market.pos.service.TeamListService;
+import com.market.pos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/team")
@@ -29,6 +28,9 @@ public class TeamTreeController {
 
     @Autowired
     private ITeamMembersImportService iTeamMembersImportService;
+
+    @Autowired
+    private HongService hongService;
 
     @RequestMapping("/members")
     public void addTeam(HttpServletRequest request,Model model){
@@ -284,6 +286,25 @@ public class TeamTreeController {
         String resultUserId = iTeamMembersImportService.findUserIdByUserIdAndGroupId(userIdGet,groupid);
         if (resultUserId == null) {
             iTeamMembersImportService.insertImpotMember(userIdGet, userNameGet, groupid);
+        }
+    }
+
+    @RequestMapping("/updateHong")
+    public void updateHong(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String userid = (String) session.getAttribute("userid");
+        if (userid == null){
+            response.sendRedirect("/Members/login");
+        }
+        String content = request.getParameter("content");
+        String type = request.getParameter("type");
+
+        //先确定是否有数据
+        String lastContent = hongService.getHongByUserIdAndType(userid,type);
+        if (lastContent == null){
+            hongService.insertHong(userid,type,content);
+        }else {
+            hongService.updateHongByUserId(userid,type,content);
         }
     }
 }
