@@ -43,6 +43,7 @@
             <button class="layui-btn layui-btn-normal layui-btn-sm" style="width: 70px" th:onclick="'javascript:teamImfor('+${team.id}+')'">看排表</button>
             <button class="layui-btn layui-btn-warm layui-btn-sm" style="width: 70px" th:onclick="'javascript:join('+${team.id}+')'">报名</button>
             <button class="layui-btn layui-btn-danger layui-btn-sm" style="width: 70px" th:onclick="'javascript:del('+${team.id}+')'">删除</button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" style="width: 70px" th:onclick="'javascript:diaoluo('+${team.id}+')'">猜掉落</button>
             </div>
         </div>
         <div style="height: 10px"><hr class="layui-bg-gray"></div>
@@ -81,6 +82,17 @@
                 title: '请认真填写哦',
                 area: ['70%','90%'],
                 content: '/teamJoin/' + id
+            });
+        })
+    }
+
+    function diaoluo(id) {
+        layui.use('layer', function(){
+            layer.open({
+                type: 2,
+                title: '猜掉落啦，祝你好运！',
+                area: ['70%','90%'],
+                content: '/diaoluo/' + id
             });
         })
     }

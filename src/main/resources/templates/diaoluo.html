@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>猜掉落</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+        <div style="margin-top: 50px;margin-right: 40px">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 3%;margin-left: 3%">
+                <legend align="center" th:text="${Name}"></legend>
+                <div align="center">
+                    <span class="layui-badge layui-bg-green" th:text="${tTime}"></span>
+                </div>
+
+            </fieldset>
+            <!--<form class="layui-form" th:action="@{'/join/'+${id}}">-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-left: 3%">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">拿云</li>
+                    <li>已投注金额<span class="layui-badge"th:text="${sumOfPrice}"></span>金</li>
+                </ul>
+                <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+            <!--</form>-->
+        </div>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
+<script src="../static/js/myJs.js"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            return false;
+        });
+    });
+</script>
+<script th:inline="javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //展示已知数据
+        table.render({
+            elem: '#test'
+            ,title: '已报名玩家'
+            ,cols: [[ //标题栏
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: 'ID'}
+                ,{field: 'name', title: '掉落名称'}
+                ,{field: 'price', title: '金额(单位：/金)'}
+                ,{field: 'peilv', title: '赔率'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',fixed: 'right'}
+            ]]
+            ,data: [[${json}]]
+            ,page: true //是否显示分页
+            ,limits: [5, 7, 10]
+            ,limit: 5 //每页默认显示的数量
+            ,id: 'testReload'
+            // ,initSort: {
+            //     field: 'id' //排序字段，对应 cols 设定的各字段名
+            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            // }
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event ==='editId') {
+                layer.prompt({
+                    formType: 2
+                    ,value: data.price
+                    ,title: '修改金额'
+                    ,maxlength: 5
+                }, function(value, index){
+                    obj.update({
+                        price: value
+                    });
+                    var price = value;
+                    var id = [[${id}]];
+                    var name = data.name;
+                    var editdata = {};
+                    editdata["price"] = price;
+                    editdata["id"] = id;
+                    editdata["name"] = name;
+                    myajax(editdata,"/diaoluo/edit");
+                    console.log(editdata);
+                    layer.close(index);
+                    layer.msg("修改成功");
+                });
+            }
+        });
+    });
+
+</script>
+
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="editId">修改金额</a>
+        </script>
+</body>
+</html>

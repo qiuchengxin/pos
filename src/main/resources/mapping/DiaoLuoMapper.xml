@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.pos.mapper.DiaoLuoMapper">
+
+    <resultMap id="TeamListResultMap" type="com.market.pos.pojo.Caidiaoluo">
+        <id property="id" column="id"/>
+        <result property="tid" column="tid"/>
+        <result property="userid" column="userid"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <insert id="insertUseridAndTid">
+        insert into caidiaoluo (tid,userid,name) values (#{tid},#{userid},#{name});
+    </insert>
+
+    <select id="selectUserId" resultType="String">
+        select userid from caidiaoluo where userid = #{userid} and tid = #{tid} and name = '肃杀衣';
+    </select>
+
+    <select id="selectAllByTidAndUserId" resultMap="TeamListResultMap">
+        select * from caidiaoluo where tid = #{tid} and userid = #{userid};
+    </select>
+
+    <update id="updatePrice">
+        update caidiaoluo set price = #{price} where tid = #{tid} and userid = #{userid} and name = #{name};
+    </update>
+    
+    <select id="selectSumOfPrice" resultType="String">
+        select sum(price) from caidiaoluo where tid = #{tid} and userid = #{userid};
+    </select>
+
+    <!--查询一个团内所有掉落的金额-->
+    <select id="selectAllPriceByTid" resultType="String">
+        select sum(price) from caidiaoluo where tid = #{tid};
+    </select>
+
+    <!--查询一个团内某装备的总金额-->
+    <select id="selectOneAllPrice" resultType="String">
+        select sum(price) from caidiaoluo where tid = #{tid} and name = #{name};
+    </select>
+</mapper>

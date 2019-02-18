@@ -80,17 +80,17 @@ public class FileController {
 //            src.put("src",host + ":" + post + sonPath + fileName);
 //            suc.put("data", src);
 //            System.out.println(suc);
-                String html = "<!DOCTYPE html>\n" +
-                        "<html lang=\"en\">\n" +
-                        "<head>\n" +
-                        "<title></title>\n" +
-                        "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n" +
-                        "</head>\n" +
-                        "<body>\n" +
-                        "<img src=" + host + ":" + post + sonPath + fileName + ">\n" +
-                        "</body>\n" +
-                        "</html>";
-                return html;
+//                String html = "<!DOCTYPE html>\n" +
+//                        "<html lang=\"en\">\n" +
+//                        "<head>\n" +
+//                        "<title></title>\n" +
+//                        "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n" +
+//                        "</head>\n" +
+//                        "<body>\n" +
+//                        "<img src=" + host + ":" + post + sonPath + fileName + ">\n" +
+//                        "</body>\n" +
+//                        "</html>";
+                return "上传成功";
         } catch (Exception e) {
             return "上传失败";
         }

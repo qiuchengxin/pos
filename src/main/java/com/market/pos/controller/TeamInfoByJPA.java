@@ -2,9 +2,13 @@ package com.market.pos.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
+import com.market.pos.pojo.Caidiaoluo;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamMembers;
 import com.market.pos.pojo.TeamTree;
+import com.market.pos.service.DiaoLuoService;
 import com.market.pos.service.ITeamMembersService;
 import com.market.pos.service.JPAService.TeamListRepository;
 import com.market.pos.service.JPAService.TeamTreeRepository;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +38,9 @@ public class TeamInfoByJPA {
 
     @Autowired
     private TeamListService teamListService;
+
+    @Autowired
+    private DiaoLuoService diaoLuoService;
 
     @GetMapping(value = "/jpa/{id}")
     public String findAllById(@PathVariable("id") long id , Model model, HttpServletRequest request){
@@ -144,6 +152,66 @@ public class TeamInfoByJPA {
     public String teamJoin(@PathVariable("id") long id,Model model){
         model.addAttribute("id",id);
         return "baoming";
+    }
+
+    @GetMapping(value = "/diaoluo/{id}")
+    public String diaoluo(@PathVariable("id") long id,Model model,HttpServletRequest request){
+        model.addAttribute("id",id);
+        //通过session获得userid,并向前端传递其时候为管理员的信息
+        HttpSession session = request.getSession();
+        String userid = (String) session.getAttribute("userid");
+        //获取副本信息
+        TeamList teamlist = teamListRepository.findById(id);
+        String tName = teamlist.getTName();
+        String tType = teamlist.getTType();
+        String tTime = teamlist.getTTime();
+        String Name = tType + tName;
+        model.addAttribute("Name",Name);
+        model.addAttribute("tTime",tTime);
+
+        String resultUserId = diaoLuoService.selectUserId(id,userid);
+        String[] packName = {"归墟玄晶","肃杀衣","肃风衣","肃和衣","肃雍衣","昭懿裤","昭清裤","昭武裤","昭灼裤","昭苏裤","昭仰裤","昭懿戒","昭清戒","昭武戒","昭灼戒","昭苏戒","昭仰戒"};
+        if (resultUserId == null){
+            //如果用户第一次点开此按钮，则生成用户对应的数据
+            for (int i = 0 ; i<=packName.length;i++){
+                diaoLuoService.insertUseridAndTid(id,userid,packName[i]);
+            }
+        }
+
+        //查询当前已压金额
+        String sumOfPrice = diaoLuoService.selectSumOfPrice(id,userid);
+        model.addAttribute("sumOfPrice",sumOfPrice);
+
+        List<Caidiaoluo> list = diaoLuoService.selectAllByTidAndUserId(id,userid);
+        String jsonString = JSON.toJSONString(list);
+        JSONArray jsonArray = JSONArray.parseArray(jsonString);
+
+        //计算赔率
+        JSONArray json = new JSONArray();
+
+        for (int i = 0 ; i<=packName.length;i++){
+            JSONObject jsonObject = new JSONObject();
+            String allPrice = diaoLuoService.selectAllPriceByTid(id);
+            String oneAllPrice = diaoLuoService.selectOneAllPrice(id,packName[i]);
+
+            if (allPrice == null && oneAllPrice == null){
+                jsonObject = jsonArray.getJSONObject(i);
+                jsonObject.put("peilv",0);
+            }else if (oneAllPrice == null && allPrice != null){
+                jsonObject = jsonArray.getJSONObject(i);
+                jsonObject.put("peilv",allPrice);
+            }else {
+                int allPriceInt = Integer.parseInt(allPrice);
+                int oneAllPriceInt = Integer.parseInt(oneAllPrice);
+                double peilv = allPriceInt / oneAllPriceInt;
+                jsonObject = jsonArray.getJSONObject(i);
+                jsonObject.put("peilv",peilv);
+            }
+            json.add(jsonObject);
+        }
+        System.out.println(json.toString());
+        model.addAttribute("json",json);
+        return "diaoluo";
     }
 
     @GetMapping("/teamTable/{tFrom}")

@@ -65,7 +65,7 @@ public class MembersController {
 
     @RequestMapping("/login")
     public String login(){
-        return "loginold";
+        return "login";
     }
 
     @RequestMapping(value = "/logincheck" , method = RequestMethod.POST)
@@ -87,7 +87,7 @@ public class MembersController {
                 model.addAttribute("return","密码错误！");
             }
         }
-        return "loginold";
+        return "login";
     }
 
     @RequestMapping("/IndexServlet")
