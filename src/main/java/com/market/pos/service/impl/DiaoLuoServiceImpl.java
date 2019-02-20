@@ -54,4 +54,40 @@ public class DiaoLuoServiceImpl extends ServiceImpl<DiaoLuoMapper, Caidiaoluo> i
         String oneAllPrice = diaoLuoMapper.selectOneAllPrice(tid, name);
         return oneAllPrice;
     }
+
+    @Override
+    public int selectNumOfPerson(long tid,String name) {
+        int numOfPerson = diaoLuoMapper.selectNumOfPerson(tid,name);
+        return numOfPerson;
+    }
+
+    @Override
+    public List<Caidiaoluo> selectJieSuan(long tid, String name,String name2,String name3,String name4) {
+        List<Caidiaoluo> list = diaoLuoMapper.selectJieSuan(tid, name, name2, name3, name4);
+        return list;
+    }
+
+    @Override
+    public List<Caidiaoluo> selectOut(long tid) {
+        List<Caidiaoluo> list = diaoLuoMapper.selectOut(tid);
+        return list;
+    }
+
+    @Override
+    public String selectPriceByUseridAndTid(long tid, String userid) {
+        String price = diaoLuoMapper.selectPriceByUseridAndTid(tid, userid);
+        return price;
+    }
+
+    @Override
+    public List<Caidiaoluo> selectQQId(long tid) {
+        List<Caidiaoluo> userIdList = diaoLuoMapper.selectQQId(tid);
+        return userIdList;
+    }
+
+    @Override
+    public void delRecordByTid(long tid) {
+        diaoLuoMapper.delRecordByTid(tid);
+    }
+
 }

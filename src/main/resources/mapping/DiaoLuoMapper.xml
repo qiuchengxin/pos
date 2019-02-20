@@ -40,4 +40,32 @@
     <select id="selectOneAllPrice" resultType="String">
         select sum(price) from caidiaoluo where tid = #{tid} and name = #{name};
     </select>
+
+    <!--查询选择此项的人数-->
+    <select id="selectNumOfPerson" resultType="int">
+        SELECT COUNT(*) price from caidiaoluo where tid = #{tid} and name = #{name} and price != 0 ;
+    </select>
+
+    <!--查询猜中的-->
+    <select id="selectJieSuan" resultMap="TeamListResultMap">
+        select * from caidiaoluo where name in (#{name},#{name2},#{name3},#{name4}) and tid = #{tid} and price !=0;
+    </select>
+    <!--查询没猜中的-->
+    <!--明细-->
+    <select id="selectOut" resultMap="TeamListResultMap">
+        select * from caidiaoluo where tid = #{tid} and price != 0;
+    </select>
+
+    <!--查询不重复的qqid-->
+    <select id="selectQQId" resultMap="TeamListResultMap">
+        SELECT userid from caidiaoluo where tid = #{tid} and price != 0 GROUP BY userid ;
+    </select>
+
+    <select id="selectPriceByUseridAndTid" resultType="String">
+        select price from caidiaoluo where tid = #{tid} and userid = #{userid};
+    </select>
+
+    <delete id="delRecordByTid">
+        delete from caidiaoluo where tid = #{tid};
+    </delete>
 </mapper>

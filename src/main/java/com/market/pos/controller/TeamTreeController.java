@@ -32,6 +32,9 @@ public class TeamTreeController {
     @Autowired
     private HongService hongService;
 
+    @Autowired
+    private DiaoLuoService diaoLuoService;
+
     @RequestMapping("/members")
     public void addTeam(HttpServletRequest request,Model model){
 
@@ -234,8 +237,11 @@ public class TeamTreeController {
     @RequestMapping("/delTeamList")
     public void delTeamList(HttpServletRequest request){
         String id = request.getParameter("id");
+        long tId = Long.parseLong(id);
+        System.out.println(tId);
         System.out.println(id);
         teamListService.delTeamList(id);
+        diaoLuoService.delRecordByTid(tId);
     }
 
     @RequestMapping("/delTeamMemerImport")

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>猜掉落</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+        <div style="margin-top: 50px;margin-right: 40px">
+            <form class="layui-form" th:action="@{'/jiesuando/'+${id}}">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">拿云掉落</label>
+                    <div class="layui-input-block">
+
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">归墟玄晶</li>
+                            </ul>
+                            <div class="layui-tab-content" id="xuanjing">
+                                <div class="layui-tab-item layui-show">
+                                    <input type="checkbox" value="归墟玄晶" title="归墟玄晶" name="xuanjing">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">裤子</li>
+                            </ul>
+                            <div class="layui-tab-content" id="kuzi">
+                                <div class="layui-tab-item layui-show">
+                                    <input type="checkbox" value="昭懿裤" title="昭懿裤" name="kuzi">
+                                    <input type="checkbox" value="昭清裤" title="昭清裤" name="kuzi">
+                                    <input type="checkbox" value="昭武裤" title="昭武裤" name="kuzi">
+                                    <input type="checkbox" value="昭灼裤" title="昭灼裤" name="kuzi">
+                                    <p>
+                                        <input type="checkbox" value="昭苏裤" title="昭苏裤" name="kuzi">
+                                        <input type="checkbox" value="昭仰裤" title="昭仰裤" name="kuzi">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">戒指</li>
+                            </ul>
+                            <div class="layui-tab-content" id="jiezhi">
+                                <div class="layui-tab-item layui-show">
+                                    <input type="checkbox" value="昭懿戒" title="昭懿戒" name="jiezhi">
+                                    <input type="checkbox" value="昭清戒" title="昭清戒" name="jiezhi">
+                                    <input type="checkbox" value="昭武戒" title="昭武戒" name="jiezhi">
+                                    <input type="checkbox" value="昭灼戒" title="昭灼戒" name="jiezhi">
+                                    <p>
+                                        <input type="checkbox" value="昭苏戒" title="昭苏戒" name="jiezhi">
+                                        <input type="checkbox" value="昭仰戒" title="昭仰戒" name="jiezhi">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">衣服</li>
+                            </ul>
+                            <div class="layui-tab-content" id="yifu">
+                                <div class="layui-tab-item layui-show">
+                                    <input type="checkbox" value="肃杀衣" title="肃杀衣" name="yifu">
+                                    <input type="checkbox" value="肃风衣" title="肃风衣" name="yifu">
+                                    <input type="checkbox" value="肃和衣" title="肃和衣" name="yifu">
+                                    <input type="checkbox" value="肃雍衣" title="肃雍衣" name="yifu">
+                                    <p>
+                                        <input type="checkbox" value="肃然衣" title="肃然衣" name="yifu">
+                                        <input type="checkbox" value="肃澹衣" title="肃澹衣" name="yifu">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="width: auto;margin-top: 1%;margin-left: 2%">
+                    <button class="layui-btn layui-btn-fluid" lay-submit>结算</button>
+                </div>
+            </form>
+        </div>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            return false;
+        });
+    });
+</script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>

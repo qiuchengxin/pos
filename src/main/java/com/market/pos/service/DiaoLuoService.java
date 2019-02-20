@@ -21,4 +21,16 @@ public interface DiaoLuoService extends IService<Caidiaoluo> {
 
     public String selectOneAllPrice(long tid,String name);
 
+    public int selectNumOfPerson(long tid,String name);
+
+    public List<Caidiaoluo> selectJieSuan(long tid,String name,String name2,String name3,String name4);
+
+    public List<Caidiaoluo> selectOut(long tid);
+
+    public String selectPriceByUseridAndTid(long tid,String userid);
+
+    public List<Caidiaoluo> selectQQId(long tid);
+
+    public void delRecordByTid(long tid);
+
 }

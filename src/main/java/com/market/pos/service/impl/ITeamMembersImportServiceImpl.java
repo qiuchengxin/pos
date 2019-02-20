@@ -41,4 +41,10 @@ public class ITeamMembersImportServiceImpl extends ServiceImpl<TeamMembersImport
         String resultUserId = teamMembersImportMapper.findUserIdByUserIdAndGroupId(userid, groupid);
         return resultUserId;
     }
+
+    @Override
+    public String selectUserNameByUserId(String userid, String groupid) {
+        String userName = teamMembersImportMapper.selectUserNameByUserId(userid, groupid);
+        return userName;
+    }
 }

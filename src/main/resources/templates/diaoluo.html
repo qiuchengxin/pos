@@ -19,9 +19,12 @@
             <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-left: 3%">
                 <ul class="layui-tab-title">
                     <li class="layui-this">拿云</li>
-                    <li>已投注金额<span class="layui-badge"th:text="${sumOfPrice}"></span>金</li>
+                    <li>已投注金额<span class="layui-badge"th:text="${sumOfPrice}" id="money"></span></li>
                 </ul>
                 <table class="layui-hide" id="test" lay-filter="test"></table>
+            </div>
+            <div style="width: auto;margin-top: 1%;margin-left: 2%;margin-bottom: 1%">
+                <button class="layui-btn layui-btn-fluid" onclick="jiesuan()">结算</button>
             </div>
             <!--</form>-->
         </div>
@@ -49,11 +52,10 @@
             elem: '#test'
             ,title: '已报名玩家'
             ,cols: [[ //标题栏
-                {type: 'checkbox', fixed: 'left'}
-                ,{field: 'id', title: 'ID'}
-                ,{field: 'name', title: '掉落名称'}
+                {field: 'name', title: '掉落名称'}
                 ,{field: 'price', title: '金额(单位：/金)'}
                 ,{field: 'peilv', title: '赔率'}
+                ,{field: 'num', title: '已投注人数'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo',fixed: 'right'}
             ]]
             ,data: [[${json}]]
@@ -61,21 +63,24 @@
             ,limits: [5, 7, 10]
             ,limit: 5 //每页默认显示的数量
             ,id: 'testReload'
-            // ,initSort: {
-            //     field: 'id' //排序字段，对应 cols 设定的各字段名
-            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
-            // }
+            ,initSort: {
+                field: 'price' //排序字段，对应 cols 设定的各字段名
+                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            }
         });
 
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            //console.log(obj)
+            // var myDate = new Date();
+            // var date = myDate.toLocaleString( );
+            // console.log(date);
+            var sprice = data.price;
             if (obj.event ==='editId') {
                 layer.prompt({
                     formType: 2
                     ,value: data.price
-                    ,title: '修改金额'
+                    ,title: '投注金额'
                     ,maxlength: 5
                 }, function(value, index){
                     obj.update({
@@ -90,6 +95,7 @@
                     editdata["name"] = name;
                     myajax(editdata,"/diaoluo/edit");
                     console.log(editdata);
+                    moneychange(sprice,price);
                     layer.close(index);
                     layer.msg("修改成功");
                 });
@@ -100,7 +106,47 @@
 </script>
 
         <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="editId">修改金额</a>
+
         </script>
+<script>
+    function moneychange(sprice,eprice){
+        var sallmoney = document.getElementById("money").innerText.replace("金","");
+        var money = parseInt(sallmoney) - parseInt(sprice) + parseInt(eprice);
+        document.getElementById("money").innerText = money + "金";
+    }
+</script>
+<script th:inline="javascript">
+    function jiesuan() {
+        var userid = [[${userid}]];
+        if (userid == 0){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("无权限！");
+            });
+        }else if (userid == 1){
+            // parent.layer.close();
+            var id = [[${id}]];
+            window.location.href="/jiesuan/" + id;
+        }
+    }
+</script>
+<script th:inline="javascript">
+    window.onload = function () {
+        var k = [[${k}]];
+        if (k == 1){
+            document.getElementById("barDemo").innerHTML = "<a class=\"layui-btn layui-btn-sm layui-btn-danger\" lay-event=\"editId\" id=\"bt\">修改金额</a>";
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("开盘状态中");
+            });
+        } else {
+            document.getElementById("barDemo").innerHTML = "<span class=\"layui-badge layui-bg-gray\" align=\"center\">已封盘</span>";
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.msg("本期副本竞猜已封盘，敬请期待结果的揭晓");
+            });
+        }
+    }
+</script>
 </body>
 </html>

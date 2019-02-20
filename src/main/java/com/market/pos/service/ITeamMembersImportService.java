@@ -38,4 +38,6 @@ public interface ITeamMembersImportService extends IService<TeamImpormember> {
      * @return
      */
     public String findUserIdByUserIdAndGroupId(String userid,String groupid);
+
+    public String selectUserNameByUserId(String userid,String groupid);
 }

@@ -33,6 +33,8 @@ public class DiaoLuoController {
         String name = request.getParameter("name");
         long tid = Long.valueOf(id);
         long price = Long.valueOf(priceString);
-        diaoLuoService.updatePrice(tid,userid,name,price);
+        if (price >= 0) {
+            diaoLuoService.updatePrice(tid, userid, name, price);
+        }
     }
 }

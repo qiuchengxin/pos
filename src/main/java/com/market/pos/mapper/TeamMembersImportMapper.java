@@ -19,4 +19,6 @@ public interface TeamMembersImportMapper extends BaseMapper<TeamImpormember> {
     public void insertImpotMember(String userid,String username,String groupid);
 
     public String findUserIdByUserIdAndGroupId(String userid,String groupid);
+
+    public String selectUserNameByUserId(String userid,String groupid);
 }

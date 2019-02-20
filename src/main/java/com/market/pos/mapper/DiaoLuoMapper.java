@@ -22,4 +22,17 @@ public interface DiaoLuoMapper extends BaseMapper<Caidiaoluo> {
     public String selectAllPriceByTid(long tid);
 
     public String selectOneAllPrice(long tid,String name);
+
+    public int selectNumOfPerson(long tid,String name);
+
+    public List<Caidiaoluo> selectJieSuan(long tid,String name,String name2,String name3,String name4);
+
+    public List<Caidiaoluo> selectOut(long tid);
+
+    public String selectPriceByUseridAndTid(long tid,String userid);
+
+    public List<Caidiaoluo> selectQQId(long tid);
+
+    public void delRecordByTid(long tid);
+
 }
