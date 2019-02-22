@@ -145,4 +145,9 @@ public class ViewController {
 
         return "cygl";
     }
+
+    @RequestMapping("/calculate")
+    public String calculate(){
+        return "calculate";
+    }
 }

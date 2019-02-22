@@ -3,6 +3,8 @@ package com.market.pos.controller;
 import com.market.pos.pojo.Members;
 import com.market.pos.service.MembersService;
 import com.market.pos.tool.common.GetUserId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import java.io.IOException;
 @Controller
 public class MembersController {
     static HttpSession session = null;
+    private static Logger logger = LoggerFactory.getLogger(MembersController.class);
 
     /**
      * 新增member
@@ -79,6 +82,7 @@ public class MembersController {
             model.addAttribute("return","该账号并未注册！");
         }else {
             if (result_password.equals(password)){
+                logger.info("用户" + userid + "登录");
                 model.addAttribute("return","登录成功！");
                 HttpSession session = request.getSession();
                 session.setAttribute("userid",userid);

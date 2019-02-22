@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>403</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        .grid{
+            height: 300px;
+            background-color: rgba(146, 214, 186, 0.21);
+            margin-left: 2%;
+            margin-top: 2%;
+            float: left;
+            width: 22.5%;
+        }
+        /*.bgimg{*/
+            /*height: 100%;*/
+            /*width: 100%;*/
+        /*}*/
+
+        /* 鼠标移动到选项上修改背景颜色 */
+        div div:hover {
+            background-color: #cffffc;
+            color: white;
+        }
+        /*= effect-8 css =*/
+        .effect-8{max-height: 289px; min-height: 289px; overflow: hidden;  perspective: 800px;}
+        .effect-8 h3{line-height: 35px;}
+        .effect-8 .member-image{position: absolute; bottom: 0; width: 100%; transition: 0.4s; z-index: 1;}
+        .effect-8 .member-image img{width: 100%; transition: 0.4s; height: 100%;}
+        .effect-8 .more-info{height: 208px; transition: 0.4s; overflow: hidden; position: relative; background-color: #fff;}
+        .effect-8:hover .member-image{transform: rotateX(82deg); transform-origin: center bottom 0; transition: 0.4s;}
+        /*= effect-8 css end =*/
+    </style>
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+
+
+<div>
+    <div class=" grid" align="center">
+        <div class="member-info">
+            <h3>蓬莱</h3>
+            <h5>世外蓬莱</h5>
+        </div>
+        <div class="member-image">
+            <img src="../static/jx/蓬莱.png" alt="Member">
+        </div>
+        <div class="more-info">
+            <p></p>
+            <div class="social-touch icon-colored">
+                <a class="fb-touch" href="#"></a>
+                <a class="tweet-touch" href="#"></a>
+                <a class="linkedin-touch" href="#"></a>
+            </div>
+        </div>
+    </div>
+    <div class=" grid" align="center"><img src="../static/jx/七秀.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/万花.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/明教.png" class="bgimg"></div>
+</div>
+
+<div>
+    <div class=" grid" align="center"><img src="../static/jx/藏剑.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/纯阳.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/唐门.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/丐帮.png" class="bgimg"></div>
+</div>
+
+<div>
+    <div class=" grid" align="center"><img src="../static/jx/霸刀.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/天策.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/少林.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/苍云.png" class="bgimg"></div>
+</div>
+
+<div>
+    <div class=" grid" align="center"><img src="../static/jx/长歌.png" class="bgimg"></div>
+    <div class=" grid" align="center"><img src="../static/jx/五毒.png" class="bgimg"></div>
+</div>
+</body>
+</html>
