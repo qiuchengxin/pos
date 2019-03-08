@@ -2,10 +2,12 @@ package com.market.pos.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.market.pos.pojo.Qa;
 import com.market.pos.pojo.TeamImpormember;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.service.ITeamMembersImportService;
 import com.market.pos.service.ITeamTreeService;
+import com.market.pos.service.QAService;
 import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -25,6 +27,9 @@ public class ViewController {
 
     @Autowired
     private TeamListService teamListService;
+
+    @Autowired
+    private QAService qaService;
 
     @Autowired
     private ITeamMembersImportService iTeamMembersImportService;
@@ -149,5 +154,42 @@ public class ViewController {
     @RequestMapping("/calculate")
     public String calculate(){
         return "calculate";
+    }
+
+    @RequestMapping(value = "/insertQA" , method = RequestMethod.POST)
+    public String insertQA(HttpServletRequest request,Model model){
+
+        //获取session中的userid，确认用户身份
+        HttpSession session = request.getSession();
+        String userid = String.valueOf(session.getAttribute("userid"));
+
+        String question = request.getParameter("question");
+        String answer = request.getParameter("answer");
+        if (question.equals("") || answer.equals("")){
+            model.addAttribute("return","问题和答案不能为空");
+        }else {
+            String resultQuestion = qaService.getQuestion(question);
+            //只在无相同题目情况下新增QA
+            if (resultQuestion == null) {
+                qaService.insertQA(question, answer,userid);
+                model.addAttribute("return", "新增QA成功！");
+            } else {
+                model.addAttribute("return", "该问题已经添加过了！");
+            }
+        }
+
+        if (userid.equals("admin")) {
+            List<Qa> list = qaService.getAllQA();
+            String jsonString = JSON.toJSONString(list);
+            JSONArray jsonArray = JSONArray.parseArray(jsonString);
+            model.addAttribute("json", jsonArray);
+        }else {
+            List<Qa> list = qaService.getQAByUserId(userid);
+            String jsonString = JSON.toJSONString(list);
+            JSONArray jsonArray = JSONArray.parseArray(jsonString);
+            model.addAttribute("json", jsonArray);
+        }
+
+        return "QA";
     }
 }

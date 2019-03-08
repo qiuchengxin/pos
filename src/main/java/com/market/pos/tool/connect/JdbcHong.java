@@ -1,9 +1,10 @@
 package com.market.pos.tool.connect;
 
+import com.market.pos.config.DBClose;
+
 import java.sql.*;
 
 public class JdbcHong {
-    static Connection connection;
     static String driver = "com.mysql.cj.jdbc.Driver";
     static String user = "root";
     static String password = "123456";
@@ -18,11 +19,14 @@ public class JdbcHong {
     public static void searchHong(String sql,String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         content = null;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet result = null;
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
             while (result.next()){
                 content = result.getString("content");
             }
@@ -31,6 +35,8 @@ public class JdbcHong {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DBClose.colseSqlConnection(result,statement,connection);
         }
     }
 }

@@ -78,8 +78,11 @@
                     </tr>
                     </tbody>
                 </table>
-                <div style="width: auto;margin-top: 1%">
-                    <button class="layui-btn layui-btn-fluid" lay-submit onclick="showdata()">保存排表</button>
+                <div style="width: 48%;margin-top: 1%" class="layui-inline">
+                    <button class="layui-btn " lay-submit onclick="showdata()" style="width: 100%">保存排表</button>
+                </div>
+                <div style="width: 48%;margin-top: 1%;float: right;" class="layui-inline">
+                    <button class="layui-btn  layui-btn-danger"  onclick="tuanQue()" lay-submit style="width: 100%">发起团确</button>
                 </div>
             </div>
         </div>
@@ -109,7 +112,7 @@
         //展示已知数据
         table.render({
             elem: '#test'
-            ,title: '已报名玩家'
+            ,title: '报名玩家'
             ,cols: [[ //标题栏
                 {type: 'checkbox', fixed: 'left'}
                 ,{field: 'userid', title: 'QQID'}
@@ -281,6 +284,32 @@
             con["data55"] = data55;
             console.log(con);
             myajax(con, "/team/updateTeamMembers");
+        }
+    }
+</script>
+<script th:inline="javascript">
+    function tuanQue() {
+        //获取tid
+        var t_id = [[${tId}]];
+        //定义dom的id数组
+        var targetId = [
+            "target11","target12","target13","target14","target15",
+            "target21","target22","target23","target24","target25",
+            "target31","target32","target33","target34","target35",
+            "target41","target42","target43","target44","target45",
+            "target51","target52","target53","target54","target55"
+        ];
+
+        for (i = 0 ; i <= 1 ; i++){
+            //根据ID匹配核心成员列表，要求排表使用成员ID必须与核心成员表中一致
+            //确认：1  拒绝 ：0 或 NULl
+            var text = document.getElementById(targetId[i]).innerText;
+            var con = {};
+            con["tId"] = t_id;
+            con["text"] = text;
+            con["target"] = targetId[i];
+            console.log(con);
+            myajax(con, "/common/ready");
         }
     }
 </script>

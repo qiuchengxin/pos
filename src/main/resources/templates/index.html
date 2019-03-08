@@ -49,6 +49,7 @@
                     <a class="" href="javascript:;">我的菜单</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:hong();">我的宏</a></dd>
+                        <dd><a href="javascript:qa();">自定义问答</a></dd>
                         <dd><a href="javascript:peizhuang();">我的配装</a></dd>
                         <dd><a href="javascript:calculate();">DPS计算器</a></dd>
                     </dl>
@@ -90,6 +91,9 @@
     }
     function calculate() {
         document.getElementById("myiframe").src="/view/calculate";
+    }
+    function qa() {
+        document.getElementById("myiframe").src="/QA/list";
     }
 </script>
 <script>

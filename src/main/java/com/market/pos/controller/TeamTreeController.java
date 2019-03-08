@@ -35,6 +35,9 @@ public class TeamTreeController {
     @Autowired
     private DiaoLuoService diaoLuoService;
 
+    @Autowired
+    private QAService qaService;
+
     @RequestMapping("/members")
     public void addTeam(HttpServletRequest request,Model model){
 
@@ -312,5 +315,20 @@ public class TeamTreeController {
         }else {
             hongService.updateHongByUserId(userid,type,content);
         }
+    }
+
+    @RequestMapping("/delQa")
+    public void delQa(HttpServletRequest request){
+        String idGet = request.getParameter("id");
+        int id = Integer.parseInt(idGet);
+        qaService.delQA(id);
+    }
+
+    @RequestMapping("/editQa")
+    public void editQa(HttpServletRequest request){
+        String idGet = request.getParameter("id");
+        String answer = request.getParameter("answer");
+        int id = Integer.parseInt(idGet);
+        qaService.updateQAById(id,answer);
     }
 }

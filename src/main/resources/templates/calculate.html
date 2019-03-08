@@ -2,82 +2,341 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>403</title>
+    <title>DSP计算器</title>
     <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <style>
-        .grid{
-            height: 300px;
-            background-color: rgba(146, 214, 186, 0.21);
-            margin-left: 2%;
-            margin-top: 2%;
-            float: left;
-            width: 22.5%;
+        body { border: none; margin: 0; background-color: rgba(255, 255, 255, 0.72); }
+        li {
+            list-style: none;
         }
-        /*.bgimg{*/
-            /*height: 100%;*/
-            /*width: 100%;*/
-        /*}*/
+        ul {
+            margin: 0;
+            padding: 0;
+        }
 
-        /* 鼠标移动到选项上修改背景颜色 */
-        div div:hover {
-            background-color: #cffffc;
-            color: white;
+        .contentbox {
+            width: 1000px;
+            margin: auto;
+            margin-top: 2em;
+            clear:left;
         }
-        /*= effect-8 css =*/
-        .effect-8{max-height: 289px; min-height: 289px; overflow: hidden;  perspective: 800px;}
-        .effect-8 h3{line-height: 35px;}
-        .effect-8 .member-image{position: absolute; bottom: 0; width: 100%; transition: 0.4s; z-index: 1;}
-        .effect-8 .member-image img{width: 100%; transition: 0.4s; height: 100%;}
-        .effect-8 .more-info{height: 208px; transition: 0.4s; overflow: hidden; position: relative; background-color: #fff;}
-        .effect-8:hover .member-image{transform: rotateX(82deg); transform-origin: center bottom 0; transition: 0.4s;}
-        /*= effect-8 css end =*/
+        .qcontainer {
+            -webkit-perspective: 400;
+            -moz-perspective: 400;
+            float: left;
+            width: 220px;
+            margin-right:20px;
+        }
+        .film {
+            width: 100%;
+            height: 300px;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: 1.5s;
+            -moz-transform-style: preserve-3d;
+            -moz-transition: 1.5s;
+        }
+        .qcontainer:hover .film {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+        }
+        .face {
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+        }
+        .face h3 {
+            color: white;
+            text-align: center;
+        }
+        .back {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            background: -webkit-gradient(linear, left top, left bottom, from(#0fa8c6), to(#0fa8c6));
+            background: -moz-linear-gradient(top, #0fa8c6, #0fa8c6);
+            width:220px;
+            height:280px;
+        }
+        .foot{
+            text-align: center;
+            color: #fff;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            margin-left:-126px;
+            font-size: 12px;
+            font-family: "微软雅黑";
+
+        }
     </style>
 </head>
 <body>
 <script src="../static/layui/layui.js" charset="utf-8"></script>
 
-
-<div>
-    <div class=" grid" align="center">
-        <div class="member-info">
-            <h3>蓬莱</h3>
-            <h5>世外蓬莱</h5>
-        </div>
-        <div class="member-image">
-            <img src="../static/jx/蓬莱.png" alt="Member">
-        </div>
-        <div class="more-info">
-            <p></p>
-            <div class="social-touch icon-colored">
-                <a class="fb-touch" href="#"></a>
-                <a class="tweet-touch" href="#"></a>
-                <a class="linkedin-touch" href="#"></a>
+<div class="contentbox">
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/蓬莱.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【蓬莱】
+                        <p>崖岸穿云卷怒涛</p>
+                        <p>清风三尺削蓬蒿</p>
+                        <p>古来侠客俱往矣</p>
+                        <p>天下谁人共萧骚</p>
+                    </h3>
+                </div>
             </div>
         </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">蓬莱</button>
     </div>
-    <div class=" grid" align="center"><img src="../static/jx/七秀.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/万花.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/明教.png" class="bgimg"></div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/七秀.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【七秀】
+                        <p>西子湖畔西子情</p>
+                        <p>楼外楼中雨霖铃</p>
+                        <p>画廊绣舫霓裳舞</p>
+                        <p>小桥流水叶娉婷</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">七秀</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/万花.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【万花】
+                        <p>春兰秋菊夏清风</p>
+                        <p>三星望月挂夜空</p>
+                        <p>不求独避风雨外</p>
+                        <p>只笑桃源非梦中</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">万花</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/明教.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【明教】
+                        <p>白沙大漠玉笛吹</p>
+                        <p>一去三生渐忘谁</p>
+                        <p>日月同辉出乱世</p>
+                        <p>光明圣火盼东归</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">明教</button>
+    </div>
+</div>
+<!--第二排-->
+<div class="contentbox">
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/丐帮.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【丐帮】
+                        <p>搅动君山五十州</p>
+                        <p>风尘几历尽翩遥</p>
+                        <p>散罢千金未束手</p>
+                        <p>餐风吞酒不寂寥</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">丐帮</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/苍云.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【苍云】
+                        <p>歌起征思芦管怨<p>
+                        <p>透穿玄甲朔风寒</p>
+                        <p>黄泉作酒酬兄弟</p>
+                        <p>战尽狂沙血未干</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">苍云</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/少林.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【少林】
+                        <p>古刹紫竹禅钟鸣</p>
+                        <p>降妖伏魔江湖行</p>
+                        <p>佛音亦有豪情意</p>
+                        <p>天下武功出少林</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">少林</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/纯阳.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【纯阳】
+                        <p>昆仑玄境山外山</p>
+                        <p>乾坤阴阳有洞天</p>
+                        <p>只问真君何处有</p>
+                        <p>不向江湖寻剑仙</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">纯阳</button>
+    </div>
 </div>
 
-<div>
-    <div class=" grid" align="center"><img src="../static/jx/藏剑.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/纯阳.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/唐门.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/丐帮.png" class="bgimg"></div>
-</div>
+<!--第三排-->
+<div class="contentbox">
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/五毒.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【五毒】
+                        <p>深林魅影古墓缠</p>
+                        <p>野迹繁花掩翠山</p>
+                        <p>圣兽灵心归毒海</p>
+                        <p>仙踪遗秘问奇缘</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">五毒</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/藏剑.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【藏剑】
+                        <p>秀水灵山隐剑踪<p>
+                        <p>不闻江湖铸青锋</p>
+                        <p>逍遥此身君子意</p>
+                        <p>一壶温酒向长空</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">藏剑</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/唐门.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【唐门】
+                        <p>针翎钉棘十指牵</p>
+                        <p>暴雨飞星乾坤颠</p>
+                        <p>蜀中世家纷争事</p>
+                        <p>暗起云涌逍九天</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">唐门</button>
+    </div>
+    <div class="qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="../static/jx/天策.png" style="width:220px;height:280px;">
+            </div>
+            <div class="face back">
+                <div style="margin-top: 35%">
+                    <h3>【天策】
+                        <p>长河落日东都城</p>
+                        <p>铁马戍边将军坟</p>
+                        <p>尽诛宵小天策义</p>
+                        <p>长枪独守大唐魂</p>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">天策</button>
+    </div>
 
-<div>
-    <div class=" grid" align="center"><img src="../static/jx/霸刀.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/天策.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/少林.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/苍云.png" class="bgimg"></div>
-</div>
+    <!--第四排-->
+    <div class="contentbox">
+        <div class="qcontainer">
+            <div class="film">
+                <div class="face front">
+                    <img src="../static/jx/霸刀.png" style="width:220px;height:280px;">
+                </div>
+                <div class="face back">
+                    <div style="margin-top: 35%">
+                        <h3>【霸刀】
+                            <p>寥落尘寰数十载</p>
+                            <p>何曾开眼论豪英</p>
+                            <p>刀光起处鲸吞海</p>
+                            <p>誓将浮名敬死生</p>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">霸刀</button>
+        </div>
+        <div class="qcontainer">
+            <div class="film">
+                <div class="face front">
+                    <img src="../static/jx/长歌.png" style="width:220px;height:280px;">
+                </div>
+                <div class="face back">
+                    <div style="margin-top: 35%">
+                        <h3>【长歌】
+                            <p>儒门有志羁风雨<p>
+                            <p>失鹿山河散若星</p>
+                            <p>千古文人侠客梦</p>
+                            <p>肯将碧血写丹青</p>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <button class="layui-btn layui-btn-fluid" style="margin-bottom: 20px">长歌</button>
+        </div>
+    </div>
 
-<div>
-    <div class=" grid" align="center"><img src="../static/jx/长歌.png" class="bgimg"></div>
-    <div class=" grid" align="center"><img src="../static/jx/五毒.png" class="bgimg"></div>
-</div>
 </body>
 </html>

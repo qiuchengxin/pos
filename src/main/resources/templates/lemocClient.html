@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <title>client - LEMOC</title>
+        <!--link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/normalize/5.0.0/normalize.min.css"!-->
+        <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/semantic-ui/2.2.6/semantic.min.css">
+        <!--script src="http://cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script!-->        
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+        <script src="http://cdn.bootcss.com/semantic-ui/2.2.6/semantic.min.js"></script>
+    </head>
+    <body>
+        <div class="ui raised segment">
+<div class="ui grid">
+<div class="ui ten wide column celled animated msg list" style="height:600px;overflow:auto;">
+
+</div>
+<div class="ui six wide column celled animated log list raised segment" style="height:600px;overflow:auto;">
+
+</div>
+</div>
+
+        </div>
+    
+        <div class="ui black  inverted segment">
+        <div class="ui grid">
+            <div class="ui two wide column">
+                <button class="ui green connect button">连接服务器</button>
+            </div>
+            <div class="ui two wide column">
+                <div class="ui disabled fluid qq input">
+                    <input placeholder="输入qq号" type="text" id="qq_input">
+                </div>
+            </div>                
+            <div class="ui ten wide column">
+                <div class="ui disabled fluid text input">
+                    <input placeholder="输入要发送的消息" type="text" id="text_input">
+                </div>
+            </div>
+            <div class="ui one wide column">
+                <button class="ui green disabled send button">发送</button>
+            </div>
+        </div>
+    </div>
+        
+            
+         
+
+ 
+            
+
+
+        <script>$(document).ready(function(){
+        var webSocket;
+        var connected = false;
+        var msglist = "";
+        var loglist = "";
+        $(".send.button").click(function(){
+            //loglist += $("#text_input").val();
+            //console.log($("#text_input").val());
+            if($("#qq_input").val().length ==0)
+{
+	alert("请输入qq号");
+	return false;
+}
+
+if($("#text_input").val().length ==0)
+{
+	alert("请输入要发送的信息");
+	return false;
+}
+           //构造json串
+     	var json = new Object();  
+	json.act = "106";
+	json.QQID = $("#qq_input").val();
+	json.msg = $("#text_input").val();  
+	var json_str = JSON.stringify(json);  
+   	webSocket.send(json_str);
+	loglist += "<p style='color:green'>" + json_str + "</p>";
+    $(".log.list").html(loglist);
+	
+	msglist += "<p style='color:blue'>你对" + json.QQID + "说 : " + json.msg + "<p>";
+    $(".msg.list").html(msglist);
+	
+   	return false;
+
+        });
+        
+                              
+        $(".connect.button").click(function(){
+            if(connected)
+            {
+                $(".connect.button").attr("class", "ui green connect button").text("连接服务器");
+                $(".qq.input").attr("class", "ui fluid disabled qq input");
+                $(".text.input").attr("class", "ui fluid disabled text input");
+                $(".send.button").attr("class", "ui disabled green send button");
+                connected = false;
+                webSocket.close();
+                return false;
+            }
+            
+            webSocket = new WebSocket("ws://localhost:25303");
+            
+            webSocket.onerror = function(event) {
+             onError(event)
+            };
+            
+            webSocket.onopen = function(event) {
+             onOpen(event)
+            };
+             
+            webSocket.onclose = function(event) {
+             onClose(event)
+            };
+            
+            webSocket.onmessage = function(event) {
+             onMessage(event)
+            };
+            
+            $(".connect.button").attr("class", "ui red connect button").text("断开连接");
+            $(".qq.input").attr("class", "ui fluid qq input");
+            $(".text.input").attr("class", "ui fluid text input");
+            $(".send.button").attr("class", "ui green send button");
+            connected = true;
+            return false;
+        });       
+         
+  function onMessage(event) {
+    //console.log(event.data);
+	loglist += "<p style='color:orange'>" + event.data + "</p>";    
+    $(".log.list").html(loglist);
+    
+    var obj = eval('(' + decodeURI(event.data) + ')');
+    if(obj.error != 0)
+    {
+        return;        
+    }
+    
+    if(obj.act == 21)
+    {
+        msglist += "<p>" + obj.fromQQ + "说 : " + obj.msg + "<p>";
+        $(".msg.list").html(msglist);
+    }
+    else if(obj.act == 2)
+    {
+        msglist += "<p>" + obj.fromQQ + "在群" + obj.fromGroup + "里说 : " + obj.msg + "<p>";
+        $(".msg.list").html(msglist);
+    }
+    else if(obj.act == 4)
+    {
+        msglist += "<p>" + obj.fromQQ + "在讨论组" + obj.fromDiscuss + "里说 : " + obj.msg + "<p>";
+        $(".msg.list").html(msglist);
+    }
+    scrollToBottom();
+  }
+  
+  function onOpen(event) {
+    msglist += "<p style='color:red'>" + "服务器连接成功<p>";
+    $(".msg.list").html(msglist);
+    scrollToBottom();
+  }
+   
+  function onClose(event) {
+    msglist += "<p style='color:red'>" + "与服务器断开连接<p>";
+    $(".msg.list").html(msglist);
+    scrollToBottom();
+  }
+  function onError(event) {
+    msglist += "<p style='color:red'>" + event.data + "<p>";
+    $(".msg.list").html(msglist);
+    scrollToBottom();
+  }
+        
+                
+        //滚动到底部
+        function scrollToBottom() {
+            //console.log("scrollToBottom");
+            var scrollTop = $(".msg.list")[0].scrollHeight + 50;
+            $(".msg.list").scrollTop(scrollTop);
+        }    
+                
+        });</script>
+    </body>
+</html>

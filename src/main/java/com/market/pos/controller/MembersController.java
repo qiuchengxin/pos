@@ -21,7 +21,7 @@ import java.io.IOException;
 @Controller
 public class MembersController {
     static HttpSession session = null;
-    private static Logger logger = LoggerFactory.getLogger(MembersController.class);
+//    private static Logger logger = LoggerFactory.getLogger(MembersController.class);
 
     /**
      * 新增member
@@ -82,7 +82,7 @@ public class MembersController {
             model.addAttribute("return","该账号并未注册！");
         }else {
             if (result_password.equals(password)){
-                logger.info("用户" + userid + "登录");
+//                logger.info("用户" + userid + "登录");
                 model.addAttribute("return","登录成功！");
                 HttpSession session = request.getSession();
                 session.setAttribute("userid",userid);

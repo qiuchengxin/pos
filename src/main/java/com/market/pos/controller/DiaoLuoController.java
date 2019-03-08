@@ -20,7 +20,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/diaoluo")
 public class DiaoLuoController {
-    private static Logger logger = LoggerFactory.getLogger(DiaoLuoController.class);
+//    private static Logger logger = LoggerFactory.getLogger(DiaoLuoController.class);
 
     @Autowired
     private DiaoLuoService diaoLuoService;

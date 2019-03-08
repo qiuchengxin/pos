@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>QA</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css"  media="all">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 3%;margin-left: 3%">
+    <legend align="center">QA问答库<p>
+    </p></legend>
+
+</fieldset>
+<div class="layui-collapse" style="margin: 3% 3% 0% 3%">
+    <div class="layui-tab layui-tab-card" style="margin:2% 2% 2% 2%">
+        <ul class="layui-tab-title">
+            <li class="layui-this">
+                <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-friends" style="font-size: 15px; color: #1E9FFF;"> 录入QA</i></h3>
+            </li>
+            <li>
+                <h3 class="layui-timeline-title"><i class="layui-icon layui-icon-release" style="font-size: 15px; color: #1E9FFF;"> QA测试</i></h3>
+            </li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-inline">
+                    <form action="/view/insertQA" method="post">
+                        <div class="layui-inline">
+                            <input type="text" maxlength="20" name="question" id="question" lay-verify="required" placeholder="问题" autocomplete="off" class="layui-input layui-inline">
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="answer" id="answer" lay-verify="required" placeholder="答案" autocomplete="off" class="layui-input layui-inline">
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-normal" type="submit">新增问答</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-warm" onclick="insertQa()" type="submit">问题搜索</button>
+                </div>
+                <div>
+                    <table class="layui-hide" id="test" lay-filter="test"></table>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                该页面开发中。
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../static/js/jQuery1.11.3.min.js"></script>
+<script src="../static/js/myJs.js"></script>
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+<script th:inline="javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //展示已知数据
+        table.render({
+            elem: '#test'
+            ,title: '问答库'
+            ,cols: [[ //标题栏
+                {type: 'checkbox', fixed: 'left'}
+                // ,{field: 'id', title: 'ID'}
+                ,{field: 'question', title: '问题'}
+                ,{field: 'answer', title: '答案'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',fixed: 'right'}
+            ]]
+            ,data: [[${json}]]
+            ,page: true //是否显示分页
+            ,limits: [5, 7, 10]
+            ,limit: 10 //每页默认显示的数量
+            ,id: 'testReload'
+            // ,initSort: {
+            //     field: 'id' //排序字段，对应 cols 设定的各字段名
+            //     ,type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            // }
+        });
+        //监听行工具事件,通过id删除
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('确定要删除这条记录吗？', function(index){
+                    obj.del();
+                    var id = data.id;
+                    var editdata = {};
+                    editdata["id"] = id;
+                    myajax(editdata,"/team/delQa");
+                    layer.close(index);
+                    layer.msg("删除成功！");
+
+                });
+            }else if (obj.event ==='editId') {
+                layer.prompt({
+                    formType: 2
+                    ,value: data.answer
+                    ,title: '修改答复内容'
+                }, function(value, index){
+                    obj.update({
+                        answer: value
+                    });
+                    var id = data.id;
+                    var editdata = {};
+                    editdata["id"] = id;
+                    editdata["answer"] = value;
+                    myajax(editdata,"/team/editQa")
+                    layer.close(index);
+                    layer.msg("修改成功");
+                });
+            }
+        });
+    });
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="editId">修改答案</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<!--<script type="text/html" id="barDemo2">-->
+    <!--<a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="addToImpot">纳入核心成员</a>-->
+<!--</script>-->
+
+<script th:inline="javascript">
+    var message = [[${return}]];
+    if (message != null){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg(message);
+        });
+    }
+</script>
+</html>

@@ -1,65 +1,171 @@
 package com.market.pos.tool.connect;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.market.pos.config.DBClose;
 
 import java.sql.*;
 
-public class JdbcTeamAdmin {
+public class JdbcTest {
     static String driver = "com.mysql.cj.jdbc.Driver";
     static String user = "root";
     static String password = "123456";
 
-    public static int id;
-    public static int putin;
-    public static String t_id;
-    public static String t_name;
-    public static String t_type;
-    public static String t_time;
-    public static String liuyan;
-    public static String username;
-    public static String usertype;
-
-    public static String result_userid;
-
     /**
-     * 查询team_list表，团队信息
+     * 查询问题表question
      * @param sql
      * @param groupid
+     * @return
      */
-    public static void searchTeamList(String sql,String groupid){
+    public static String searchQuestion(String sql, String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
-        t_name = null;
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
+        JSONObject jsonObject = new JSONObject();
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while (result.next()){
-                id = result.getInt("id");
-                t_id = result.getString("t_id");
-                t_name = result.getString("t_name");
-                t_type = result.getString("t_type");
-                t_time = result.getString("t_time");
-                liuyan = result.getString("liuyan");
+                int id = result.getInt("id");
+                String content = result.getString("content");
+                int answerId = result.getInt("answer_id");
+                //填充json
+                jsonObject.put("id",id);
+                jsonObject.put("content",content);
+                jsonObject.put("answerId",answerId);
             }
-        } catch (ClassNotFoundException e) {
+//            return question;
+        }catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             DBClose.colseSqlConnection(result,statement,connection);
         }
+        return jsonObject.toJSONString();
     }
 
     /**
-     * 插入表team_list
+     * 查询随机数
+     * @param sql
+     * @param groupid
+     * @return
+     */
+    public static String searchRank(String sql, String groupid){
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet result = null;
+        JSONArray jsonArray = new JSONArray();
+        try{
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url,user,password);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while (result.next()){
+                int id = result.getInt("id");
+                int option = result.getInt("option");
+                //填充json
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id",id);
+                jsonObject.put("option",option);
+                jsonArray.add(jsonObject);
+            }
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBClose.colseSqlConnection(result,statement,connection);
+        }
+        return jsonArray.toJSONString();
+    }
+
+    /**
+     * 查询正确答案
+     * @param sql
+     * @param groupid
+     * @return
+     */
+    public static String searchAnswer(String sql, String groupid){
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet result = null;
+        JSONObject jsonObject = new JSONObject();
+        try{
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url,user,password);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while (result.next()){
+                int id = result.getInt("id");
+                String content = result.getString("content");
+                int questionId = result.getInt("question_id");
+                //填充json
+                jsonObject.put("id",id);
+                jsonObject.put("content",content);
+                jsonObject.put("questionId",questionId);
+            }
+//            return question;
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBClose.colseSqlConnection(result,statement,connection);
+        }
+        return jsonObject.toJSONString();
+    }
+
+    /**
+     * 查询三个错误答案
+     * @param sql
+     * @param groupid
+     * @return
+     */
+    public static String searchWrongAnswers(String sql, String groupid){
+        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet result = null;
+        JSONArray jsonArray = new JSONArray();
+        try{
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url,user,password);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while (result.next()){
+                int id = result.getInt("id");
+                String content = result.getString("content");
+                int questionId = result.getInt("question_id");
+                //填充json
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id",id);
+                jsonObject.put("content",content);
+                jsonObject.put("questionId",questionId);
+                jsonArray.add(jsonObject);
+            }
+//            return question;
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBClose.colseSqlConnection(result,statement,connection);
+        }
+        return jsonArray.toJSONString();
+    }
+
+    /**
+     * 插入题目
      * @param sql
      * @param groupid
      */
-    public static void insertTeamList(String sql,String groupid){
+    public static void insertTest(String sql,String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
@@ -78,22 +184,38 @@ public class JdbcTeamAdmin {
         }
     }
 
-    /**
-     * 更新表team_list
-     * @param sql
-     * @param groupid
-     */
-    public static void updateTeamList(String sql,String groupid){
+    //查询表test_list
+    public static String searchTest(String sql, String groupid){
         String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
+        JSONObject jsonObject = new JSONObject();
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
             statement = connection.createStatement();
-            statement.executeUpdate(sql);
-            connection.close();
+            result = statement.executeQuery(sql);
+            while (result.next()){
+                String questionContent = result.getString("question_content");
+                String answer = result.getString("answer");
+                String a = result.getString("a");
+                String b = result.getString("b");
+                String c = result.getString("c");
+                String d = result.getString("d");
+                int isRight = result.getInt("is_right");
+                String time = result.getString("time");
+                //填充json
+                jsonObject.put("questionContent",questionContent);
+                jsonObject.put("answer",answer);
+                jsonObject.put("a",a);
+                jsonObject.put("b",b);
+                jsonObject.put("c",c);
+                jsonObject.put("d",d);
+                jsonObject.put("isRight",isRight);
+                jsonObject.put("time",time);
+            }
+//            return question;
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -101,92 +223,6 @@ public class JdbcTeamAdmin {
         }finally {
             DBClose.colseSqlConnection(result,statement,connection);
         }
-    }
-
-    /**
-     * 查询表Team_Members
-     * @param sql
-     * @param groupid
-     */
-    public static void searchTeamMembers(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
-        result_userid = null;
-        putin = 0;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet result = null;
-        try{
-            Class.forName(driver);
-            connection = DriverManager.getConnection(url,user,password);
-            statement = connection.createStatement();
-            result = statement.executeQuery(sql);
-            while (result.next()){
-                result_userid = result.getString("userid");
-                putin = result.getInt("putin");
-                username = result.getString("username");
-                usertype = result.getString("usertype");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DBClose.colseSqlConnection(result,statement,connection);
-        }
-    }
-
-    public static String searchTeamTree(String sql,String groupid,String tposition){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
-        String tpositionFromSql = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet result = null;
-        try{
-            Class.forName(driver);
-            connection = DriverManager.getConnection(url,user,password);
-            statement = connection.createStatement();
-            result = statement.executeQuery(sql);
-
-            while (result.next()){
-                tpositionFromSql = result.getString(tposition);
-                return tpositionFromSql;
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DBClose.colseSqlConnection(result,statement,connection);
-        }
-        return tpositionFromSql;
-    }
-
-    /**
-     * 查询team_impormember
-     */
-    public static String searchTeamImpotMember(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
-        String username = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet result = null;
-        try{
-            Class.forName(driver);
-            connection = DriverManager.getConnection(url,user,password);
-            statement = connection.createStatement();
-            result = statement.executeQuery(sql);
-
-            while (result.next()){
-                username = result.getString("username");
-                return username;
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DBClose.colseSqlConnection(result,statement,connection);
-        }
-        return username;
+        return jsonObject.toJSONString();
     }
 }

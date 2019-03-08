@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 
 import com.market.pos.pojo.AskQQMessage;
 import com.market.pos.pojo.QQMessage;
+import com.market.pos.service.QAService;
 import com.market.pos.tool.DailySearch.DailySearchController;
 import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
@@ -35,10 +36,12 @@ import com.market.pos.tool.market_equipment.GodMarketSell_equipment;
 import com.market.pos.tool.market_special.GodMarketBuy_special;
 import com.market.pos.tool.market_special.GodMarketSell_special;
 import com.market.pos.tool.pk.GetQid;
+import com.market.pos.tool.qa.QaService;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
 import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.serverOpenSearch.AdSearch;
+import com.market.pos.tool.test.AskForTest;
 import com.market.pos.tool.wujiaHeZi.GetHeziList;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
@@ -55,11 +58,11 @@ public class LemocWebSocketClient extends WebSocketClient {
     }
 
     public void onClose(int arg0, String arg1, boolean arg2) {
-        System.out.println("客户端关闭");
+        System.out.println("---CLOSE--- 客户端关闭");
     }
 
     public void onError(Exception arg0) {
-        System.out.println("客户端错误");
+        System.out.println("---ERROR---  客户端错误");
     }
 
     public void onMessage(String json){
@@ -76,25 +79,33 @@ public class LemocWebSocketClient extends WebSocketClient {
         //传递信息到NLU
         if (groupid.matches("721623673") || groupid.matches("921340922")){
 
+            if (msg.equals("我要答题")){
+                String ask = AskForTest.AskToUser(qqid,groupid);
+                send(ask);
+            }
+
+            if (msg.equals("a") || msg.equals("b") || msg.equals("c") || msg.equals("d")){
+                String ask = AskForTest.answerByUser(qqid,groupid,msg);
+                if (ask.equals("IGNORE")){
+                    System.out.println("--------------IGNORE *无视本次答题！*-------------");
+                }else {
+                    send(ask);
+                }
+            }
+
             if (msg.matches("我的.*宏")){
                 String ask = HongSearch.HongSearch(qqid,msg,groupid);
                 send(ask);
                 System.out.println(ask);
-            }
-
-            if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
+            }else if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
                 String ask = PublicHongSearch.HongSearch(qqid,msg,groupid);
                 send(ask);
                 System.out.println(ask);
-            }
-
-            if (msg.matches(".*有团吗.*")){
+            }else if (msg.matches(".*有团吗.*")){
                 String ask = TeamAdminController.searchTeamList(groupid,qqid);
                 send(ask);
                 System.out.println(ask);
-            }
-
-            if (msg.matches("我要报名.*")){
+            }else if (msg.matches("我要报名.*")){
                 String ask = TeamAdminController.insertTeamMembers(groupid,qqid,username,msg,nick);
                 send(ask);
                 System.out.println(ask);
@@ -112,15 +123,11 @@ public class LemocWebSocketClient extends WebSocketClient {
                 String askJoin = TeamJoin.teamJoin(t_id,qqid,usertype,groupid);
                 send(askJoin);
                 System.out.println(askJoin);
-            }
-
-            if (msg.matches(".*取消报名.*")){
+            }else if (msg.matches(".*取消报名.*")){
                 String ask = TeamAdminController.delTeamMembers(qqid,groupid);
                 send(ask);
                 System.out.println(ask);
-            }
-
-            if (msg.matches(".*看排表.*")) {
+            }else if (msg.matches(".*看排表.*")) {
                 String t_from = null;
                 if (groupid.equals("721623673")){
                     t_from = "hs";
@@ -134,13 +141,23 @@ public class LemocWebSocketClient extends WebSocketClient {
                 askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：http://148.70.49.2:8080/teamTable/" + t_from);
                 String ask = new Gson().toJson(askQQMessage);
                 send(ask);
-            }
-
-            if (msg.matches(".*日常.*")){
+            }else if(msg.matches(".*日常.*")){
                 String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
                 send(ask);
                 System.out.println(ask);
+            }else {
+                String answer = QaService.qaSearch(msg);
+                if (answer != null){
+                    AskQQMessage askQQMessage = new AskQQMessage();
+                    askQQMessage.setAct("101");
+                    askQQMessage.setQQID(qqid);
+                    askQQMessage.setGroupid(groupid);
+                    askQQMessage.setMsg("[CQ:at,qq=" + qqid + "]" + answer);
+                    String ask = new Gson().toJson(askQQMessage);
+                    send(ask);
+                }
             }
+
         }else if (!groupid.matches("721623673") && !groupid.matches("921340922")) {
             String qiandao = "签到";
             if ((msg.equals(qiandao) == true) || msg.equals("qd") == true || msg.equals("QD") == true) {
@@ -443,6 +460,20 @@ public class LemocWebSocketClient extends WebSocketClient {
                 String ask = PublicHongSearch.HongSearch(qqid,msg,groupid);
                 send(ask);
                 System.out.println(ask);
+            }
+
+            if (msg.equals("我要答题")){
+                String ask = AskForTest.AskToUser(qqid,groupid);
+                send(ask);
+            }
+
+            if (msg.equals("a") || msg.equals("b") || msg.equals("c") || msg.equals("d")){
+                String ask = AskForTest.answerByUser(qqid,groupid,msg);
+                if (ask.equals("IGNORE")){
+                    System.out.println("--------------IGNORE *无视本次答题！*-------------");
+                }else {
+                    send(ask);
+                }
             }
         }
     }

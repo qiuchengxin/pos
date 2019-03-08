@@ -47,6 +47,7 @@ public class TeamAdminService {
                 "'" + userid + "'" + "," +
                 "'" + username + "'" + "," +
                 "'" + usertype + "'" + ")";
+        System.out.println(sql);
         JdbcTeamAdmin.insertTeamList(sql,groupid);
     }
 

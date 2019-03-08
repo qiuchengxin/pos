@@ -1,9 +1,10 @@
 package com.market.pos.tool.connect;
 
+import com.market.pos.config.DBClose;
+
 import java.sql.*;
 
 public class JdbcSky {
-    static Connection connection;
     static String driver = "com.mysql.cj.jdbc.Driver";
     static String user = "root";
     static String password = "123456";
@@ -32,11 +33,14 @@ public class JdbcSky {
         done = 0;
         who = null;
         fail = 0;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet result = null;
         try{
             Class.forName(driver);
             connection = DriverManager.getConnection(url,user,password);
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
             while (result.next()){
                 result_userid = result.getString("userid");
                 need = result.getInt("need");
@@ -47,11 +51,12 @@ public class JdbcSky {
                 three = result.getString("three");
                 fail = result.getInt("fail");
             }
-            connection.close();
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DBClose.colseSqlConnection(result,statement,connection);
         }
     }
 }
