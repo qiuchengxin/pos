@@ -300,7 +300,7 @@
             "target51","target52","target53","target54","target55"
         ];
 
-        for (i = 0 ; i <= 1 ; i++){
+        for (i = 0 ; i <= targetId.length ; i++){
             //根据ID匹配核心成员列表，要求排表使用成员ID必须与核心成员表中一致
             //确认：1  拒绝 ：0 或 NULl
             var text = document.getElementById(targetId[i]).innerText;
@@ -310,6 +310,16 @@
             con["target"] = targetId[i];
             console.log(con);
             myajax(con, "/common/ready");
+        }
+    }
+</script>
+<script th:inline="javascript">
+    var json = [[${jsonTarget}]];
+    for (var i =0;i<json.length;i++){
+        var type = json[i].type;
+        var target = json[i].target;
+        if (type != 1){
+            document.getElementById(target).style.background="#FFCCCC";
         }
     }
 </script>

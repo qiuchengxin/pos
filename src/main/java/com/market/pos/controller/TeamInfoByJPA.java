@@ -8,12 +8,9 @@ import com.market.pos.pojo.Caidiaoluo;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.pojo.TeamMembers;
 import com.market.pos.pojo.TeamTree;
-import com.market.pos.service.DiaoLuoService;
-import com.market.pos.service.ITeamMembersImportService;
-import com.market.pos.service.ITeamMembersService;
+import com.market.pos.service.*;
 import com.market.pos.service.JPAService.TeamListRepository;
 import com.market.pos.service.JPAService.TeamTreeRepository;
-import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,6 +46,9 @@ public class TeamInfoByJPA {
 
     @Autowired
     private ITeamMembersImportService iTeamMembersImportService;
+
+    @Autowired
+    private TargetService targetService;
 
     @GetMapping(value = "/jpa/{id}")
     public String findAllById(@PathVariable("id") long id , Model model, HttpServletRequest request){
@@ -153,6 +153,26 @@ public class TeamInfoByJPA {
         model.addAttribute("t_53", t_53);
         model.addAttribute("t_54", t_54);
         model.addAttribute("t_55", t_55);
+        //target数组
+        JSONArray jsonTarget = new JSONArray();
+        String[] target = {"target11","target12","target13","target14","target15",
+                            "target21","target22","target23","target24","target25",
+                            "target31","target32","target33","target34","target35",
+                            "target41","target42","target43","target44","target45",
+                            "target51","target52","target53","target54","target55"};
+        for (int i=0; i<target.length; i++){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("target",target[i]);
+            String type = targetService.findTypeByTarget(target[i]);
+            if (type == null){
+                jsonObject.put("type","0");
+            }else {
+                jsonObject.put("type",type);
+            }
+            jsonTarget.add(jsonObject);
+        }
+        System.out.println(jsonTarget.toJSONString());
+        model.addAttribute("jsonTarget",jsonTarget);
         return "teammade";
     }
 
