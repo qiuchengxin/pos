@@ -1,13 +1,15 @@
 package com.market.pos.tool.connect;
 
 import com.market.pos.config.DBClose;
+import com.market.pos.tool.common.FinalData;
 
 import java.sql.*;
 
 public class JdbcTeamAdmin {
+    static String jdbcurl = FinalData.JDBCURL;
     static String driver = "com.mysql.cj.jdbc.Driver";
-    static String user = "root";
-    static String password = "123456";
+    static String user = FinalData.SQLUSRERNAME;
+    static String password = FinalData.SQLPASSWORD;
 
     public static int id;
     public static int putin;
@@ -27,7 +29,7 @@ public class JdbcTeamAdmin {
      * @param groupid
      */
     public static void searchTeamList(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         t_name = null;
         Connection connection = null;
         Statement statement = null;
@@ -60,7 +62,7 @@ public class JdbcTeamAdmin {
      * @param groupid
      */
     public static void insertTeamList(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -84,7 +86,7 @@ public class JdbcTeamAdmin {
      * @param groupid
      */
     public static void updateTeamList(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -109,7 +111,7 @@ public class JdbcTeamAdmin {
      * @param groupid
      */
     public static void searchTeamMembers(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         result_userid = null;
         putin = 0;
         Connection connection = null;
@@ -136,7 +138,7 @@ public class JdbcTeamAdmin {
     }
 
     public static String searchTeamTree(String sql,String groupid,String tposition){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         String tpositionFromSql = null;
         Connection connection = null;
         Statement statement = null;
@@ -165,7 +167,7 @@ public class JdbcTeamAdmin {
      * 查询team_impormember
      */
     public static String searchTeamImpotMember(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         String username = null;
         Connection connection = null;
         Statement statement = null;

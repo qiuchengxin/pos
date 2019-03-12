@@ -1,14 +1,15 @@
 package com.market.pos.tool.connect;
 
 import com.market.pos.config.DBClose;
+import com.market.pos.tool.common.FinalData;
 
 import java.sql.*;
 
 public class JdbcCw {
-
+    static String jdbcurl = FinalData.JDBCURL;
     static String driver = "com.mysql.cj.jdbc.Driver";
-    static String user = "root";
-    static String password = "123456";
+    static String user = FinalData.SQLUSRERNAME;
+    static String password = FinalData.SQLPASSWORD;
 
     public static String result_userid;
     public static int is_doudi;
@@ -23,7 +24,7 @@ public class JdbcCw {
      * @param groupid
      */
     public static void searchCw(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         result_userid = null;
         is_doudi = 0;
         hurt = null;

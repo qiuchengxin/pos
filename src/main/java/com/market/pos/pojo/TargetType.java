@@ -7,6 +7,7 @@ public class TargetType {
   private String userid;
   private String target;
   private long type;
+  private String tId;
 
 
   public long getId() {
@@ -44,4 +45,11 @@ public class TargetType {
     this.type = type;
   }
 
+  public String gettId() {
+    return tId;
+  }
+
+  public void settId(String tId) {
+    this.tId = tId;
+  }
 }

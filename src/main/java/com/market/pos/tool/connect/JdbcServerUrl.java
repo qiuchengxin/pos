@@ -1,19 +1,21 @@
 package com.market.pos.tool.connect;
 
 import com.market.pos.config.DBClose;
+import com.market.pos.tool.common.FinalData;
 
 import java.sql.*;
 
 public class JdbcServerUrl {
+    static String jdbcurl = FinalData.JDBCURL;
     static String driver = "com.mysql.cj.jdbc.Driver";
-    static String user = "root";
-    static String password = "123456";
+    static String user = FinalData.SQLUSRERNAME;
+    static String password = FinalData.SQLPASSWORD;
 
     public static String serverName;
     public static String serverUrl;
 
     public static void searchServerUrl(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         serverName = null;
         serverUrl = null;
         Connection connection = null;

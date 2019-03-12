@@ -7,11 +7,14 @@ import java.util.List;
 
 public interface TargetService extends IService<TargetType> {
 
-    public String findTypeByTarget(String target);
+    public String findTypeByTarget(String target,String tId);
 
-    public void insertUserIdAndTarget(String userid,String target,int type);
+    public void insertUserIdAndTarget(String userid,String target,int type,String tId);
 
-    public void updateByUserId(int type,String userid);
+    public void updateByUserId(int type,String userid,String tId);
 
     public void delByUserId(String userid);
+
+    public String findByUserId(String userid,String tId);
+
 }

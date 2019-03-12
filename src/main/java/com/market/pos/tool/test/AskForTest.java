@@ -5,13 +5,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
+import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AskForTest {
-
+    private static Logger logger = Logger.getLogger(AskForTest.class);
     /**
      * 我要答题，新增数据
      * @param userid
@@ -144,7 +145,7 @@ public class AskForTest {
                 ask = new Gson().toJson(askQQMessage);
             }
         }
-        System.out.println(ask);
+        logger.info(ask);
         return ask;
     }
 }

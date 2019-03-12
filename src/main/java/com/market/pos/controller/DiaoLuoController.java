@@ -2,7 +2,7 @@ package com.market.pos.controller;
 
 import com.market.pos.service.DiaoLuoService;
 import com.market.pos.service.HongService;
-import org.slf4j.Logger;
+import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/diaoluo")
 public class DiaoLuoController {
-//    private static Logger logger = LoggerFactory.getLogger(DiaoLuoController.class);
+    private static Logger logger = Logger.getLogger(DiaoLuoController.class);
 
     @Autowired
     private DiaoLuoService diaoLuoService;

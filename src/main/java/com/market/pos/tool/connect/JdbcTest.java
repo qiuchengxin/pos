@@ -3,13 +3,15 @@ package com.market.pos.tool.connect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.market.pos.config.DBClose;
+import com.market.pos.tool.common.FinalData;
 
 import java.sql.*;
 
 public class JdbcTest {
+    static String jdbcurl = FinalData.JDBCURL;
     static String driver = "com.mysql.cj.jdbc.Driver";
-    static String user = "root";
-    static String password = "123456";
+    static String user = FinalData.SQLUSRERNAME;
+    static String password = FinalData.SQLPASSWORD;
 
     /**
      * 查询问题表question
@@ -18,7 +20,7 @@ public class JdbcTest {
      * @return
      */
     public static String searchQuestion(String sql, String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -55,7 +57,7 @@ public class JdbcTest {
      * @return
      */
     public static String searchRank(String sql, String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -91,7 +93,7 @@ public class JdbcTest {
      * @return
      */
     public static String searchAnswer(String sql, String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -128,7 +130,7 @@ public class JdbcTest {
      * @return
      */
     public static String searchWrongAnswers(String sql, String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -166,7 +168,7 @@ public class JdbcTest {
      * @param groupid
      */
     public static void insertTest(String sql,String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;
@@ -186,7 +188,7 @@ public class JdbcTest {
 
     //查询表test_list
     public static String searchTest(String sql, String groupid){
-        String url = "jdbc:mysql://148.70.49.2:3306/" + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
+        String url = jdbcurl + groupid + "?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8";
         Connection connection = null;
         Statement statement = null;
         ResultSet result = null;

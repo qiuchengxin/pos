@@ -20,23 +20,29 @@ public class TargetServiceImpl extends ServiceImpl<TargetMapper, TargetType> imp
 
 
     @Override
-    public String findTypeByTarget(String target) {
-        String type = targetMapper.findTypeByTarget(target);
+    public String findTypeByTarget(String target, String tId) {
+        String type = targetMapper.findTypeByTarget(target,tId);
         return type;
     }
 
     @Override
-    public void insertUserIdAndTarget(String userid, String target, int type) {
-        targetMapper.insertUserIdAndTarget(userid, target, type);
+    public void insertUserIdAndTarget(String userid, String target, int type, String tId) {
+        targetMapper.insertUserIdAndTarget(userid, target, type, tId);
     }
 
     @Override
-    public void updateByUserId(int type, String userid) {
-        targetMapper.updateByUserId(type, userid);
+    public void updateByUserId(int type, String userid, String tId) {
+        targetMapper.updateByUserId(type, userid, tId);
     }
 
     @Override
     public void delByUserId(String userid) {
         targetMapper.delByUserId(userid);
+    }
+
+    @Override
+    public String findByUserId(String userid, String tId) {
+        String type = targetMapper.findByUserId(userid, tId);
+        return type;
     }
 }

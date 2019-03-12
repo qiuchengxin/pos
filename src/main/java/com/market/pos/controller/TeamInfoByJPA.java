@@ -63,6 +63,7 @@ public class TeamInfoByJPA {
         model.addAttribute("t_time",tTime);
         model.addAttribute("liuyan",liuyan);
         model.addAttribute("tFrom",tFrom);
+        model.addAttribute("id",id);
 
         String tId = teamlist.getTId();
         Optional<TeamTree> optional = teamTreeRepository.findById(tId);
@@ -163,7 +164,8 @@ public class TeamInfoByJPA {
         for (int i=0; i<target.length; i++){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("target",target[i]);
-            String type = targetService.findTypeByTarget(target[i]);
+            String t_id = String.valueOf(id);
+            String type = targetService.findTypeByTarget(target[i],t_id);
             if (type == null){
                 jsonObject.put("type","0");
             }else {
@@ -517,7 +519,6 @@ public class TeamInfoByJPA {
         model.addAttribute("t_53", t_53);
         model.addAttribute("t_54", t_54);
         model.addAttribute("t_55", t_55);
-
         return "kanpaibiao";
     }
 }
