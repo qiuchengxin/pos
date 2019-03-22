@@ -2,7 +2,6 @@ package com.market.pos.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.market.pos.pojo.TeamImpormember;
-import com.market.pos.pojo.TeamList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

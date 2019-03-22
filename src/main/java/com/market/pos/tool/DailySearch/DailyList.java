@@ -1,7 +1,5 @@
 package com.market.pos.tool.DailySearch;
 
-import java.lang.reflect.Array;
-
 public class DailyList {
 
     /**

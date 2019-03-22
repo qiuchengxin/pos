@@ -2,7 +2,6 @@ package com.market.pos.tool.dujie;
 
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
-import com.market.pos.tool.connect.JdbcUsers;
 import com.market.pos.tool.pk.GetGrade;
 
 public class SkyController {

@@ -2,7 +2,6 @@ package com.market.pos.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.market.pos.pojo.TeamImpormember;
-import com.market.pos.pojo.TeamMembers;
 
 import java.util.List;
 

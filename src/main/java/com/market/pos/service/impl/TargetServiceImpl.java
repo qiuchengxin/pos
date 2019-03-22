@@ -1,16 +1,11 @@
 package com.market.pos.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.market.pos.mapper.QAMapper;
 import com.market.pos.mapper.TargetMapper;
-import com.market.pos.pojo.Qa;
 import com.market.pos.pojo.TargetType;
-import com.market.pos.service.QAService;
 import com.market.pos.service.TargetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TargetServiceImpl extends ServiceImpl<TargetMapper, TargetType> implements TargetService {

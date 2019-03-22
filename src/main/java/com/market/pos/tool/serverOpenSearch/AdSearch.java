@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;

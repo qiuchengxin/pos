@@ -6,14 +6,14 @@ import com.market.pos.pojo.Qa;
 import com.market.pos.pojo.TeamImpormember;
 import com.market.pos.pojo.TeamList;
 import com.market.pos.service.ITeamMembersImportService;
-import com.market.pos.service.ITeamTreeService;
 import com.market.pos.service.QAService;
 import com.market.pos.service.TeamListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

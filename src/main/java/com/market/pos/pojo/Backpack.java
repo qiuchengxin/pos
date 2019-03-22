@@ -1,9 +1,5 @@
 package com.market.pos.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 public class Backpack {
 
   private int userid;

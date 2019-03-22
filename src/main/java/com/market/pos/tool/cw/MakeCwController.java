@@ -5,8 +5,6 @@ import com.market.pos.pojo.AskQQMessage;
 import com.market.pos.tool.findTreasure.BackpackService;
 import com.market.pos.tool.pk.GetQid;
 
-import javax.swing.plaf.PanelUI;
-
 /**
  * 我要锻造xxx
  */

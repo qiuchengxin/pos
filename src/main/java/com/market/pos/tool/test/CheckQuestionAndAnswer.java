@@ -1,7 +1,5 @@
 package com.market.pos.tool.test;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.market.pos.tool.connect.JdbcTest;
 
 public class CheckQuestionAndAnswer {

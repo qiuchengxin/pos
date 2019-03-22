@@ -1,19 +1,12 @@
 package com.market.pos;
 
-import com.market.pos.tool.goldPriceSearch.GoldPriceSearch;
 import com.market.pos.tool.lemoc.LemocWebSocketClientFactory;
-import com.market.pos.tool.timeTask.TimeTask;
 import org.java_websocket.client.WebSocketClient;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableTransactionManagement

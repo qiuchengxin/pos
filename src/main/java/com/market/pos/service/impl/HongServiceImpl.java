@@ -2,15 +2,10 @@ package com.market.pos.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.market.pos.mapper.HongMapper;
-import com.market.pos.mapper.TeamMembersImportMapper;
 import com.market.pos.pojo.Hong;
-import com.market.pos.pojo.TeamImpormember;
 import com.market.pos.service.HongService;
-import com.market.pos.service.ITeamMembersImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class HongServiceImpl extends ServiceImpl<HongMapper, Hong> implements HongService {

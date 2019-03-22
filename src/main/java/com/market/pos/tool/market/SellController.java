@@ -1,6 +1,5 @@
 package com.market.pos.tool.market;
 
-import com.market.pos.pojo.Backpack;
 import com.market.pos.tool.Equip.DeLEquip;
 import com.market.pos.tool.findTreasure.BackpackService;
 

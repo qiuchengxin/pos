@@ -2,7 +2,6 @@ package com.market.pos.tool.market;
 
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
-import com.market.pos.pojo.Backpack;
 import com.market.pos.tool.findTreasure.BackpackService;
 import com.market.pos.tool.pk.GetQid;
 

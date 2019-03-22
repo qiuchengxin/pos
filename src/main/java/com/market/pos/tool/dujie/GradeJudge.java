@@ -1,7 +1,5 @@
 package com.market.pos.tool.dujie;
 
-import com.market.pos.tool.pk.GetGrade;
-
 public class GradeJudge {
 
     public static void gradeJudge(String userid,String groupid){

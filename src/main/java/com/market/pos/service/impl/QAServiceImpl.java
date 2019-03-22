@@ -1,11 +1,8 @@
 package com.market.pos.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.market.pos.mapper.HongMapper;
 import com.market.pos.mapper.QAMapper;
-import com.market.pos.pojo.Hong;
 import com.market.pos.pojo.Qa;
-import com.market.pos.service.HongService;
 import com.market.pos.service.QAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

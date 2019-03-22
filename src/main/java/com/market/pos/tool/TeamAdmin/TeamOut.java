@@ -1,6 +1,5 @@
 package com.market.pos.tool.TeamAdmin;
 
-import com.market.pos.tool.connect.JdbcDaily;
 import com.market.pos.tool.connect.JdbcTeamAdmin;
 
 public class TeamOut {

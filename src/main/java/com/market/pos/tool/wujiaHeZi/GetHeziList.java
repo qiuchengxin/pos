@@ -2,13 +2,11 @@ package com.market.pos.tool.wujiaHeZi;
 
 import com.google.gson.Gson;
 import com.market.pos.pojo.AskQQMessage;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

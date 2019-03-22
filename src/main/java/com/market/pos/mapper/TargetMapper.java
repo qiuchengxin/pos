@@ -1,11 +1,8 @@
 package com.market.pos.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.market.pos.pojo.Qa;
 import com.market.pos.pojo.TargetType;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface TargetMapper extends BaseMapper<TargetType> {

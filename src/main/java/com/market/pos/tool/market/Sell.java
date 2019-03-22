@@ -1,7 +1,5 @@
 package com.market.pos.tool.market;
 
-import com.market.pos.tool.connect.JdbcUsers;
-
 public class Sell {
 
     /**

@@ -2,10 +2,8 @@ package com.market.pos.tool.lemoc;
 
 
 import com.google.gson.Gson;
-
 import com.market.pos.pojo.AskQQMessage;
 import com.market.pos.pojo.QQMessage;
-import com.market.pos.service.QAService;
 import com.market.pos.tool.DailySearch.DailySearchController;
 import com.market.pos.tool.Equip.EquipIn;
 import com.market.pos.tool.Equip.OpenEquip;
@@ -23,23 +21,23 @@ import com.market.pos.tool.dujie.SkyController;
 import com.market.pos.tool.dujie.Who;
 import com.market.pos.tool.findTreasure.BackpackController;
 import com.market.pos.tool.findTreasure.OpenBack;
-import com.market.pos.tool.goldPriceSearch.GoldPriceSearch;
 import com.market.pos.tool.goldPriceSearch.ServerSearch;
 import com.market.pos.tool.hideroom.FindHideRoom;
 import com.market.pos.tool.hideroom.HideRoom;
 import com.market.pos.tool.hideroom.HurtHideRoom;
 import com.market.pos.tool.hong.HongSearch;
 import com.market.pos.tool.hong.PublicHongSearch;
+import com.market.pos.tool.jpgTable.CreateTableController;
 import com.market.pos.tool.market.*;
 import com.market.pos.tool.market_equipment.GodMarketBuy_equipment;
 import com.market.pos.tool.market_equipment.GodMarketSell_equipment;
 import com.market.pos.tool.market_special.GodMarketBuy_special;
 import com.market.pos.tool.market_special.GodMarketSell_special;
 import com.market.pos.tool.pk.GetQid;
+import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.qa.QaService;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
-import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.serverOpenSearch.AdSearch;
 import com.market.pos.tool.test.AskForTest;
 import com.market.pos.tool.tuanQue.TuanQue;
@@ -48,7 +46,6 @@ import org.apache.log4j.Logger;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
-
 
 import java.net.URI;
 import java.util.regex.Pattern;
@@ -146,13 +143,20 @@ public class LemocWebSocketClient extends WebSocketClient {
                 }else if (groupid.equals("921340922")){
                     t_from = "fbd";
                 }
-                AskQQMessage askQQMessage = new AskQQMessage();
-                askQQMessage.setAct("101");
-                askQQMessage.setQQID(qqid);
-                askQQMessage.setGroupid(groupid);
-                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：http://182.254.189.186:8081/teamTable/" + t_from);
-                String ask = new Gson().toJson(askQQMessage);
-                send(ask);
+//                AskQQMessage askQQMessage = new AskQQMessage();
+//                askQQMessage.setAct("101");
+//                askQQMessage.setQQID(qqid);
+//                askQQMessage.setGroupid(groupid);
+//                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：http://182.254.189.186:8081/teamTable/" + t_from);
+//                String ask = new Gson().toJson(askQQMessage);
+//                send(ask);
+                //0321更新为图片输出
+                try {
+                    String ask = CreateTableController.setJpg(groupid,qqid);
+                    send(ask);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }else if(msg.matches(".*日常.*")){
                 String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
                 send(ask);

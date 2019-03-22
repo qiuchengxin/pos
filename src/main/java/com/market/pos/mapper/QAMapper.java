@@ -1,7 +1,6 @@
 package com.market.pos.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.market.pos.pojo.Hong;
 import com.market.pos.pojo.Qa;
 import org.apache.ibatis.annotations.Mapper;
 
