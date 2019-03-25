@@ -83,7 +83,7 @@ public class LemocWebSocketClient extends WebSocketClient {
         String groupid = receiveMessage.getFromGroup();
         String subType = receiveMessage.getSubType();
         String username = receiveMessage.getUsername();
-        logger.info("【接收消息】 ：" + msg);
+        logger.info("【接收消息】" + nick +"(" + username + ")说 ："  + msg);
         //传递信息到NLU
         if (!subType.equals("1") && (msg.equals("1") || msg.equals("2"))){
             String ask = TuanQue.tuanQue(msg,qqid);
@@ -164,7 +164,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                     askQQMessage.setAct("101");
                     askQQMessage.setQQID(qqid);
                     askQQMessage.setGroupid(groupid);
-                    askQQMessage.setMsg("[CQ:at,qq=" + qqid + "]" + answer);
+                    askQQMessage.setMsg(answer);
                     String ask = new Gson().toJson(askQQMessage);
                     send(ask);
                 }
@@ -177,15 +177,12 @@ public class LemocWebSocketClient extends WebSocketClient {
                 String ask = QianDao.ask;
                 send(ask);
             }
-
-            if (msg.matches(".*日常.*")){
+            else if (msg.matches(".*日常.*")){
                 String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
-
-            String dianzhan = "赞我";
-            if ((msg.equals(dianzhan) == true)) {
+            else if ((msg.equals("赞我") == true)) {
                 DianZan.dianZan(qqid, groupid);
                 String ask = DianZan.ask;
                 send(ask);
@@ -202,22 +199,21 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.equals("挖宝") == true) {
+            else if (msg.equals("挖宝") == true) {
                 BackpackController.backpackController(qqid, groupid);
                 String ask = BackpackController.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            String openback = "我的背包";
-            if (msg.equals(openback) == true) {
+            else if (msg.equals("我的背包") == true) {
                 OpenBack.openBack(qqid, groupid);
                 String ask = OpenBack.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches("我要修炼.*")) {
+            else if (msg.matches("我要修炼.*")) {
                 GetQid.getMsgb(msg);
                 String msg_use = GetQid.ch_msg;
                 EquipIn.BookIn(qqid, groupid, msg_use);
@@ -226,7 +222,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches("我要装备.*")) {
+            else if (msg.matches("我要装备.*")) {
                 GetQid.getMsge(msg);
                 String msg_use = GetQid.ch_msg;
                 EquipIn.equipmentIn(qqid, groupid, msg_use);
@@ -235,14 +231,14 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*毛线.*装备.*") || msg.matches("我的装备")) {
+            else if (msg.matches(".*毛线.*装备.*") || msg.matches("我的装备")) {
                 OpenEquip.openEquip(qqid, groupid);
                 String ask = OpenEquip.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches("\\u005BCQ:at,qq=.*用.*") || msg.matches("用.*\\u005BCQ:at,qq=.*")) {
+            else if (msg.matches("\\u005BCQ:at,qq=.*用.*") || msg.matches("用.*\\u005BCQ:at,qq=.*")) {
                 GetQid.getQid(msg);
                 Hurt.hurt(qqid, groupid, msg);
                 String ask = Hurt.ask;
@@ -258,7 +254,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 }
             }
 
-            if (subType.equals("1") && msg.matches(".*要.*闭关.*")) {
+            else if (subType.equals("1") && msg.matches(".*要.*闭关.*")) {
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("101");
                 askQQMessage.setGroupid(groupid);
@@ -269,7 +265,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(ask);
             }
 
-            if (!subType.equals("1") && msg.matches("我要在.*闭关")) {
+            else if (!subType.equals("1") && msg.matches("我要在.*闭关")) {
                 GetQid.getGroupId(msg);
                 String belongId = GetQid.belongId;
                 HideRoom.hideRoom(qqid, belongId);
@@ -278,7 +274,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (!subType.equals("1") && msg.matches("闭关")) {
+            else if (!subType.equals("1") && msg.matches("闭关")) {
                 logger.info("发起闭关请求");
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("106");
@@ -289,7 +285,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(ask);
             }
 
-            if (subType.equals("1") && msg.matches(".*偷袭.*\\u005BCQ:at,qq=.*")) {
+            else if (subType.equals("1") && msg.matches(".*偷袭.*\\u005BCQ:at,qq=.*")) {
                 GetQid.getQid(msg);
                 String be_qqid = GetQid.ch_qqid;
                 HurtHideRoom.hurtHideRoom(qqid, be_qqid, groupid);
@@ -298,34 +294,34 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*谁在闭关.*") || msg.matches(".*偷偷修炼.*") || msg.matches(".*偷偷闭关.*")) {
+            else if (msg.matches(".*谁在闭关.*") || msg.matches(".*偷偷修炼.*") || msg.matches(".*偷偷闭关.*")) {
                 FindHideRoom.findHideRoom(groupid);
                 String ask = FindHideRoom.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*看大佬.*") || msg.matches(".*天字榜.*")) {
+            else if (msg.matches(".*看大佬.*") || msg.matches(".*天字榜.*")) {
                 RankController.rankAll(qqid, groupid);
                 String ask = RankController.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*看弟弟.*") || msg.matches(".*弟弟排行.*")) {
+            else if (msg.matches(".*看弟弟.*") || msg.matches(".*弟弟排行.*")) {
                 RankMin.rankMin(qqid, groupid);
                 String ask = RankMin.ask;
                 send(ask);
             }
 
-            if (msg.matches(".*我要渡劫.*")) {
+            else if (msg.matches(".*我要渡劫.*")) {
                 SkyController.skyController(qqid, groupid);
                 String ask = SkyController.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*我要帮助.*\\u005BCQ:at,qq=.*")) {
+            else if (msg.matches(".*我要帮助.*\\u005BCQ:at,qq=.*")) {
                 GetQid.getQid(msg);
                 String userid = GetQid.ch_qqid;
                 HelpDuJie.helpDuJie(qqid, userid, groupid);
@@ -334,28 +330,28 @@ public class LemocWebSocketClient extends WebSocketClient {
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*\\u005BCQ:at,qq=.*是破坏者.*")) {
+            else if (msg.matches(".*\\u005BCQ:at,qq=.*是破坏者.*")) {
                 Who.who(qqid, msg, groupid);
                 String ask = Who.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*做橙武.*") || msg.matches(".*做cw.*") || msg.matches(".*做CW.*")) {
+            else if (msg.matches(".*做橙武.*") || msg.matches(".*做cw.*") || msg.matches(".*做CW.*")) {
                 CwController.makeCw(qqid, groupid);
                 String ask = CwController.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches("我要锻造.*")) {
+            else if (msg.matches("我要锻造.*")) {
                 MakeCwController.makeCwController(qqid, msg, groupid);
                 String ask = MakeCwController.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*\\u005BCQ:at,qq=.*我要购买.*")) {
+            else if (msg.matches(".*\\u005BCQ:at,qq=.*我要购买.*")) {
                 GetQid.getQid(msg);
                 String ch_qqid = GetQid.ch_qqid;
                 MarketService.selectMarketByUserid(ch_qqid, groupid);
@@ -385,51 +381,51 @@ public class LemocWebSocketClient extends WebSocketClient {
                 }
             }
 
-            if (msg.matches(".*我要.*出.*") && !msg.matches(".*套.*") && !msg.matches(".*玄晶.*")) {
+            else  if (msg.matches(".*我要.*出.*") && !msg.matches(".*套.*") && !msg.matches(".*玄晶.*")) {
                 GodMarketSell.godMarketSell(qqid, msg, groupid);
                 String ask = GodMarketSell.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*我要.*出.*套")) {
+            else if (msg.matches(".*我要.*出.*套")) {
                 GodMarketSell_equipment.godMarketSell(qqid, msg, groupid);
                 String ask = GodMarketSell_equipment.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*我要.*出醉月玄晶")) {
+            else if (msg.matches(".*我要.*出醉月玄晶")) {
                 GodMarketSell_special.godMarketSell(qqid, msg, groupid);
                 String ask = GodMarketSell_special.ask;
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*我的商店.*")) {
+            else if (msg.matches(".*我的商店.*")) {
                 SearchSell.searchSell(qqid, groupid);
                 String ask = SearchSell.ask;
                 this.send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*我不摆摊了.*")) {
+            else if (msg.matches(".*我不摆摊了.*")) {
                 DelSell.delSell(qqid, groupid);
                 String ask = DelSell.ask;
                 this.send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*金价查询.*")) {
+            else if (msg.matches(".*金价查询.*")) {
                 String ask = ServerSearch.sercerSearch(msg, groupid);
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
-            if (msg.matches(".*更新公告.*")) {
+            else if (msg.matches(".*更新公告.*")) {
                 String ask = AdSearch.adSearch(groupid);
                 send(ask);
             }
-            if (msg.matches("物价查询.*")) {
+            else if (msg.matches("物价查询.*")) {
                 String ask = GetHeziList.getHeziList(qqid, msg);
                 send(ask);
 
@@ -442,7 +438,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(askGroup);
             }
 
-            if (msg.matches(".*金价表.*")) {
+            else if (msg.matches(".*金价表.*")) {
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("101");
                 askQQMessage.setQQID(qqid);
@@ -452,7 +448,7 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(ask);
             }
 
-            if (msg.matches(".*金价图.*")) {
+            else if (msg.matches(".*金价图.*")) {
                 AskQQMessage askQQMessage = new AskQQMessage();
                 askQQMessage.setAct("101");
                 askQQMessage.setQQID(qqid);
@@ -462,28 +458,41 @@ public class LemocWebSocketClient extends WebSocketClient {
                 send(ask);
             }
 
-            if (msg.matches("我的.*宏")){
+            else if (msg.matches("我的.*宏")){
                 String ask = HongSearch.HongSearch(qqid,msg,groupid);
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
+            else  if (msg.matches(".*宏") && !msg.matches("我的.*宏")){
                 String ask = PublicHongSearch.HongSearch(qqid,msg,groupid);
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
             }
 
-            if (msg.equals("我要答题")){
+            else if (msg.equals("我要答题")){
                 String ask = AskForTest.AskToUser(qqid,groupid);
                 send(ask);
             }
 
-            if (msg.equals("a") || msg.equals("b") || msg.equals("c") || msg.equals("d")){
+            else if (msg.equals("a") || msg.equals("b") || msg.equals("c") || msg.equals("d")){
                 String ask = AskForTest.answerByUser(qqid,groupid,msg);
                 if (ask.equals("IGNORE")){
                     logger.info("--------------IGNORE *无视本次答题！*-------------");
                 }else {
+                    send(ask);
+                }
+            }
+            else {
+                //QA兜底
+                String answer = QaService.qaSearch(msg);
+                if (answer != null){
+                    AskQQMessage askQQMessage = new AskQQMessage();
+                    askQQMessage.setAct("101");
+                    askQQMessage.setQQID(qqid);
+                    askQQMessage.setGroupid(groupid);
+                    askQQMessage.setMsg(answer);
+                    String ask = new Gson().toJson(askQQMessage);
                     send(ask);
                 }
             }

@@ -72,24 +72,22 @@ public class CommonController {
                     //如果为空，判定为第一次发给该用户确认信息
                     if (typeByUserId == null){
                         targetService.insertUserIdAndTarget(userid,target,0,tId);
-                        logger.info("-----------发送信息给" + userid + "-----------");
+                        logger.info("-----------发送信息给" + username + "(" +userid + ")" +"-----------");
                         askQQMessage.setQQID(userid);
                         String ask = new Gson().toJson(askQQMessage);
                         System.out.println(ask);
                         lemocWebSocketClient.send(ask);
                     }else {
                         if (!typeByUserId.equals("1")){
-                            logger.info("-----------发送信息给" + userid + "-----------");
+                            logger.info("-----------发送信息给"  + username + "(" + userid + ")" + "-----------");
                             askQQMessage.setQQID(userid);
                             String ask = new Gson().toJson(askQQMessage);
                             System.out.println(ask);
                             lemocWebSocketClient.send(ask);
                         }else {
-                            logger.info("userName : " + username + " -- 此用户已经确认过了");
+                            logger.info("******* : " + username + " 已经确认过了*******");
                         }
                     }
-                }else {
-                    logger.info("匹配不上当前用户名：" + username);
                 }
             }
         }else if (text == null){
