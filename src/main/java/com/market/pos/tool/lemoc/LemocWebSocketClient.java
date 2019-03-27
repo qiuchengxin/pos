@@ -38,6 +38,7 @@ import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.qa.QaService;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
+import com.market.pos.tool.qiyu.GetHttpClient;
 import com.market.pos.tool.qiyu.QiYUController;
 import com.market.pos.tool.serverOpenSearch.AdSearch;
 import com.market.pos.tool.serverOpenSearch.ServerOpenSearch;
@@ -186,6 +187,10 @@ public class LemocWebSocketClient extends WebSocketClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }else if (msg.matches("我的奇遇.*") || msg.matches("绝世奇遇.*")||msg.matches("所有绝世奇遇")){
+                String ask = GetHttpClient.getAsk(msg,groupid);
+                send(ask);
+                logger.info("【发送消息】 ：" +ask);
             }
             else {
                 String answer = QaService.qaSearch(msg);
@@ -537,6 +542,10 @@ public class LemocWebSocketClient extends WebSocketClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }else if (msg.matches("我的奇遇.*") || msg.matches("绝世奇遇.*")||msg.matches("所有绝世奇遇")){
+                String ask = GetHttpClient.getAsk(msg,groupid);
+                send(ask);
+                logger.info("【发送消息】 ：" +ask);
             }
             else {
                 //QA兜底
