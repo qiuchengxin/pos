@@ -289,12 +289,17 @@
 </script>
 <script th:inline="javascript">
     var json = [[${jsonTarget}]];
-    for (var i =0;i<json.length;i++){
+    for (var i = 0;i<json.length;i++){
         var type = json[i].type;
         var target = json[i].target;
-        if (type != 1){
+        if (type != 1 && type != 2){
             document.getElementById(target).style.background="#FFCCCC";
+        }else if (type != 0 && type != 1){
+            document.getElementById(target).style.background="#ff7b6c";
         }
+        // if(type.equals("2")){
+        //     document.getElementById(target).style.background="#ff7b6c";
+        // }
     }
 </script>
 <script th:inline="javascript">

@@ -38,7 +38,9 @@ import com.market.pos.tool.pk.TiaoZhan;
 import com.market.pos.tool.qa.QaService;
 import com.market.pos.tool.qiandao.DianZan;
 import com.market.pos.tool.qiandao.QianDao;
+import com.market.pos.tool.qiyu.QiYUController;
 import com.market.pos.tool.serverOpenSearch.AdSearch;
+import com.market.pos.tool.serverOpenSearch.ServerOpenSearch;
 import com.market.pos.tool.test.AskForTest;
 import com.market.pos.tool.tuanQue.TuanQue;
 import com.market.pos.tool.wujiaHeZi.GetHeziList;
@@ -47,6 +49,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.regex.Pattern;
 
@@ -143,13 +146,6 @@ public class LemocWebSocketClient extends WebSocketClient {
                 }else if (groupid.equals("921340922")){
                     t_from = "fbd";
                 }
-//                AskQQMessage askQQMessage = new AskQQMessage();
-//                askQQMessage.setAct("101");
-//                askQQMessage.setQQID(qqid);
-//                askQQMessage.setGroupid(groupid);
-//                askQQMessage.setMsg("[CQ:at,qq=" + qqid + "] 排表链接：http://182.254.189.186:8081/teamTable/" + t_from);
-//                String ask = new Gson().toJson(askQQMessage);
-//                send(ask);
                 //0321更新为图片输出
                 try {
                     String ask = CreateTableController.setJpg(groupid,qqid);
@@ -161,7 +157,37 @@ public class LemocWebSocketClient extends WebSocketClient {
                 String ask = DailySearchController.dailySearch("pay_data",qqid,groupid);
                 send(ask);
                 logger.info("【发送消息】 ：" +ask);
-            }else {
+            }else if (msg.matches("开服查询.*")){
+                String ask = ServerOpenSearch.serverOpenSearchAnswers(msg,groupid);
+                send(ask);
+                logger.info("【发送消息】 ：" +ask);
+            }else if (msg.matches("宠物查询.*")){
+                try {
+                    String ans = "你也可以对我说“CD宠物查询+服务器” 来查询刚进入CD的宠物~\n";
+                    String ask = QiYUController.qyAnswers(msg,1,groupid,"宠物查询",ans);
+                    send(ask);
+                    logger.info(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (msg.matches("CD宠物查询.*") || msg.matches("cd宠物查询.*")){
+                try {
+                    String ans = "【刚进CD的宠物】\n若想查询失联的宠物，请对我说“失联宠物查询+服务器”\n";
+                    String ask = QiYUController.qyAnswers(msg,0,groupid,"CD宠物查询",ans);
+                    send(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (msg.matches("失联宠物查询.*")){
+                try {
+                    String ans = "【失联宠物】\n";
+                    String ask = QiYUController.qyAnswers(msg,2,groupid,"失联宠物查询",ans);
+                    send(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
                 String answer = QaService.qaSearch(msg);
                 if (answer != null){
                     AskQQMessage askQQMessage = new AskQQMessage();
@@ -485,6 +511,31 @@ public class LemocWebSocketClient extends WebSocketClient {
                     logger.info("--------------IGNORE *无视本次答题！*-------------");
                 }else {
                     send(ask);
+                }
+            }
+            else if (msg.matches("宠物查询.*")){
+                try {
+                    String ans = "你也可以对我说“CD宠物查询+服务器” 来查询刚进入CD的宠物~\n";
+                    String ask = QiYUController.qyAnswers(msg,1,groupid,"宠物查询",ans);
+                    send(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (msg.matches("CD宠物查询.*") || msg.matches("cd宠物查询.*")){
+                try {
+                    String ans = "【刚进CD的宠物】\n若想查询失联的宠物，请对我说“失联宠物查询+服务器”\n";
+                    String ask = QiYUController.qyAnswers(msg,0,groupid,"CD宠物查询",ans);
+                    send(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (msg.matches("失联宠物查询.*")){
+                try {
+                    String ans = "【失联宠物】\n";
+                    String ask = QiYUController.qyAnswers(msg,2,groupid,"失联宠物查询",ans);
+                    send(ask);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             else {

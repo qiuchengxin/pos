@@ -5,6 +5,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.jsoup.select.Elements;
 
+/**
+ * 快递查询
+ * author：qiucx
+ */
 public class PostSearchController {
 
     public static void postSearchController(String postid,String type) {
